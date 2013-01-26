@@ -1,0 +1,71 @@
+/*
+* layout
+*/
+body {
+  background: #eee;
+}
+#main {
+  margin: 10px auto 0;
+  width: 1000px;
+  height: 600px;
+  background: #fff;
+}
+
+#main > section {
+  width: 980px;
+  height: 580px;
+  padding: 10px;
+}
+/*
+* generic stuff
+*/
+.centered {
+  text-align: center;
+}
+.page-header {
+  text-align: center;
+}
+
+/*
+* pages
+* ========
+*/
+
+/* home */
+#home .player-select button {
+  margin-top: 20px;
+}
+
+/* score-selector */
+#numpad {
+  position: relative;
+}
+#numpad .modal {
+  position: absolute;
+  width: 500px;
+  margin-left: -263px;
+}
+
+#numpad ol {
+  height: 450px;
+}
+#numpad li {
+  float: left;
+  padding: 10px;
+}
+#numpad li button {
+  width: 100px;
+  height: 100px;
+  font-size: 300%;
+}
+#numpad .modal button {
+  font-size: 200%;
+  margin: 20px 0;
+}
+#numpad .modal button span {
+  width: 50px;
+}
+#calc #subtotal  {
+  text-align: right;
+}
+
