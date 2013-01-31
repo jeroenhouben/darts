@@ -7,6 +7,7 @@ function Leg() {
   this.scores = [];
   this.started = false;
   this.game_type = 501;
+  this.player_on_turn = null;
   
 }
 
@@ -26,12 +27,24 @@ Leg.prototype = {
 	  for (var i = 0; i < this.players.length; i++) {
 	    this.scores.push({ player: this.players[i], current_score: this.game_type}); // Refactor 'current_score' to 'score'
 	  }
-	  
+	
+	  this.player_on_turn = this.players[0];
+	},
+	
+	nextTurn: function() {
+	  if (this.player_on_turn != null) {
+	    currentPlayer = this.player_on_turn;
+	    var i = this.players.indexOf(currentPlayer);
+	    var j = (i + 1) % this.players.length;
+	    this.player_on_turn = this.players[j];
+	  } else {
+	    console.log("ERROR: Calling 'nextTurn' doesn't make sense; the game hasn't started yet!")
+	  }
 	},
 	
 	processTurn: function(turn) {
 	  if (!this.started) {
-	    console.log("ERROR: 'Register turn' makes no sense; the game leg hasn't started yet!"); // Fix with Exceptions (?)
+	    console.log("ERROR: 'Process turn' makes no sense; the game leg hasn't started yet!"); // Fix with Exceptions (?)
 	  } else if (turn.darts_left != 0) {
 	    console.log("ERROR: Unable to process turn, for the turn has not yet been finished: still " + turn.darts_left + " dart(s) to throw")
 	  } else {
@@ -87,6 +100,14 @@ function Turn(player) {
 
 Turn.prototype = {
   
+  finishTurn: function() {
+    if (this.darts_left == 0) {
+      // TODO
+    } else {
+      console.log("ERROR: Cannot finish turn; player has still darts left tot throw")
+    }
+  },
+  
   registerThrow: function(score) {
     if (this.darts_left > 0) {
       this.score += score;
@@ -129,7 +150,7 @@ Player.prototype = {
 * init new game
 */
 
-var block_to_test = 2;
+var block_to_test = 3;
 
 if (block_to_test == 0) {
   p1 = new Player("Jeroen");
@@ -190,6 +211,26 @@ if (block_to_test == 0) {
   
   // Lets see if we done good
   console.log(l.toString());
+
+} else if (block_to_test == 3) {
+
+  p1 = new Player("Jeroen");
+  p2 = new Player("Jonas");
+  p3 = new Player("Lars Vegas");
+  
+  l = new Leg();
+  
+  l.addPlayer(p1);
+  l.addPlayer(p2);
+  l.addPlayer(p3);
+  
+  l.start();
+
+  for (var i = 0; i < 10; i++) {
+    console.log(l.player_on_turn.name);
+    l.nextTurn();
+  }
+
 
 } else {
   console.log("Nothing to see here; move along");
