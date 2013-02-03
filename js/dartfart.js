@@ -2,6 +2,49 @@
 
 window.App = Ember.Application.create();
 
+// Router
+App.Router.map(function() {
+  this.resource('match', function() {
+    this.resource('players')
+  });
+});
+
+App.IndexRoute = Ember.Route.extend({
+  redirect: function() {
+    this.transitionTo('match');
+  }
+});
+
+App.MatchRoute = Ember.Route.extend({
+  model: function(params) {
+    return App.Match.createRecord({startScore: 501});
+  }
+});
+
+// Controllers
+App.MatchController = Ember.ObjectController.extend({
+  // initial value
+  isStarted: false,
+
+  start: function(size) {
+    var match = this.get('content'),
+        players = match.get('players');
+
+    for (var i=1; i <= size; i++) {
+      players.createRecord({name: "assman #" + i});
+    };
+    this.set('isStarted', true);
+  }
+
+});
+
+App.PlayersController = Ember.ArrayController.extend({
+
+});
+
+
+
+
 // Models
 
 /*
@@ -16,10 +59,19 @@ App.Store = DS.Store.extend({
 });
 
 App.Match = DS.Model.extend({
-  players: DS.hasMany('App.Player')
+  startScore: DS.attr('number'),
+  players: DS.hasMany('App.Player'),
+  is301: function() {
+    return (this.get('startScore') == 301)
+  }.property('startScore'),
+  is501: function() {
+    return (this.get('startScore') == 501)
+  }.property('startScore')
+  
 });
 
 App.Player = DS.Model.extend({
+  name: DS.attr('string'),
   match: DS.belongsTo('App.Match')
 });
 

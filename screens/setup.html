@@ -1,7 +1,7 @@
 <section id="setup">
 	<ol>
-		<li><input type="text" name="" value="Enno" /></li>
-		<li><input type="text" name="" value="Lars Vegas" /></li>
-		<li><input type="text" name="" value="Jeroen" /></li>
+    {{#each player in controller.players}}
+			<li>{{view Ember.TextField valueBinding="player.name"}}</li>
+    {{/each}}
 	</ol>
 </section>
