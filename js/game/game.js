@@ -7,7 +7,7 @@ function Leg() {
   this.scores = [];
   this.started = false;
   this.game_type = 501;
-  this.player_on_turn = null;
+  this.current_turn = null;
   
 }
 
@@ -28,15 +28,15 @@ Leg.prototype = {
 	    this.scores.push({ player: this.players[i], current_score: this.game_type}); // Refactor 'current_score' to 'score'
 	  }
 	
-	  this.player_on_turn = this.players[0];
+	  this.current_turn = new Turn(this.players[0]);
 	},
 	
 	nextTurn: function() {
-	  if (this.player_on_turn != null) {
-	    currentPlayer = this.player_on_turn;
+	  if (this.current_turn != null) {
+	    currentPlayer = this.current_turn.player;
 	    var i = this.players.indexOf(currentPlayer);
 	    var j = (i + 1) % this.players.length;
-	    this.player_on_turn = this.players[j];
+	    this.current_turn = new Turn(this.players[j]);
 	  } else {
 	    console.log("ERROR: Calling 'nextTurn' doesn't make sense; the game hasn't started yet!")
 	  }
@@ -227,7 +227,7 @@ if (block_to_test == 0) {
   l.start();
 
   for (var i = 0; i < 10; i++) {
-    console.log(l.player_on_turn.name);
+    console.log(l.current_turn.player.name);
     l.nextTurn();
   }
 
