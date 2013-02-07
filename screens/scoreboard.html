@@ -8,8 +8,37 @@
 			<button class="btn btn-large btn-block btn-danger" type="button"><i class="icon-white icon-file"></i> New Game</button>
 		</div>
 	  <div class="span8">
+			{{whoopin}}
 
-	 		<!--# include file="components/_scores_table.html" -->
+			<table class="table table-hover table-striped">
+			  <thead>
+			    <tr>
+						{{#each player in players}}
+						<th>{{player.name}}</th>
+						{{/each}}
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr>
+			      <th>301</th>
+			      <th>301</th>
+			      <th>301</th>
+			      <th>301</th>
+			    </tr>
+			    <tr>
+			      <td>265</td>
+			      <td>243</td>
+			      <td>280</td>
+			      <td>205</td>
+			    </tr>
+			    <tr>
+			      <td>210</td>
+			      <td>195</td>
+			      <td><input type="text" name="" min="0" max="180" size="3" value="..." /></td>
+			      <td></td>
+			    </tr>
+			  </tbody>
+			</table>
 
 		
 			<div class="modal hide fade" id="score-entry-choice-modal">

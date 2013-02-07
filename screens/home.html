@@ -5,7 +5,7 @@
 				<div class="page-header">
 				  <h1>Lets play darts! {{startScore}}</h1>
 				</div>
-			</div>
+			</div>{{controller.application.match.startScore}}
 
 			<div class="btn-group" data-toggle="buttons-radio">
 			  <button type="button" {{bindAttr class=":btn :btn-large :btn-primary :btn301 is301:active"}}> 301 </button>
@@ -16,16 +16,16 @@
 
 			<h2>Start a Game with:</h2>
 			<div class="player-select">
-				<button {{action "start" 2}} class="btn btn-large btn-block btn-primary" type="button">
+				<button {{action "initNumberOfPlayers" 2}} class="btn btn-large btn-block btn-primary" type="button">
 					<i class="icon-user icon-white"></i>
 					<i class="icon-user icon-white"></i>
 				</button>
-				<button {{action "start" 3}} class="btn btn-large btn-block btn-primary" type="button">
+				<button {{action "initNumberOfPlayers" 3}} class="btn btn-large btn-block btn-primary" type="button">
 					<i class="icon-user icon-white"></i>
 					<i class="icon-user icon-white"></i>
 					<i class="icon-user icon-white"></i>
 				</button>
-				<button {{action "start" 4}} class="btn btn-large btn-block btn-primary" type="button">
+				<button {{action "initNumberOfPlayers" 4}} class="btn btn-large btn-block btn-primary" type="button">
 					<i class="icon-user icon-white"></i>
 					<i class="icon-user icon-white"></i>
 					<i class="icon-user icon-white"></i>

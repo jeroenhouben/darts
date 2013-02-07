@@ -5,42 +5,78 @@ window.App = Ember.Application.create();
 // Router
 App.Router.map(function() {
   this.resource('match', function() {
-    this.resource('players')
+    this.resource('players');
+    this.route('setup');
+    this.route('scoreboard');
   });
 });
 
+App.ApplicationRoute = Ember.Route.extend({
+  setupController: function(controller, model) {
+    var match = App.Match.createRecord({startScore: 501});
+    var set = match.set('sett', App.Sett.createRecord({
+      match: match
+    }));
+    var leg = App.Leg.createRecord({
+      set: set
+    })
+    controller.set('match', match);
+  } 
+});
+    
+
+
 App.IndexRoute = Ember.Route.extend({
   redirect: function() {
-    this.transitionTo('match');
+    this.transitionTo('match.setup');
   }
 });
 
-App.MatchRoute = Ember.Route.extend({
-  model: function(params) {
-    return App.Match.createRecord({startScore: 501});
+App.PlayersRoute = Ember.Route.extend({
+  setupController: function(controller, model) {
+    var c = this.controllerFor('application');
+    var match = c.get('match');
+    controller.set('content', match.get('players'));
   }
+});
+
+
+App.MatchScoreboardRoute = Ember.Route.extend({
+  setupController: function(controller, model) {
+    var c = this.controllerFor('application');
+    var match = c.get('match');
+    controller.set('content', match);
+  }
+});
+
+
+App.MatchScoreboardController = Ember.ObjectController.extend({
+  whoopin: "on"  
 });
 
 // Controllers
-App.MatchController = Ember.ObjectController.extend({
-  // initial value
-  isStarted: false,
-
-  start: function(size) {
-    var match = this.get('content'),
+App.MatchSetupController = Ember.ObjectController.extend({
+  initNumberOfPlayers: function(size) {
+    var c = this.controllerFor('application'),
+        match = c.get('match'),
         players = match.get('players');
 
+    players.set('content', []);
     for (var i=1; i <= size; i++) {
-      players.createRecord({name: "assman #" + i});
+      players.createRecord({
+        name: "assman #" + i,
+        match: match
+      });
     };
-    this.set('isStarted', true);
+    this.transitionToRoute('players');
   }
 
 });
 
 App.PlayersController = Ember.ArrayController.extend({
-
+  
 });
+
 
 
 
@@ -58,9 +94,17 @@ App.Store = DS.Store.extend({
   adapter: 'DS.FixtureAdapter'
 });
 
+
+App.Player = DS.Model.extend({
+  match: DS.belongsTo('App.Match'),
+  name: DS.attr('string')
+});
+
+
 App.Match = DS.Model.extend({
   startScore: DS.attr('number'),
   players: DS.hasMany('App.Player'),
+  sett: DS.belongsTo('App.Sett'),
   is301: function() {
     return (this.get('startScore') == 301)
   }.property('startScore'),
@@ -70,18 +114,27 @@ App.Match = DS.Model.extend({
   
 });
 
-App.Player = DS.Model.extend({
-  name: DS.attr('string'),
-  match: DS.belongsTo('App.Match')
-});
-
-App.Set = DS.Model.extend({
+App.Sett = DS.Model.extend({
   match: DS.belongsTo('App.Match'),
-  legs: DS.hasMany('App.Leg')
+  leg: DS.belongsTo('App.Leg')
 });
 
 App.Leg = DS.Model.extend({
-  match: DS.belongsTo('App.Set')
+  sett: DS.belongsTo('App.Sett')
 });
+
+App.Round = DS.Model.extend({
+  leg: DS.belongsTo('App.Leg'),
+  nr: DS.attr('integer')
+});
+
+App.RoundResult = DS.Model.extend({
+  player: DS.belongsTo('App.Player'),
+  leg: DS.belongsTo('App.Leg'),
+  dart1: DS.attr('integer'),
+  dart2: DS.attr('integer'),
+  dart3: DS.attr('integer')
+})
+
 
 

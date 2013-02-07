@@ -1,0 +1,11 @@
+<section id="setup">
+	{{controller}}
+	<h1>They be Dartin'</h1>
+	<ol>
+    {{#each player in controller}}
+			<li>{{view Ember.TextField valueBinding="player.name"}} faf</li>
+    {{/each}}
+	</ol>
+	
+	{{#linkTo "match.scoreboard"}}Start!{{/linkTo}}
+</section>
