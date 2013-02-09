@@ -13,15 +13,15 @@
 				<li class="scores-for-player">
 					<h4>{{player.name}}</h4>
 					<ol class="unstyled">
+						<li>{{startScore}}</li>
 						{{#each turn in player.turns}}
-							<li>{{turn.score}}</li>
+							{{view App.TurnView contextBinding="turn"}}
 						{{/each}}
 					</ol>
 				</li>
 				{{/each}}
 			</ol>
 
-		
 			<div class="modal hide fade" id="score-entry-choice-modal">
 			  <div class="modal-body">
 					<h3>Score voor beurt #<span>2</span> van <span>Lars Vegas:</span></h3>
@@ -35,4 +35,3 @@
 		</div>
 	</div>
 </section>
-

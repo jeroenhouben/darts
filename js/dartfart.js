@@ -8,6 +8,7 @@ App.Router.map(function() {
     this.resource('players');
     this.route('setup');
     this.route('scoreboard');
+    this.route('turn_calculator');
   });
 });
 
@@ -32,6 +33,10 @@ App.IndexRoute = Ember.Route.extend({
     this.transitionTo('match.setup');
   }
 });
+
+App.MatchTurnCalculatorRoute = Ember.Route.extend({
+  
+});    
 
 App.MatchSetupRoute = Ember.Route.extend({
   setupController: function(controller, model) {
@@ -61,7 +66,6 @@ App.MatchScoreboardController = Ember.ObjectController.extend({
 
 // Controllers
 App.MatchSetupController = Ember.ObjectController.extend({
-
   initNumberOfPlayers: function(size) {
     var leg = this.controllerFor('application').get('leg'),
         players = leg.get('players'),
@@ -73,16 +77,35 @@ App.MatchSetupController = Ember.ObjectController.extend({
     };
     this.transitionToRoute('players');
   }
-
 });
 
-App.PlayersController = Ember.ArrayController.extend({
+App.MatchScoreboardController = Ember.ObjectController.extend({
+  startCalculator: function(turn) {
+    this.transitionToRoute('match.turn_calculator');
+  },
+});
+
+App.PlayersController = Ember.ArrayController.extend({});
+
+// views
+App.TurnView = Ember.View.extend({
+  tagName: 'li',
+  templateName: 'turn',
+  isEditing: false,
+  turnNumber: 0,
   
+  click: function(e, view) {
+    this.set('isEditing', (!this.isEditing));
+    if (this.get('isEditing')) {
+      this.get('controller').startCalculator(this.get('context'));
+    }
+  }
+
 });
 
-
-
-
+App.TurnCalculatorView = Ember.View.extend({
+  templateName: 'calc'
+});
 
 // Models
 
@@ -141,7 +164,8 @@ App.Player = Ember.Object.extend({
   
   turns: function() {
     return this.get('leg').turnsForPlayer(this)
-  }.property()
+  }.property(),
+  
 
 });
 
@@ -150,13 +174,40 @@ App.Turn = Ember.Object.extend({
   dart1: null,
   dart2: null,
   dart3: null,
+  completed: false,
+  
   score: function() {
     var d1 = this.dart1, d2 = this.dart2, d3 = this.dart3;
     if (d1 == null && d2 == null && d3 == null) {
       return null;
     }
     return d1 + d2 + d3;
-  }.property('dart1','dart2','dart3')
+  }.property('dart1','dart2','dart3'),
+
+  /*
+  * returns the score at this given turn of the leg
+  */
+  legScore: function() {
+    var leg = this.get('player.leg'),
+        turns = this.get('player.turns'),
+        score = leg.startScore // dont use a getter we're not modifying this (??)
+
+    idx = turns.indexOf(this);
+
+    // take a slice of the turns array and sum the score
+    var slice = turns.slice(0,idx+1)
+    
+    for (var i = slice.length - 1; i >= 0; i--){
+      score -= slice[i].get('score');
+    };
+    
+    return score;
+  }.property(),
+  
+  isCompleted: function() {
+    return this.completed
+  }.property('completed')
+  
 });
 
 sampleData()
@@ -170,31 +221,35 @@ function sampleData() {
   var p2 = leg.registerPlayer('Asstrid')
 
   var t1a = App.Turn.create({
+    completed: true,
     player: p1,
-    dart1: 12,
-    dart2: 13,
-    dart3: 14
+    dart1: 10,
+    dart2: 20,
+    dart3: 30
   })
   leg.turns.push(t1a)
 
   var t1b = App.Turn.create({
+    completed: true,
     player: p2,
     dart1: 60,
-    dart2: 20,
+    dart2: 25,
     dart3: 10
   })
   leg.turns.push(t1b)
 
   var t2a = App.Turn.create({
+    completed: true,
     player: p1,
-    dart1: 22,
-    dart2: 33,
-    dart3: 44
+    dart1: 2,
+    dart2: 3,
+    dart3: 5
   })
   leg.turns.push(t2a)
 
 
   var t2b = App.Turn.create({
+    completed: false,
     player: p2
   })
   leg.turns.push(t2b)
