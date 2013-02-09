@@ -14,23 +14,29 @@ App.Router.map(function() {
 App.ApplicationRoute = Ember.Route.extend({
   setupController: function(controller, model) {
     var match = App.Match.createRecord({startScore: 501});
-    var set = match.set('sett', App.Sett.createRecord({
+    var sett = match.set('sett', App.Sett.createRecord({
       match: match
     }));
-    var leg = App.Leg.createRecord({
-      set: set
-    })
+    var leg = sett.set('leg', App.Leg.createRecord({
+      set: sett
+    }));
     controller.set('match', match);
-  } 
+  }
 });
-    
-
 
 App.IndexRoute = Ember.Route.extend({
   redirect: function() {
     this.transitionTo('match.setup');
   }
 });
+
+App.MatchSetupRoute = Ember.Route.extend({
+  setupController: function(controller, model) {
+    var c = this.controllerFor('application');
+    var match = c.get('match');
+    controller.set('content', match);
+  }
+});    
 
 App.PlayersRoute = Ember.Route.extend({
   setupController: function(controller, model) {
@@ -40,12 +46,12 @@ App.PlayersRoute = Ember.Route.extend({
   }
 });
 
-
 App.MatchScoreboardRoute = Ember.Route.extend({
   setupController: function(controller, model) {
     var c = this.controllerFor('application');
-    var match = c.get('match');
-    controller.set('content', match);
+    var leg = c.get('match').get('sett').get('leg');
+    controller.set('content', leg);
+    debugger
   }
 });
 
@@ -56,6 +62,7 @@ App.MatchScoreboardController = Ember.ObjectController.extend({
 
 // Controllers
 App.MatchSetupController = Ember.ObjectController.extend({
+
   initNumberOfPlayers: function(size) {
     var c = this.controllerFor('application'),
         match = c.get('match'),
@@ -68,6 +75,25 @@ App.MatchSetupController = Ember.ObjectController.extend({
         match: match
       });
     };
+    
+    // create some test turns
+    var leg = match.get('leg');
+    
+    for (var i=1; i < 4; i++) {
+      console.log('round ', i)
+      players.forEach(function(player, index) {
+        App.Turn.createRecord({
+          nr: i,
+          leg: leg,
+          player: player,
+          dart1: 100,
+          dart2: 3,
+          dart3: 5
+        })
+      });
+    };
+    
+    
     this.transitionToRoute('players');
   }
 
@@ -123,18 +149,14 @@ App.Leg = DS.Model.extend({
   sett: DS.belongsTo('App.Sett')
 });
 
-App.Round = DS.Model.extend({
+App.Turn = DS.Model.extend({
   leg: DS.belongsTo('App.Leg'),
-  nr: DS.attr('integer')
-});
-
-App.RoundResult = DS.Model.extend({
   player: DS.belongsTo('App.Player'),
-  leg: DS.belongsTo('App.Leg'),
+  nr: DS.attr('integer'),
   dart1: DS.attr('integer'),
   dart2: DS.attr('integer'),
   dart3: DS.attr('integer')
-})
+});
 
 
 
