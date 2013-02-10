@@ -18,13 +18,13 @@ App.ApplicationRoute = Ember.Route.extend({
       startScore: 501
     });
     controller.set('leg', leg);
-    window.gleg = leg;
+    window.gleg = leg; //global shortcut fer debuggin
   },
   
   events: {
     startLeg: function() {
-      var leg = this.controllerFor("application").get("leg");
-      leg.set('turns', []);
+      var leg = this.controllerFor("application").get("leg")
+          
       if (leg.get('players').length == 0) {
         this.transitionTo('match.setup');
       } else {
@@ -77,11 +77,12 @@ App.MatchSetupController = Ember.ObjectController.extend({
   initNumberOfPlayers: function(size) {
     var leg = this.controllerFor('application').get('leg'),
         players = leg.get('players'),
+        dummies = ["Marvin", "Jeroen", "Lennard", "Lars Vegas"],
         p;
 
     players.set('content', []);
     for (var i=1; i <= size; i++) {
-      p = leg.registerPlayer("assman #" + i);
+      p = leg.registerPlayer(dummies[i-1]);
     };
     this.transitionToRoute('players');
   },
@@ -120,6 +121,9 @@ App.TurnController = Ember.ObjectController.extend({
   registerTurn: function() {
     this.set('completed', true);
     this.transitionTo('match.scoreboard');
+
+    var leg = this.controllerFor('application').get('leg');
+    leg.advanceTurn();
   },
 
   setMultiplier: function(i) {
@@ -150,7 +154,6 @@ App.MatchScoreboardController = Ember.ObjectController.extend({
 
 App.PlayersController = Ember.ArrayController.extend({
   leg: null
-  
 });
 
 // views
@@ -158,16 +161,8 @@ App.TurnOnScoreboardView = Ember.View.extend({
   tagName: 'li',
   templateName: 'turn-on-scoreboard',
   isEditing: false,
-  turnNumber: 0,
   
-  click: function() {
-    this.toggleEditing();
-  },
-  touchEnd: function() {
-    this.toggleEditing();
-  },
-  
-  toggleEditing: function() {
+  click: function(event) {
     this.set('isEditing', (!this.isEditing));
     if (this.get('isEditing')) {
       this.get('controller').startCalculator(this.get('context'));
@@ -191,12 +186,12 @@ App.TurnCalculatorView = Ember.View.extend({
 App.Leg = Ember.Object.extend({
   startScore: 501,
   players: [],
-  turns: [],
   currentPlayer: null,
-
+  
   registerPlayer: function(name) {
     var p = App.Player.create({
-      name: name
+      name: name,
+      turns: []
     });
     this.players.addObject(p);
     p.set('leg', this);
@@ -204,13 +199,33 @@ App.Leg = Ember.Object.extend({
   },
   
   start: function() {
-    this.set('turns', []); // start will always reset
-    
-    var p1 = this.players[0];
+    this.resetPlayerTurns();
     // create a new turn for the first player
-    this.get('turns').addObject(App.Turn.create({player: p1}));
+    var p1 = this.get('players.firstObject');
+    p1.get('turns').addObject(App.Turn.create({player: p1}));
     this.set('currentPlayer', p1);
   },
+  
+  resetPlayerTurns: function() {
+    this.get('players').forEach(function(p) {
+      p.set('turns', [])
+    });
+  },
+  
+  advanceTurn: function() {
+    var currentPlayer = this.get('currentPlayer'),
+        idx = this.players.indexOf(currentPlayer);
+
+    if (idx == this.players.length-1) {
+      this.set('currentPlayer', this.players[0]);
+    } else {
+      this.set('currentPlayer', this.players[idx+1]);
+    }
+
+    newTurn = App.Turn.create({player: this.get('currentPlayer')});
+    this.get('currentPlayer').get('turns').addObject(newTurn);
+  },
+  
 
   is301: function() {
     return (this.get('startScore') == 301)
@@ -220,34 +235,18 @@ App.Leg = Ember.Object.extend({
     return (this.get('startScore') == 501)
   }.property('startScore'),
   
-  numberOfRounds: function() {
-    return Math.floor(this.turns.length / this.players.length);
-  },
-  
-  turnsForPlayer: function(player) {
-    return this.turns.filterProperty('player', player);
-  },
-  
-  completedTurns: function() {
-    return this.turns.filterProperty('completed', true);
-  }.property("turns.@each.completed"),
-  
-  completedTurnsChanged: function(sender, key, value) {
-    console.log('completedTurnsChanged', key)
-  }.observes('completedTurns.length')
-  
 
 });
 
 App.Player = Ember.Object.extend({
   name: null,
   leg: null,
+  turns: null,
   
-  turns: function() {
-    return this.get('leg').get('turnsForPlayer', this)
-  }.property('leg.turns'),
+  completedTurns: function() {
+    return this.get('turns').filterProperty('completed', true);
+  }.property("turns.@each.completed")
   
-
 });
 
 App.Turn = Ember.Object.extend({
@@ -258,7 +257,7 @@ App.Turn = Ember.Object.extend({
   completed: false,
   
   score: function() {
-    var d1 = this.dart1, d2 = this.dart2, d3 = this.dart3;
+    var d1 = this.get('dart1'), d2 = this.get('this.dart2'), d3 = this.get('this.dart3');
     if (d1 == null && d2 == null && d3 == null) {
       return null;
     }
@@ -286,7 +285,7 @@ App.Turn = Ember.Object.extend({
   }.property('player.turns.@each.score'),
   
   isCompleted: function() {
-    return this.completed
+    return this.completed;
   }.property('completed')
   
 });
