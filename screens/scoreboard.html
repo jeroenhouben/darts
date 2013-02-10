@@ -4,8 +4,8 @@
 	</div>
 	<div class="row">
 	  <div class="span4">
-			<button class="btn btn-large btn-block btn-primary" type="button"><i class="icon-white icon-wrench"></i> Players &amp; Settings</button>
-			<button class="btn btn-large btn-block btn-danger" type="button"><i class="icon-white icon-file"></i> New Game</button>
+			{{#linkTo "players" class="btn btn-large btn-block btn-primary" }}<i class="icon-white icon-wrench"></i> Players &amp; Settings {{/linkTo}}
+			<button  {{action startLeg}} class="btn btn-large btn-block btn-danger" type="button"><i class="icon-white icon-file"></i> New Game</button>
 		</div>
 	  <div class="span8">
 			<ol class="unstyled">
