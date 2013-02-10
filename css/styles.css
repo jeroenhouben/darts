@@ -26,7 +26,7 @@ body {
 * generic stuff
 */
 .centered {
-  text-align: center;
+  text-align: center !important;
 }
 .page-header {
   text-align: center;
@@ -40,8 +40,12 @@ body {
   margin-top: 20px;
 }
 /* Turn (calc) */
+#subtotal li.active {
+  background-color: yellow;
+}
 #numpad {
   position: relative;
+  text-align: center;
 }
 #numpad ol {
   height: 450px;

@@ -44,33 +44,12 @@
 	</script>
 
 	<script type="text/x-handlebars" data-template-name="turn">
-	<section id="turn">
-		<div class="row">
-		  <div class="span8">
-				<h1 class="centered">{{player.name}}</h1>
-			</div>
-		</div>
-		<div class="row">
-		  <div class="span8" id="numpad">
-				<!--# include file="screens/components/_calculator.html" -->
-			</div>
-		  <div class="span4" id="subtotal">
-				<ol class="unstyled">
-					<li {{action "selectDart" 1}}>1st Dart: {{dart1}}</li>	
-					<li {{action "selectDart" 2}}>2nd Dart: {{dart2}}</li>	
-					<li {{action "selectDart" 3}}>3rd Dart: {{dart3}}</li>	
-				</ol>
-				<hr />
-				total: {{score}}
-			</div>
-		</div>
-	</section>
+	<!--# include file="screens/turn.html" -->
 	</script>
 
 	
   <script src="js/libs/jquery-1.8.3.min.js"></script>
 	<script src="js/bootstrap/bootstrap-modal.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/bootstrap/bootstrap-button.js" type="text/javascript" charset="utf-8"></script>
   <script src="js/libs/handlebars-1.0.0.rc.2.js"></script>
   <script src="js/libs/ember.js"></script>
   <script src="js/libs/ember-data.js"></script>
