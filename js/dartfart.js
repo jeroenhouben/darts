@@ -20,6 +20,7 @@ App.ApplicationRoute = Ember.Route.extend({
     controller.set('leg', leg);
     window.gleg = leg;
   }
+
 });
 
 App.TurnRoute = Ember.Route.extend({
@@ -47,8 +48,10 @@ App.MatchSetupRoute = Ember.Route.extend({
 App.PlayersRoute = Ember.Route.extend({
   setupController: function(controller, model) {
     var leg = this.controllerFor('application').get('leg');
+    controller.set('leg', leg);
     controller.set('content', leg.get('players'));
   }
+  
 });
 
 App.MatchScoreboardRoute = Ember.Route.extend({
@@ -71,8 +74,14 @@ App.MatchSetupController = Ember.ObjectController.extend({
       p = leg.registerPlayer("assman #" + i);
     };
     this.transitionToRoute('players');
+  },
+  
+  setStartScore: function(score) {
+    this.get('content').set('startScore', score);
   }
+  
 });
+
 
 /*
 * represents a single Turn 
@@ -100,7 +109,7 @@ App.TurnController = Ember.ObjectController.extend({
   
   registerTurn: function() {
     this.set('completed', true);
-    this.transitionTo('match.scoreboard')
+    this.transitionTo('match.scoreboard');
   },
 
   setMultiplier: function(i) {
@@ -129,7 +138,14 @@ App.MatchScoreboardController = Ember.ObjectController.extend({
 });
 
 
-App.PlayersController = Ember.ArrayController.extend({});
+App.PlayersController = Ember.ArrayController.extend({
+  leg: null,
+  
+  startGame: function() {
+    this.get('leg').start();
+    this.transitionTo('match.scoreboard');
+  }
+});
 
 // views
 App.TurnOnScoreboardView = Ember.View.extend({
@@ -138,7 +154,14 @@ App.TurnOnScoreboardView = Ember.View.extend({
   isEditing: false,
   turnNumber: 0,
   
-  click: function(e, view) {
+  click: function() {
+    this.toggleEditing();
+  },
+  touchEnd: function() {
+    this.toggleEditing();
+  },
+  
+  toggleEditing: function() {
     this.set('isEditing', (!this.isEditing));
     if (this.get('isEditing')) {
       this.get('controller').startCalculator(this.get('context'));
@@ -163,23 +186,24 @@ App.Leg = Ember.Object.extend({
   startScore: 501,
   players: [],
   turns: [],
+  currentPlayer: null,
 
   registerPlayer: function(name) {
     var p = App.Player.create({
       name: name
     });
-    this.players.push(p);
+    this.players.addObject(p);
     p.set('leg', this);
     return p;
   },
   
   start: function() {
-    this.turns = []; // start will always reset
+    this.set('turns', []); // start will always reset
     
-    // create a new turn for everybody (basically one empty horizontal line on the scoreboard)
-    this.players.forEach(function(p) {
-      this.turns.push(App.Turn.create({player: p}))
-    })
+    var p1 = this.players[0];
+    // create a new turn for the first player
+    this.turns.addObject(App.Turn.create({player: p1}));
+    this.set('currentPlayer', p1);
   },
 
   is301: function() {
@@ -198,8 +222,17 @@ App.Leg = Ember.Object.extend({
     return this.turns.filter(function(turn) {
       return (turn.player == player);
     });
-  }
+  },
   
+  completedTurns: function() {
+    return this.turns.filterProperty('completed', true);
+  }.property("turns.@each.completed"),
+  
+  completedTurnsChanged: function(sender, key, value) {
+    console.log('sender', sender, 'key', key, 'value', value)
+  }.observes('completedTurns.length')
+  
+
 });
 
 App.Player = Ember.Object.extend({
@@ -254,7 +287,7 @@ App.Turn = Ember.Object.extend({
   
 });
 
-sampleData()
+ // sampleData()
 
 function sampleData() {
   var leg = App.Leg.create({

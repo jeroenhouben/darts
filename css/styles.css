@@ -26,7 +26,7 @@ body {
 * generic stuff
 */
 .centered {
-  text-align: center !important;
+  text-align: center;
 }
 .page-header {
   text-align: center;
@@ -46,6 +46,9 @@ body {
 #numpad {
   position: relative;
   text-align: center;
+}
+#numpad .btn-group {
+  margin: 10px 0 10px;
 }
 #numpad ol {
   height: 450px;

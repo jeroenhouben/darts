@@ -1,19 +1,16 @@
 <section id="turn">
 	<div class="row">
-	  <div class="span8">
-			<h1 class="centered">{{player.name}}</h1>
-		</div>
-	</div>
-	<div class="row">
 	  <div class="span8" id="numpad">
 			<div class="btn-group">
-			  <button {{action "setMultiplier" 1}} type="button" {{bindAttr class=":btn :btn-primary isSingle:active"}}>Single</button>
-			  <button {{action "setMultiplier" 2}} type="button" {{bindAttr class=":btn :btn-primary isDouble:active"}}>Double</button>
-			  <button {{action "setMultiplier" 3}} type="button" {{bindAttr class=":btn :btn-primary isTriple:active"}}>Triple</button>
+			  <button {{action "setMultiplier" 1}} type="button" {{bindAttr class=":btn :btn-success isSingle:active"}}>Single</button>
+			  <button {{action "setMultiplier" 2}} type="button" {{bindAttr class=":btn :btn-success isDouble:active"}}>Double</button>
+			  <button {{action "setMultiplier" 3}} type="button" {{bindAttr class=":btn :btn-success isTriple:active"}}>Triple</button>
 			</div>
 			<!--# include file="components/_calculator.html" -->
 		</div>
 	  <div class="span4" id="subtotal">
+			<h1>{{player.name}}</h1>
+
 			<ol class="unstyled">
 				<li {{bindAttr class="isDart1Selected:active"}} {{action "selectDart" 1}}>1st Dart: {{dart1}}</li>	
 				<li {{bindAttr class="isDart2Selected:active"}} {{action "selectDart" 2}}>2nd Dart: {{dart2}}</li>	

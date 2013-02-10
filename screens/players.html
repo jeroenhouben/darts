@@ -1,5 +1,4 @@
 <section id="setup">
-	{{controller}}
 	<h1>They be Dartin'</h1>
 	<ol>
     {{#each player in controller}}
@@ -7,5 +6,8 @@
     {{/each}}
 	</ol>
 	
-	{{#linkTo "match.scoreboard"}}Start!{{/linkTo}}
+	<button {{action "startGame"}} class="btn btn-large btn-primary" type="button">
+		<i class="icon-save icon-white"></i> Game On!
+	</button>
+
 </section>
