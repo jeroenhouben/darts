@@ -39,14 +39,9 @@ body {
 #home .player-select button {
   margin-top: 20px;
 }
-/* score-selector */
+/* Turn (calc) */
 #numpad {
   position: relative;
-}
-#numpad .modal {
-  position: absolute;
-  width: 500px;
-  margin-left: -263px;
 }
 #numpad ol {
   height: 450px;
@@ -65,8 +60,13 @@ body {
 #numpad .modal button span {
   width: 50px;
 }
-#calc #subtotal {
+#numpad #subtotal {
   text-align: right;
+}
+.modal {
+  position: absolute;
+  width: 500px;
+  margin-left: -263px;
 }
 /* scoreboard */
 #scoreboard li.scores-for-player {

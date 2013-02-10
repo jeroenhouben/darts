@@ -6,9 +6,9 @@ window.App = Ember.Application.create();
 App.Router.map(function() {
   this.resource('match', function() {
     this.resource('players');
+    this.resource('turn', { path: '/turns/:turn_id' });
     this.route('setup');
     this.route('scoreboard');
-    this.route('turn_calculator');
   });
 });
 
@@ -22,6 +22,13 @@ App.ApplicationRoute = Ember.Route.extend({
   }
 });
 
+App.TurnRoute = Ember.Route.extend({
+  model: function(params) {
+    console.log(params)
+    return {x:1};
+  }  
+})
+
 App.ApplicationController = Ember.Controller.extend({
   startLeg: function(leg) {
     leg.start();
@@ -33,10 +40,6 @@ App.IndexRoute = Ember.Route.extend({
     this.transitionTo('match.setup');
   }
 });
-
-App.MatchTurnCalculatorRoute = Ember.Route.extend({
-  
-});    
 
 App.MatchSetupRoute = Ember.Route.extend({
   setupController: function(controller, model) {
@@ -60,10 +63,6 @@ App.MatchScoreboardRoute = Ember.Route.extend({
 });
 
 
-App.MatchScoreboardController = Ember.ObjectController.extend({
-  whoopin: "on"  
-});
-
 // Controllers
 App.MatchSetupController = Ember.ObjectController.extend({
   initNumberOfPlayers: function(size) {
@@ -79,18 +78,27 @@ App.MatchSetupController = Ember.ObjectController.extend({
   }
 });
 
+App.TurnController = Ember.ObjectController.extend({
+
+  selectDart: function(dartNumber) {
+    
+  }
+
+});
+
 App.MatchScoreboardController = Ember.ObjectController.extend({
   startCalculator: function(turn) {
-    this.transitionToRoute('match.turn_calculator');
-  },
+    this.transitionTo('turn', turn)
+  }
 });
+
 
 App.PlayersController = Ember.ArrayController.extend({});
 
 // views
-App.TurnView = Ember.View.extend({
+App.TurnOnScoreboardView = Ember.View.extend({
   tagName: 'li',
-  templateName: 'turn',
+  templateName: 'turn-on-scoreboard',
   isEditing: false,
   turnNumber: 0,
   

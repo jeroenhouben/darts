@@ -15,23 +15,13 @@
 					<ol class="unstyled">
 						<li>{{startScore}}</li>
 						{{#each turn in player.turns}}
-							{{view App.TurnView contextBinding="turn"}}
+							{{view App.TurnOnScoreboardView contextBinding="turn"}}
 						{{/each}}
 					</ol>
 				</li>
 				{{/each}}
 			</ol>
-
-			<div class="modal hide fade" id="score-entry-choice-modal">
-			  <div class="modal-body">
-					<h3>Score voor beurt #<span>2</span> van <span>Lars Vegas:</span></h3>
-					<button class="btn btn-large btn-primary btn-block entry-choice" type="button"><i class="icon icon-th"></i> DartFart Magic Friend</button>
-					<form>
-						<input type="number" name="" min="0" max="180" size="3" value="" id="" />
-						<button class="btn btn-large btn-success save" type="button"><i class="icon icon-white icon-check"></i> Opslaan</button>
-					</form>
-			  </div>
-			</div>
+			
 		</div>
 	</div>
 </section>
