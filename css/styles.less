@@ -43,56 +43,59 @@ body {
   margin-top: 20px;
 }
 
-/* score-selector */
+/* Turn (calc) */
+#turn {
+  
+}
+#subtotal {
+  li.active {
+    background-color: yellow;
+  }
+}
 #numpad {
   position: relative;
+  text-align: center;
+  .btn-group {
+    margin: 10px 0 10px;
+  }
+  ol {
+    height: 450px;
+  }
+  li {
+    float: left;
+    padding: 10px;
+  }
+  li button {
+    width: 100px;
+    height: 100px;
+  }
+  .modal button {
+    margin: 20px 0;
+  }
+  .modal button span {
+    width: 50px;
+  }
+  #subtotal  {
+    text-align: right;
+  }
 }
-#numpad .modal {
+.modal {
   position: absolute;
   width: 500px;
   margin-left: -263px;
-}
 
-#numpad ol {
-  height: 450px;
-}
-#numpad li {
-  float: left;
-  padding: 10px;
-}
-#numpad li button {
-  width: 100px;
-  height: 100px;
-}
-#numpad .modal button {
-  margin: 20px 0;
-}
-#numpad .modal button span {
-  width: 50px;
-}
-#calc #subtotal  {
-  text-align: right;
 }
 
 /* scoreboard */
-#scoreboard table {
-  margin-top: -28px;
-}
-#scoreboard table td input {
-  width: 50px;
-}
-#scoreboard table th.current {
-  color: #990692;
-}
-
-#scoreboard .modal input {
-  height: 40px;
-  width: 80px;
-}
-
-#scoreboard td {
-  text-align: center;
-}
-#scoreboard th {
-  text-align: center;
+#scoreboard {
+  li.scores-for-player {
+    float: left;
+    margin-right: 20px;
+    text-align: center;
+  }
+  
+  .modal input {
+    height: 40px;
+    width: 80px;
+  }
 }

@@ -39,14 +39,16 @@ body {
 #home .player-select button {
   margin-top: 20px;
 }
-/* score-selector */
+/* Turn (calc) */
+#subtotal li.active {
+  background-color: yellow;
+}
 #numpad {
   position: relative;
+  text-align: center;
 }
-#numpad .modal {
-  position: absolute;
-  width: 500px;
-  margin-left: -263px;
+#numpad .btn-group {
+  margin: 10px 0 10px;
 }
 #numpad ol {
   height: 450px;
@@ -65,26 +67,21 @@ body {
 #numpad .modal button span {
   width: 50px;
 }
-#calc #subtotal {
+#numpad #subtotal {
   text-align: right;
 }
+.modal {
+  position: absolute;
+  width: 500px;
+  margin-left: -263px;
+}
 /* scoreboard */
-#scoreboard table {
-  margin-top: -28px;
-}
-#scoreboard table td input {
-  width: 50px;
-}
-#scoreboard table th.current {
-  color: #990692;
+#scoreboard li.scores-for-player {
+  float: left;
+  margin-right: 20px;
+  text-align: center;
 }
 #scoreboard .modal input {
   height: 40px;
   width: 80px;
-}
-#scoreboard td {
-  text-align: center;
-}
-#scoreboard th {
-  text-align: center;
 }

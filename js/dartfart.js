@@ -6,6 +6,7 @@ window.App = Ember.Application.create();
 App.Router.map(function() {
   this.resource('match', function() {
     this.resource('players');
+    this.resource('turn', { path: '/turns/:turn_id' });
     this.route('setup');
     this.route('scoreboard');
   });
@@ -13,16 +14,33 @@ App.Router.map(function() {
 
 App.ApplicationRoute = Ember.Route.extend({
   setupController: function(controller, model) {
-    var match = App.Match.createRecord({startScore: 501});
-    var sett = match.set('sett', App.Sett.createRecord({
-      match: match
-    }));
-    var leg = sett.set('leg', App.Leg.createRecord({
-      set: sett
-    }));
-    controller.set('match', match);
+    var leg = App.Leg.create({
+      startScore: 501
+    });
+    controller.set('leg', leg);
+    window.gleg = leg;
+  },
+  
+  events: {
+    startLeg: function() {
+      var leg = this.controllerFor("application").get("leg");
+      leg.set('turns', []);
+      if (leg.get('players').length == 0) {
+        this.transitionTo('match.setup');
+      } else {
+        this.transitionTo('match.scoreboard');
+        leg.start();
+      }
+    }
   }
+
 });
+
+App.TurnRoute = Ember.Route.extend({
+})
+
+App.ApplicationController = Ember.Controller.extend({
+})
 
 App.IndexRoute = Ember.Route.extend({
   redirect: function() {
@@ -32,80 +50,135 @@ App.IndexRoute = Ember.Route.extend({
 
 App.MatchSetupRoute = Ember.Route.extend({
   setupController: function(controller, model) {
-    var c = this.controllerFor('application');
-    var match = c.get('match');
-    controller.set('content', match);
+    var leg = this.controllerFor('application').get('leg');
+    controller.set('content', leg);
   }
 });    
 
 App.PlayersRoute = Ember.Route.extend({
   setupController: function(controller, model) {
-    var c = this.controllerFor('application');
-    var match = c.get('match');
-    controller.set('content', match.get('players'));
+    var leg = this.controllerFor('application').get('leg');
+    controller.set('leg', leg);
+    controller.set('content', leg.get('players'));
   }
+  
 });
 
 App.MatchScoreboardRoute = Ember.Route.extend({
   setupController: function(controller, model) {
-    var c = this.controllerFor('application');
-    var leg = c.get('match').get('sett').get('leg');
+    var leg = this.controllerFor('application').get('leg');
     controller.set('content', leg);
-    debugger
   }
 });
 
-
-App.MatchScoreboardController = Ember.ObjectController.extend({
-  whoopin: "on"  
-});
 
 // Controllers
 App.MatchSetupController = Ember.ObjectController.extend({
-
   initNumberOfPlayers: function(size) {
-    var c = this.controllerFor('application'),
-        match = c.get('match'),
-        players = match.get('players');
+    var leg = this.controllerFor('application').get('leg'),
+        players = leg.get('players'),
+        p;
 
     players.set('content', []);
     for (var i=1; i <= size; i++) {
-      players.createRecord({
-        name: "assman #" + i,
-        match: match
-      });
+      p = leg.registerPlayer("assman #" + i);
     };
-    
-    // create some test turns
-    var leg = match.get('leg');
-    
-    for (var i=1; i < 4; i++) {
-      console.log('round ', i)
-      players.forEach(function(player, index) {
-        App.Turn.createRecord({
-          nr: i,
-          leg: leg,
-          player: player,
-          dart1: 100,
-          dart2: 3,
-          dart3: 5
-        })
-      });
-    };
-    
-    
     this.transitionToRoute('players');
+  },
+  
+  setStartScore: function(score) {
+    this.get('content').set('startScore', score);
   }
-
-});
-
-App.PlayersController = Ember.ArrayController.extend({
   
 });
 
 
+/*
+* represents a single Turn 
+*/
+App.TurnController = Ember.ObjectController.extend({
+  selectedDart: 1,
+  selectedMultiplier: 1,
+
+  selectDart: function(dartNumber) {
+    this.set('selectedDart', dartNumber)
+  },
+  
+  registerThrow: function(number) {
+    var score = number*this.selectedMultiplier; 
+    this.set('dart'+this.selectedDart, score);
+
+    this.set('selectedMultiplier', 1); // chances are the next throw will be a single
+
+    if (this.selectedDart == 3) {
+      this.set('selectedDart', null);
+    } else {
+      this.set('selectedDart', this.selectedDart+1);
+    }
+  },
+  
+  registerTurn: function() {
+    this.set('completed', true);
+    this.transitionTo('match.scoreboard');
+  },
+
+  setMultiplier: function(i) {
+    this.set('selectedMultiplier', i);
+  },
+  
+  isDart1Selected: function() {return this.get('selectedDart') === 1}.property('selectedDart'),
+  isDart2Selected: function() {return this.get('selectedDart') === 2}.property('selectedDart'),
+  isDart3Selected: function() {return this.get('selectedDart') === 3}.property('selectedDart'),
+
+  isSingle: function() {return this.get('selectedMultiplier') === 1}.property('selectedMultiplier'),
+  isDouble: function() {return this.get('selectedMultiplier') === 2}.property('selectedMultiplier'),
+  isTriple: function() {return this.get('selectedMultiplier') === 3}.property('selectedMultiplier'),
+
+  
+  turnChanged: function(sender, key, value) {
+    this.set('selectedDart', 1)
+  }.observes('content')
+
+});
+
+App.MatchScoreboardController = Ember.ObjectController.extend({
+  startCalculator: function(turn) {
+    this.transitionTo('turn', turn)
+  }
+});
 
 
+App.PlayersController = Ember.ArrayController.extend({
+  leg: null
+  
+});
+
+// views
+App.TurnOnScoreboardView = Ember.View.extend({
+  tagName: 'li',
+  templateName: 'turn-on-scoreboard',
+  isEditing: false,
+  turnNumber: 0,
+  
+  click: function() {
+    this.toggleEditing();
+  },
+  touchEnd: function() {
+    this.toggleEditing();
+  },
+  
+  toggleEditing: function() {
+    this.set('isEditing', (!this.isEditing));
+    if (this.get('isEditing')) {
+      this.get('controller').startCalculator(this.get('context'));
+    }
+  }
+
+});
+
+App.TurnCalculatorView = Ember.View.extend({
+  templateName: 'calc'
+});
 
 // Models
 
@@ -115,48 +188,153 @@ App.PlayersController = Ember.ArrayController.extend({
 * multiple players (up to 4)
 */
 
-App.Store = DS.Store.extend({
-  revision: 11,
-  adapter: 'DS.FixtureAdapter'
-});
+App.Leg = Ember.Object.extend({
+  startScore: 501,
+  players: [],
+  turns: [],
+  currentPlayer: null,
 
+  registerPlayer: function(name) {
+    var p = App.Player.create({
+      name: name
+    });
+    this.players.addObject(p);
+    p.set('leg', this);
+    return p;
+  },
+  
+  start: function() {
+    this.set('turns', []); // start will always reset
+    
+    var p1 = this.players[0];
+    // create a new turn for the first player
+    this.get('turns').addObject(App.Turn.create({player: p1}));
+    this.set('currentPlayer', p1);
+  },
 
-App.Player = DS.Model.extend({
-  match: DS.belongsTo('App.Match'),
-  name: DS.attr('string')
-});
-
-
-App.Match = DS.Model.extend({
-  startScore: DS.attr('number'),
-  players: DS.hasMany('App.Player'),
-  sett: DS.belongsTo('App.Sett'),
   is301: function() {
     return (this.get('startScore') == 301)
   }.property('startScore'),
+
   is501: function() {
     return (this.get('startScore') == 501)
-  }.property('startScore')
+  }.property('startScore'),
+  
+  numberOfRounds: function() {
+    return Math.floor(this.turns.length / this.players.length);
+  },
+  
+  turnsForPlayer: function(player) {
+    return this.turns.filterProperty('player', player);
+  },
+  
+  completedTurns: function() {
+    return this.turns.filterProperty('completed', true);
+  }.property("turns.@each.completed"),
+  
+  completedTurnsChanged: function(sender, key, value) {
+    console.log('completedTurnsChanged', key)
+  }.observes('completedTurns.length')
+  
+
+});
+
+App.Player = Ember.Object.extend({
+  name: null,
+  leg: null,
+  
+  turns: function() {
+    return this.get('leg').get('turnsForPlayer', this)
+  }.property('leg.turns'),
+  
+
+});
+
+App.Turn = Ember.Object.extend({
+  player: null,
+  dart1: null,
+  dart2: null,
+  dart3: null,
+  completed: false,
+  
+  score: function() {
+    var d1 = this.dart1, d2 = this.dart2, d3 = this.dart3;
+    if (d1 == null && d2 == null && d3 == null) {
+      return null;
+    }
+    return d1 + d2 + d3;
+  }.property('dart1','dart2','dart3'),
+
+  /*
+  * returns the score at this given turn of the leg
+  */
+  legScore: function() {
+    var leg = this.get('player.leg'),
+        turns = this.get('player.turns'),
+        score = leg.startScore // dont use a getter we're not modifying this (??)
+
+    idx = turns.indexOf(this);
+
+    // take a slice of the turns array and sum the score
+    var slice = turns.slice(0,idx+1)
+    
+    for (var i = slice.length - 1; i >= 0; i--){
+      score -= slice[i].get('score');
+    };
+    
+    return score;
+  }.property('player.turns.@each.score'),
+  
+  isCompleted: function() {
+    return this.completed
+  }.property('completed')
   
 });
 
-App.Sett = DS.Model.extend({
-  match: DS.belongsTo('App.Match'),
-  leg: DS.belongsTo('App.Leg')
-});
+ // sampleData()
 
-App.Leg = DS.Model.extend({
-  sett: DS.belongsTo('App.Sett')
-});
+function sampleData() {
+  var leg = App.Leg.create({
+   startScore: 501
+  });
 
-App.Turn = DS.Model.extend({
-  leg: DS.belongsTo('App.Leg'),
-  player: DS.belongsTo('App.Player'),
-  nr: DS.attr('integer'),
-  dart1: DS.attr('integer'),
-  dart2: DS.attr('integer'),
-  dart3: DS.attr('integer')
-});
+  var p1 = leg.registerPlayer('Jeroen');
+  var p2 = leg.registerPlayer('Asstrid')
+
+  var t1a = App.Turn.create({
+    completed: true,
+    player: p1,
+    dart1: 10,
+    dart2: 20,
+    dart3: 30
+  })
+  leg.turns.push(t1a)
+
+  var t1b = App.Turn.create({
+    completed: true,
+    player: p2,
+    dart1: 60,
+    dart2: 25,
+    dart3: 10
+  })
+  leg.turns.push(t1b)
+
+  var t2a = App.Turn.create({
+    completed: true,
+    player: p1,
+    dart1: 2,
+    dart2: 3,
+    dart3: 5
+  })
+  leg.turns.push(t2a)
 
 
+  var t2b = App.Turn.create({
+    completed: false,
+    player: p2
+  })
+  leg.turns.push(t2b)
 
+
+  window.leg = leg;  
+}

@@ -28,15 +28,28 @@
 
 
   <script type="text/x-handlebars" data-template-name="match/scoreboard">
-	{{match.startScore}}
 		<!--# include file="screens/scoreboard.html" -->
   </script>
 
+	<script type="text/x-handlebars" data-template-name="turn-on-scoreboard">
+		{{#if view.isEditing}}
+			waiting...
+		{{else}}
+			{{#if isCompleted}}
+				{{legScore}}
+			{{else}}
+				...
+			{{/if}}
+		{{/if}}
+	</script>
+
+	<script type="text/x-handlebars" data-template-name="turn">
+	<!--# include file="screens/turn.html" -->
+	</script>
 
 	
-  <script src="js/libs/jquery-1.8.3.min.js"></script>
+  <script src="js/libs/jquery-1.9.1.min.js"></script>
 	<script src="js/bootstrap/bootstrap-modal.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/bootstrap/bootstrap-button.js" type="text/javascript" charset="utf-8"></script>
   <script src="js/libs/handlebars-1.0.0.rc.2.js"></script>
   <script src="js/libs/ember.js"></script>
   <script src="js/libs/ember-data.js"></script>
