@@ -65,6 +65,10 @@ App.TurnOnScoreboardView = Ember.View.extend({
 /*
 *
 */
-App.TurnCalculatorView = Ember.View.extend({
-  templateName: 'calc'
+App.CalculatorView = Ember.View.extend({
+  templateName: 'calculator',
+  click: function(e) {
+    alert(e);
+  }
+  
 });
