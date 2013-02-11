@@ -282,7 +282,7 @@ App.Turn = Ember.Object.extend({
     };
     
     return score;
-  }.property('player.turns.@each.score'),
+  }.property('player.turns.@each.score', 'player.leg.startScore'),
   
   isCompleted: function() {
     return this.completed;
