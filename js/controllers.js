@@ -8,11 +8,10 @@
 App.MatchSetupController = Ember.ObjectController.extend({
   initNumberOfPlayers: function(size) {
     var leg = this.controllerFor('application').get('leg'),
-        players = leg.get('players'),
         dummies = ["Marvin", "Jeroen", "Lennard", "Lars Vegas"],
         p;
 
-    players.set('content', []);
+    leg.set('players', []);
     for (var i=1; i <= size; i++) {
       p = leg.registerPlayer(dummies[i-1]);
     };
