@@ -3,41 +3,11 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	
-	<link rel="stylesheet" href="css/bootstrap.css" type="text/css" charset="utf-8">
 	<link rel="stylesheet" href="css/styles.css" type="text/css" charset="utf-8">
 <style type="text/css"></style></head>
 
 <body class="ember-application">
 	
-
-	
-
-
-	
-
-
-  
-
-	
-
-	
-
-	
-  <script src="js/libs/jquery-1.9.1.min.js"></script>
-  <script src="js/libs/handlebars-1.0.0.rc.2.js"></script>
-  <script src="js/libs/ember.js"></script>
-
-  <script src="js/dartfart.js"></script>
-  <script src="js/ghostclickbuster.js" type="text/javascript" charset="utf-8"></script>
-  <script src="js/controllers.js" type="text/javascript" charset="utf-8"></script>
-  <script src="js/models.js" type="text/javascript" charset="utf-8"></script>
-  <script src="js/routes.js" type="text/javascript" charset="utf-8"></script>
-  <script src="js/views.js" type="text/javascript" charset="utf-8"></script>
-
-	<script src="js/sampledata.js" type="text/javascript" charset="utf-8"></script>
-	
-
 <div id="ember191" class="ember-view">
 	<div id="main">
 		<script id="metamorph-1-start" type="text/x-placeholder"></script><div id="ember283" class="ember-view">
@@ -70,26 +40,30 @@
 			<button class="btn btn-large" value="3" type="button">3</button>	
 			<button class="btn btn-large" value="2" type="button">2</button>	
 			<button class="btn btn-large" value="1" type="button">1</button>
-			<div class="bulls">
-				<button class="bull btn btn-large btn-success" value="25" type="button">single <strong>Bull</strong></button>	
-				<button class="bull btn btn-large btn-danger" value="50" type="button">double <strong>Bull</strong></button>	
-			</div>
+			<button class="bull btn btn-large btn-success" value="25" type="button">single <strong>BULL</strong></button>	
+			<button class="bull btn btn-large btn-danger" value="50" type="button">double <strong>BULL</strong></button>	
+			<button class="bull btn btn-large btn-inverse" value="26" type="button">0 <br /><strong>miss!</strong></button>	
+			<button class="bull btn btn-large btn-homo" value="26" type="button">26 <strong>homo</strong></button>	
 		</div>
 	</div>
 
   <div id="score">
 		<h1><script id="metamorph-23-start" type="text/x-placeholder"></script>Lars Vegas<script id="metamorph-23-end" type="text/x-placeholder"></script></h1>
 
-		<ol id="dart-scores" class="unstyled">
-			<li class="active"><a class="btn btn-success btn-large">180</a></li>
-			<li><a class="btn btn-large">32</a></li>
-			<li><a class="btn btn-large">...</a></li>
-		</ol>
+		<div id="current-throw">
+			<ol id="dart-scores" class="unstyled">
+				<li class="active"><a class="btn btn-success btn-large">180</a></li>
+				<li><a class="btn btn-large">32</a></li>
+				<li><a class="btn btn-large">...</a></li>
+			</ol>
+			<h2>106</h2>
+		</div>
 
-		<hr>
-		<h2>required: <span class="checkout">223</span></h2>
-		<h2>this throw: 106</h2>
-		<hr>
+		<div id="required">
+			<h3>required:</h3>
+			<span class="checkout">223</span>
+		</div>
+			
 		<button data-ember-action="11" class="btn btn-large btn-block btn-primary" type="button">
 			<i class="icon-save icon-white"></i> Commit Score
 		</button>
