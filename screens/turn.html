@@ -28,24 +28,45 @@
 			<button class="btn btn-large" value="3" type="button">3</button>	
 			<button class="btn btn-large" value="2" type="button">2</button>	
 			<button class="btn btn-large" value="1" type="button">1</button>
-			<div class="bulls">
-				<button class="bull btn btn-large btn-success" value="25" type="button">single <strong>Bull</strong></button>	
-				<button class="bull btn btn-large btn-danger" value="50" type="button">double <strong>Bull</strong></button>	
-			</div>
+			<button class="bull btn btn-large btn-success" value="25" type="button">single <strong>BULL</strong></button>	
+			<button class="bull btn btn-large btn-danger" value="50" type="button">double <strong>BULL</strong></button>	
+			<button class="bull btn btn-large btn-inverse" value="0" type="button">0 <br /><strong>miss!</strong></button>	
+			<button class="bull btn btn-large btn-homo" value="26" type="button">26 <strong>homo</strong></button>	
+
 		{{/view}}
 	</div>
 
   <div id="score">
 		<h1>{{player.name}}</h1>
+		<div id="current-throw">
+			<ol id="dart-scores" class="unstyled">
+				<li {{bindAttr class="isDart1Selected:active"}}>
+					<button type="button" value="1" {{bindAttr class=":btn:btn-large dart1:btn-success"}}>{{dart1}}</button>
+				</li>
+				<li class="plus">+</li>
+				<li {{bindAttr class="isDart2Selected:active"}}>
+					<button type="button" value="2" {{bindAttr class=":btn:btn-large dart2:btn-success"}}>{{dart2}}</button>
+				</li>
+				<li class="plus">+</li>
+				<li {{bindAttr class="isDart3Selected:active"}}>
+					<button type="button" value="3" {{bindAttr class=":btn:btn-large dart3:btn-success"}}>{{dart3}}</button>
+				</li>
+			</ol>
+			<h2>
+			{{#if score}}
+				{{score}}
+			{{else}}
+				...
+			{{/if}}
+			</h2>
+		</div>
 
-		<ol class="unstyled">
-			<li {{bindAttr class="isDart1Selected:active"}} {{action "selectDart" 1}}>1st Dart: {{dart1}}</li>	
-			<li {{bindAttr class="isDart2Selected:active"}} {{action "selectDart" 2}}>2nd Dart: {{dart2}}</li>	
-			<li {{bindAttr class="isDart3Selected:active"}} {{action "selectDart" 3}}>3rd Dart: {{dart3}}</li>	
-		</ol>
-		<hr />
-		<h2>total: {{score}}</h2>
-		<hr />
+		<div id="required">
+			<h3>required:</h3>
+			<span class="checkout">223</span>
+		</div>
+
+
 		<button {{action "registerTurn"}} class="btn btn-large btn-block btn-primary" type="button">
 			<i class="icon-save icon-white"></i> Commit Score
 		</button>

@@ -1,27 +1,28 @@
 <section id="scoreboard">
-	<div class="page-header">
-		<div class="buttons-inline">
-			<a {{action startLeg}} class="btn btn-primary" type="button">New Game</a>
-			{{#linkTo "players" class="btn" }}<i class="icon-wrench"></i> Players {{/linkTo}}
+	<div class="wrapper">
+		
+		<div id="current-player">
+			<h1>{{currentPlayer.name}} to throw.</h1>
 		</div>
-		<h1>{{currentPlayer.name}} to throw.</h1>
-	</div>
-	<div class="row">
-	  <div class="span12">
-			<ol id="scoreboard-list" class="unstyled">
-				{{#each player in players}}
-				<li class="scores-for-player">
-					<h4>{{player.name}}</h4>
-					<ol class="unstyled">
-						<li>{{startScore}}</li>
-						{{#each turn in player.turns}}
-							{{view App.TurnOnScoreboardView contextBinding="turn"}}
-						{{/each}}
-					</ol>
-				</li>
-				{{/each}}
-			</ol>
+		
+		<div class="buttons-left">
+			<a {{action startLeg}} class="btn btn-primary btn-block" type="button">New Game</a>
+			{{#linkTo "players" class="btn btn-block" }}<i class="icon-wrench"></i> Players {{/linkTo}}
+		</div>
+
+		<ol id="scoreboard-wrapper" class="unstyled">
+			{{#each player in players}}
+			<li class="scores-for-player">
+				<h4>{{player.name}}</h4>
+				<ol class="unstyled">
+					<li>{{startScore}}</li>
+					{{#each turn in player.turns}}
+						{{view App.TurnOnScoreboardView contextBinding="turn"}}
+					{{/each}}
+				</ol>
+			</li>
+			{{/each}}
+		</ol>
 			
-		</div>
 	</div>
 </section>
