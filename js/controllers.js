@@ -39,9 +39,10 @@ App.TurnController = Ember.ObjectController.extend({
   },
   
   registerThrow: function(number) {
-    var score = number*this.selectedMultiplier; 
-    this.set('dart'+this.selectedDart, score);
+    var m = (number<25) ? this.selectedMultiplier : 1; //bulls cannot have multipliers
+    var score = number*m;
 
+    this.set('dart'+this.selectedDart, score);
     this.set('selectedMultiplier', 1); // chances are the next throw will be a single
 
     if (this.selectedDart == 3) {

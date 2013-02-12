@@ -1,14 +1,14 @@
 <section id="scoreboard">
 	<div class="page-header">
+		<div class="buttons-inline">
+			<a {{action startLeg}} class="btn btn-primary" type="button">New Game</a>
+			{{#linkTo "players" class="btn" }}<i class="icon-wrench"></i> Players {{/linkTo}}
+		</div>
 		<h1>{{currentPlayer.name}} to throw.</h1>
 	</div>
 	<div class="row">
-	  <div class="span4">
-			{{#linkTo "players" class="btn btn-large btn-block btn-primary" }}<i class="icon-white icon-wrench"></i> Players &amp; Settings {{/linkTo}}
-			<button  {{action startLeg}} class="btn btn-large btn-block btn-danger" type="button"><i class="icon-white icon-file"></i> New Game</button>
-		</div>
-	  <div class="span8">
-			<ol class="unstyled">
+	  <div class="span12">
+			<ol id="scoreboard-list" class="unstyled">
 				{{#each player in players}}
 				<li class="scores-for-player">
 					<h4>{{player.name}}</h4>

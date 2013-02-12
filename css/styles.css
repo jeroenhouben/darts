@@ -16,10 +16,9 @@ body {
   height: 660px;
   background: #fff;
 }
+#main > div > section,
 #main > section {
-  background-color: #fff;
-  border-bottom: 1px dotted gray;
-  height: 659px;
+  height: 660px;
   padding: 0 10px;
 }
 /*
@@ -29,7 +28,22 @@ body {
   text-align: center;
 }
 .page-header {
+  margin-top: 0;
+  margin-bottom: 20px;
+  padding-bottom: 0;
   text-align: center;
+}
+.page-header .buttons-inline {
+  float: left;
+  margin: 18px 10px 0 0;
+}
+.page-header .buttons-inline a,
+.page-header .buttons-inline button {
+  margin-right: 5px;
+}
+.page-header h1 {
+  margin-top: 0;
+  padding-top: 6px;
 }
 /*
 * pages
@@ -40,48 +54,72 @@ body {
   margin-top: 20px;
 }
 /* Turn (calc) */
-#subtotal li.active {
-  background-color: yellow;
+#main section#turn {
+  background-color: #353535;
+  padding-top: 10px !important;
 }
-#numpad {
-  position: relative;
+#calculator {
+  float: left;
+  width: 560px;
+}
+#calculator #multipliers {
+  display: block;
+  margin: 18px 0;
   text-align: center;
 }
-#numpad .btn-group {
-  margin: 10px 0 10px;
+#calculator #numpad {
+  text-align: center;
 }
-#numpad ol {
-  height: 450px;
-}
-#numpad li {
+#calculator #numpad button {
+  text-align: center;
+  margin: 10px;
+  width: 90px;
+  height: 90px;
   float: left;
   padding: 10px;
 }
-#numpad li button {
-  width: 100px;
-  height: 100px;
+#calculator #numpad .bulls {
+  margin: 0 auto;
+  width: 228px;
 }
-#numpad .modal button {
-  margin: 20px 0;
+#calculator #numpad .bulls button {
+  font-size: 20px;
 }
-#numpad .modal button span {
-  width: 50px;
-}
-#numpad #subtotal {
+#score {
+  background: #fff;
+  border-radius: 15px;
+  margin-left: 560px;
+  padding: 0 20px 10px;
   text-align: right;
 }
-.modal {
-  position: absolute;
-  width: 500px;
-  margin-left: -263px;
+#score h1 {
+  margin-top: 0;
+  text-align: center;
+}
+#score h2 .checkout {
+  color: #bd362f;
+}
+#score #dart-scores {
+  margin-top: 25px;
+  display: table;
+  width: 100%;
+}
+#score #dart-scores li {
+  width: 30%;
+  display: table-cell;
+  text-align: center;
+  margin: 5px;
+  font-size: 14px;
+}
+#score #dart-scores li a {
+  width: 48px;
 }
 /* scoreboard */
-#scoreboard li.scores-for-player {
+#scoreboard-list {
+  margin: 0 auto;
+}
+#scoreboard-list li.scores-for-player {
   float: left;
   margin-right: 20px;
   text-align: center;
-}
-#scoreboard .modal input {
-  height: 40px;
-  width: 80px;
 }
