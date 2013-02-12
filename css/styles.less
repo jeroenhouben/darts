@@ -119,8 +119,15 @@ body {
     span {
         font-size: 112px;
         font-weight: bold;
-      &.checkout {
         color: #bd362f;
+      &.checkout {
+        color: darken(@btnSuccessBackground, 20);
+        text-shadow: -1px 1px 18px yellow, 1px -1px 18px yellow;
+        -webkit-transition: 500ms linear 0s;  
+        -moz-transition: 500ms linear 0s;  
+        -o-transition: 500ms linear 0s;  
+        transition: 500ms linear 0s;  
+        outline: 0 none;
       }
     }
   }
@@ -134,6 +141,9 @@ body {
       text-align: center;
       margin: 5px;
       font-size: 14px;
+      &.active button {
+        box-shadow:0 0 25px yellow;
+      } 
       &.plus {
         font-size: 30px;
         color: #ccc;
@@ -141,6 +151,7 @@ body {
         vertical-align: top;
       }
       button {
+        min-height: 40px;
         width: 82px;
       }
     }

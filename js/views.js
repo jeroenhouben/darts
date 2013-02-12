@@ -66,6 +66,17 @@ App.TurnView = Ember.View.extend({
       }
       this.get('controller').registerThrow(parseInt(btn.val(), 10));
     }
+  }),
+
+  dartScoresView: Ember.View.extend({
+    tagName: 'li',
+    click: function(e) {
+      var btn = $(e.target).closest('button');
+      if (!btn.length) {
+        return;
+      }
+      this.get('controller').selectDart(parseInt(btn.val(), 10));
+    }
   })
   
 });

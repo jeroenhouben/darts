@@ -36,7 +36,23 @@ App.TurnController = Ember.ObjectController.extend({
 
   selectDart: function(dartNumber) {
     this.set('selectedDart', dartNumber)
+    this.set('dart'+this.selectedDart, null);
   },
+  
+  requiredScore: function() {
+    return this.get('player.requiredScore');
+  }.property('player.requiredScore'),
+  
+  isCheckoutPossible: function() {
+    var i = this.get('requiredScore');
+    if (i<162) {
+      return true;
+    }
+    if (i==170 || i==167 || i==164) {
+      return true;
+    }
+    return false;
+  }.property('requiredScore'),
   
   registerThrow: function(number) {
     var m = (number<25) ? this.selectedMultiplier : 1; //bulls cannot have multipliers
@@ -67,6 +83,11 @@ App.TurnController = Ember.ObjectController.extend({
   isDart1Selected: function() {return this.get('selectedDart') === 1}.property('selectedDart'),
   isDart2Selected: function() {return this.get('selectedDart') === 2}.property('selectedDart'),
   isDart3Selected: function() {return this.get('selectedDart') === 3}.property('selectedDart'),
+
+  isDart1Processed: function() {return this.get('dart1') != null}.property('dart1'),
+  isDart2Processed: function() {return this.get('dart2') != null}.property('dart2'),
+  isDart3Processed: function() {return this.get('dart3') != null}.property('dart3'),
+
 
   isSingle: function() {return this.get('selectedMultiplier') === 1}.property('selectedMultiplier'),
   isDouble: function() {return this.get('selectedMultiplier') === 2}.property('selectedMultiplier'),

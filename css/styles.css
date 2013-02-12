@@ -3515,9 +3515,16 @@ body {
 #score #required span {
   font-size: 112px;
   font-weight: bold;
+  color: #bd362f;
 }
 #score #required span.checkout {
-  color: #bd362f;
+  color: #348c34;
+  text-shadow: -1px 1px 18px #ffff00, 1px -1px 18px #ffff00;
+  -webkit-transition: 500ms linear 0s;
+  -moz-transition: 500ms linear 0s;
+  -o-transition: 500ms linear 0s;
+  transition: 500ms linear 0s;
+  outline: 0 none;
 }
 #score #dart-scores {
   margin-top: 25px;
@@ -3531,6 +3538,9 @@ body {
   margin: 5px;
   font-size: 14px;
 }
+#score #dart-scores li.active button {
+  box-shadow: 0 0 25px yellow;
+}
 #score #dart-scores li.plus {
   font-size: 30px;
   color: #ccc;
@@ -3538,6 +3548,7 @@ body {
   vertical-align: top;
 }
 #score #dart-scores li button {
+  min-height: 40px;
   width: 82px;
 }
 /* scoreboard */

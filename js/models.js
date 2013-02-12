@@ -70,7 +70,15 @@ App.Player = Ember.Object.extend({
   
   completedTurns: function() {
     return this.get('turns').filterProperty('completed', true);
-  }.property("turns.@each.completed")
+  }.property("turns.@each.completed"),
+  
+  requiredScore: function() {
+    var i = this.get('leg.startScore');
+    this.get('turns').forEach(function(turn) {
+      i-=turn.get('score');
+    });
+    return i;
+  }.property('leg.startScore', 'turns.@each.score')
   
 });
 
@@ -98,7 +106,7 @@ App.Turn = Ember.Object.extend({
   */
   legScore: function() {
     var leg = this.get('player.leg'),
-        turns = this.get('player.turns'),
+        turns = this.get('player.turns'), // maybe only use completed scores?
         score = leg.startScore // dont use a getter we're not modifying this (??)
 
     idx = turns.indexOf(this);
