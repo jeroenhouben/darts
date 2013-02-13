@@ -3424,6 +3424,11 @@ body {
 * pages
 * ========
 */
+#intro {
+  width: 50%;
+  padding-top: 200px;
+  margin: 0 auto;
+}
 /* home */
 #home .player-select button {
   margin-top: 20px;

@@ -8,19 +8,71 @@
 App.MatchSetupController = Ember.ObjectController.extend({
 
   initNumberOfPlayers: function(size) {
-    var leg = this.controllerFor('application').get('leg'),
-        dummies = ["Marvin", "Jeroen", "Lennard", "Lars Vegas"],
-        p;
+    var DUMMIES = ["Marvin", "Jeroen", "Lennard", "Lars Vegas"];
+    var leg = this.get('model');
 
     leg.set('players', []);
     for (var i=1; i <= size; i++) {
-      p = leg.registerPlayer(dummies[i-1]);
+      leg.get('players').createRecord({
+        name: DUMMIES[i-1]
+      });
     };
     this.transitionToRoute('players');
   },
   
   setStartScore: function(score) {
-    this.get('content').set('startScore', score);
+    this.get('model').set('startScore', score);
+  }
+  
+});
+
+/*
+* MatchScoreboardController
+* Proxies the players in the leg
+*/
+App.MatchScoreboardController = Ember.ArrayController.extend({
+  
+  leg: function() {
+    return App.Leg.find(1);
+  }.property(),
+  
+  /*
+  * this method needs refactoring
+  */
+  nextPlayer: function() {
+    var players  = this.get('model'),
+        count    = this.get('length'),
+        minTurns = 999,
+        i, turnCount, nextPlayer, _player;
+    
+    for (i = count-1; i >= 0; i--){
+      _player = players.objectAt(i);
+      turnCount = _player.get('turns.length');
+      if (turnCount <= minTurns) {
+        minTurns = turnCount; 
+        nextPlayer = _player;
+      }
+    };
+    
+    return nextPlayer;
+  }.property('@each.completedTurns'),
+
+  /*
+  * edit an existing turn in the TurnCalculator
+  */
+  editTurn: function(turn) {
+    this.transitionTo('turn', turn)
+  },
+  
+  /*
+  * get (or create!) the player's last turn and go to the TurnCalculator
+  */
+  newTurnForPlayer: function(player) {
+    var turn = player.get('turns.getLastObject');
+    if (!turn || turn.get('completed')) {
+      turn = player.get('turns').createRecord();
+    }
+    this.transitionTo('turn', turn);
   }
   
 });
@@ -99,60 +151,8 @@ App.TurnController = Ember.ObjectController.extend({
 });
 
 /*
-* MatchScoreboardController
-*
-*/
-App.MatchScoreboardController = Ember.ObjectController.extend({
-
-  /*
-  * this method needs refactoring
-  */
-  nextPlayer: function() {
-    var players = this.get('players'), players, i, minTurns=999, l, nextPlayer, _player;
-
-    for (i = players.length - 1; i >= 0; i--){
-      _player = players[i];
-      l = _player.get('turns.length');
-      if (l <= minTurns) {
-        minTurns = l; 
-        nextPlayer = _player;
-      }
-    };
-    
-    return nextPlayer;
-  }.property('content.players.@each.turns.length'),
-
-  /*
-  * edit an existing turn in the TurnCalculator
-  */
-  editTurn: function(turn) {
-    this.transitionTo('turn', turn)
-  },
-  
-  /*
-  * get (or create!) the player's last turn and go to the TurnCalculator
-  */
-  newTurnForPlayer: function(player) {
-    var turn = player.get('turns.getLastObject');
-    if (!turn) {
-      turn = App.Turn.create({player: player});
-      player.set('turns', [turn]);
-    } else {
-      if (turn.get('completed')) {
-        turn = App.Turn.create({player: player});
-        player.get('turns').addObject(turn);
-      }
-    }
-    this.transitionTo('turn', turn);
-  }
-  
-});
-
-
-/*
 * PlayersController
 *
 */
 App.PlayersController = Ember.ArrayController.extend({
-  leg: null
 });

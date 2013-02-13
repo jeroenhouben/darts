@@ -13,11 +13,11 @@
 		</div>
 
 		<ol id="scoreboard-wrapper" class="unstyled">
-			{{#each player in players}}
+			{{#each player in controller}}
 			<li class="scores-for-player">
 				<h4 {{action newTurnForPlayer player}}>{{player.name}}</h4>
 				<ol class="unstyled">
-					<li class="start-score">{{startScore}}</li>
+					<li class="start-score">{{leg.startScore}}</li>
 					{{#each turn in player.turns}}
 						<li {{action editTurn turn}}>
 						{{#if turn.isCompleted}}

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>denug</title>
+  <script src="js/libs/jquery-1.9.1.min.js"></script>
+  <script src="js/libs/handlebars-1.0.0.rc.2.js"></script>
+  <script src="js/libs/ember.js"></script>
+	<script src="js/libs/ember-data.js" type="text/javascript" charset="utf-8"></script>
+
+	<script type="text/javascript" charset="utf-8">
+	window.App = Ember.Application.create();
+	// Models
+	App.Store = DS.Store.extend({
+	  revision: 11,
+	  adapter: 'DS.FixtureAdapter'
+	});
+
+	App.Leg = DS.Model.extend({
+	  players: DS.hasMany('App.Player'),
+	  turnCount: function() {
+	    var i = 0;
+	    this.get('players').forEach(function(p) {
+	      i+= p.get('turns.length');
+	    });
+	    return i;
+	  }.property('players.@each.turns.length')
+
+	});
+
+	App.Player = DS.Model.extend({
+	  name: "Franz",
+		leg: DS.belongsTo('App.Leg'),
+	  turns: DS.hasMany('App.Turn')
+	});
+
+
+	App.Turn = DS.Model.extend({
+	  player: DS.belongsTo('App.Player')
+	});
+
+	/*
+	* do this on the console to verify
+	*/
+
+
+
+	</script>
+</head>
+
+<body>
+
+
+</body>
+</html>
