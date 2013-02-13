@@ -9,24 +9,24 @@
 			</div>
 
 			<div class="btn-group start-score-select">
-			  <button type="button" {{bindAttr class=":btn :btn-large :btn-primary :btn301 is301:active"}}> 301 </button>
-			  <button type="button" {{bindAttr class=":btn :btn-large :btn-primary :btn501 is501:active"}}> 501 </button>
+			  <button {{action setStartScore 301}} type="button" {{bindAttr class=":btn :btn-large :btn-primary :btn301 is301:active"}}> 301 </button>
+			  <button {{action setStartScore 501}} type="button" {{bindAttr class=":btn :btn-large :btn-primary :btn501 is501:active"}}> 501 </button>
 			</div>
 
 			<hr />
 
 			<h2>Start a {{startScore}} with:</h2>
 			<div class="player-select">
-				<button data-players="2" class="btn btn-large btn-block btn-primary" type="button">
+				<button {{action initNumberOfPlayers 2}} class="btn btn-large btn-block btn-primary" type="button">
 					<i class="icon-user icon-white"></i>
 					<i class="icon-user icon-white"></i>
 				</button>
-				<button data-players="3" class="btn btn-large btn-block btn-primary" type="button">
+				<button {{action initNumberOfPlayers 3}} class="btn btn-large btn-block btn-primary" type="button">
 					<i class="icon-user icon-white"></i>
 					<i class="icon-user icon-white"></i>
 					<i class="icon-user icon-white"></i>
 				</button>
-				<button data-players="4" class="btn btn-large btn-block btn-primary" type="button">
+				<button  {{action initNumberOfPlayers 4}} class="btn btn-large btn-block btn-primary" type="button">
 					<i class="icon-user icon-white"></i>
 					<i class="icon-user icon-white"></i>
 					<i class="icon-user icon-white"></i>

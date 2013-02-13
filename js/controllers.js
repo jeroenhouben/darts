@@ -6,6 +6,7 @@
 *
 */
 App.MatchSetupController = Ember.ObjectController.extend({
+
   initNumberOfPlayers: function(size) {
     var leg = this.controllerFor('application').get('leg'),
         dummies = ["Marvin", "Jeroen", "Lennard", "Lars Vegas"],

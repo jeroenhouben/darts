@@ -7,7 +7,6 @@
 App.Leg = Ember.Object.extend({
   startScore: 501,
   players: [],
-  currentPlayer: null,
   
   registerPlayer: function(name) {
     var p = App.Player.create({
@@ -17,13 +16,6 @@ App.Leg = Ember.Object.extend({
     this.players.addObject(p);
     p.set('leg', this);
     return p;
-  },
-  
-  start: function() {
-    this.resetPlayerTurns();
-    // create a new turn for the first player
-    var p1 = this.get('players.firstObject');
-    this.set('currentPlayer', p1);
   },
   
   resetPlayerTurns: function() {

@@ -34,8 +34,8 @@ App.ApplicationRoute = Ember.Route.extend({
       if (leg.get('players').length == 0) {
         this.transitionTo('match.setup');
       } else {
+        leg.resetPlayerTurns();
         this.transitionTo('match.scoreboard');
-        leg.start();
       }
     }
   }
