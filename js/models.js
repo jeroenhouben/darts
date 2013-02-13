@@ -1,10 +1,14 @@
 // Models
+App.Store = DS.Store.extend({
+  revision: 11,
+  adapter: 'DS.FixtureAdapter'
+});
 
 /*
 * Leg
 *
 */
-App.Leg = Ember.Object.extend({
+App.Leg = DS.Model.extend({
   startScore: 501,
   players: [],
   

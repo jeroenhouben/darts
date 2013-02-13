@@ -8,7 +8,7 @@
 App.MatchSetupController = Ember.ObjectController.extend({
 
   initNumberOfPlayers: function(size) {
-    var leg = this.controllerFor('application').get('leg'),
+    var leg = this.get('model'),
         dummies = ["Marvin", "Jeroen", "Lennard", "Lars Vegas"],
         p;
 
@@ -20,7 +20,7 @@ App.MatchSetupController = Ember.ObjectController.extend({
   },
   
   setStartScore: function(score) {
-    this.get('content').set('startScore', score);
+    this.get('model').set('startScore', score);
   }
   
 });
