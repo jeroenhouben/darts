@@ -17,11 +17,12 @@ App.ApplicationRoute = Ember.Route.extend({
     startLeg: function() {
       var leg = App.Leg.find(1);
           
-      if (leg.get('players').length == 0) {
-        this.transitionTo('match.setup');
-      } else {
-        leg.resetPlayerTurns();
+      if (leg.get('players.length') > 0) {
+        leg.resetTurns();
         this.transitionTo('match.scoreboard');
+      } else {
+        // no players ... 
+        this.transitionTo('match.setup');
       }
     }
   }
@@ -56,7 +57,7 @@ App.PlayersRoute = Ember.Route.extend({
 App.MatchScoreboardRoute = Ember.Route.extend({
 
   model: function() {
-    return App.Leg.find(1);// always get the same Leg for now.. (its defined in sampledata (FIXTURES))
+    return App.Leg.find(1).get('players');
   }
 
 });

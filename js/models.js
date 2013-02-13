@@ -10,19 +10,9 @@ App.Store = DS.Store.extend({
 */
 App.Leg = DS.Model.extend({
   startScore: 501,
-  players: [],
+  players: DS.hasMany('App.Player'),
   
-  registerPlayer: function(name) {
-    var p = App.Player.createRecord({
-      name: name,
-      turns: []
-    });
-    this.players.addObject(p);
-    p.set('leg', this);
-    return p;
-  },
-  
-  resetPlayerTurns: function() {
+  resetTurns: function() {
     this.get('players').forEach(function(p) {
       p.set('turns', [])
     });
@@ -45,8 +35,8 @@ App.Leg = DS.Model.extend({
 */
 App.Player = DS.Model.extend({
   name: null,
-  leg: null,
-  turns: null,
+  leg: DS.belongsTo('App.Leg'),
+  turns: DS.hasMany('App.Turn'),
   
   completedTurns: function() {
     return this.get('turns').filterProperty('completed', true);
@@ -67,7 +57,7 @@ App.Player = DS.Model.extend({
 *
 */
 App.Turn = DS.Model.extend({
-  player: null,
+  player: DS.belongsTo('App.Player'),
   dart1: null,
   dart2: null,
   dart3: null,
