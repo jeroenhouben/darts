@@ -3576,10 +3576,9 @@ body {
   text-transform: uppercase;
 }
 #scoreboard-wrapper li.scores-for-player {
-  overflow: hidden;
   float: left;
-  width: 190px;
-  height: 530px;
+  width: 200px;
+  height: 570px;
   text-align: center;
   margin-left: 10px;
 }
@@ -3595,10 +3594,7 @@ body {
   color: yellow;
 }
 #scoreboard-wrapper li.scores-for-player ol {
-  overflow-y: scroll;
-  height: 440px;
   font-size: 30px;
-  width: 218px;
 }
 #scoreboard-wrapper li.scores-for-player ol li {
   padding: 3px 0;

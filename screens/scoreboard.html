@@ -9,7 +9,6 @@
 		<div class="buttons-left">
 			<a {{action startLeg}} class="btn btn-primary btn-block" type="button">New Leg</a>
 			{{#linkTo "index" class="btn btn-block btn-primary" }} New Game {{/linkTo}}
-			{{#linkTo "players" class="btn btn-block" }}<i class="icon-wrench"></i> Names {{/linkTo}}
 		</div>
 
 		<ol id="scoreboard-wrapper" class="unstyled">
@@ -18,7 +17,7 @@
 				<h4 {{action newTurnForPlayer player}}>{{player.name}}</h4>
 				<ol class="unstyled">
 					<li class="start-score">{{leg.startScore}}</li>
-					{{#each turn in player.turns}}
+					{{#each turn in player.lastTurns}}
 						<li {{action editTurn turn}}>
 						{{#if turn.isCompleted}}
 							{{turn.legScore}}

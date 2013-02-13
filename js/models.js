@@ -41,6 +41,12 @@ App.Player = DS.Model.extend({
   completedTurns: function() {
     return this.get('turns').filterProperty('completed', true);
   }.property("turns.@each.completed"),
+
+  lastTurns: function() {
+    var LIMIT = 13;
+    var turns = this.get('turns').filterProperty('completed', true);
+    return turns.slice(-LIMIT);
+  }.property("turns.@each.completed"),
   
   requiredScore: function() {
     var i = this.get('leg.startScore');
