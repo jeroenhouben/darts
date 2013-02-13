@@ -9,7 +9,7 @@ App.Store = DS.Store.extend({
 *
 */
 App.Leg = DS.Model.extend({
-  startScore: 501,
+  startScore: DS.attr('number'),
   players: DS.hasMany('App.Player'),
   
   resetTurns: function() {
@@ -34,7 +34,7 @@ App.Leg = DS.Model.extend({
 *
 */
 App.Player = DS.Model.extend({
-  name: null,
+  name: DS.attr('string'),
   leg: DS.belongsTo('App.Leg'),
   turns: DS.hasMany('App.Turn'),
   
@@ -58,26 +58,26 @@ App.Player = DS.Model.extend({
 */
 App.Turn = DS.Model.extend({
   player: DS.belongsTo('App.Player'),
-  dart1: null,
-  dart2: null,
-  dart3: null,
-  completed: false,
+  dart1: DS.attr('number'),
+  dart2: DS.attr('number'),
+  dart3: DS.attr('number'),
+  completed: DS.attr('boolean'),
   
   score: function() {
-    var d1 = this.get('dart1'), d2 = this.get('this.dart2'), d3 = this.get('this.dart3');
+    var d1 = this.get('dart1'), d2 = this.get('dart2'), d3 = this.get('dart3');
     if (d1 == null && d2 == null && d3 == null) {
       return null;
     }
-    return d1 + d2 + d3;
+    return (d1 ? d1 : 0) + (d2 ? d2 : 0) + (d3 ? d3 : 0);
   }.property('dart1','dart2','dart3'),
-
+  
   /*
   * returns the score at this given turn of the leg
   */
   legScore: function() {
     var leg = this.get('player.leg'),
         turns = this.get('player.turns'), // maybe only use completed scores?
-        score = leg.startScore // dont use a getter we're not modifying this (??)
+        score = leg.get('startScore')
 
     idx = turns.indexOf(this);
 
@@ -92,7 +92,7 @@ App.Turn = DS.Model.extend({
   }.property('player.turns.@each.score', 'player.leg.startScore'),
   
   isCompleted: function() {
-    return this.completed;
+    return this.get('completed');
   }.property('completed')
   
 });

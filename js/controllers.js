@@ -92,6 +92,12 @@ App.TurnController = Ember.ObjectController.extend({
     this.set('dart'+this.selectedDart, null);
   },
   
+  hasScore: function() {
+    if (this.get('dart1') != null) return true;
+    if (this.get('dart2') != null) return true;
+    return (this.get('dart3') != null);
+  }.property('dart1','dart2','dart3'),
+  
   requiredScore: function() {
     return this.get('player.requiredScore');
   }.property('player.requiredScore'),
