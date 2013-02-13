@@ -9,10 +9,15 @@ App.Router.map(function() {
 });
 
 /*
-* IndexRoute. just redirects. can probably go away
+* IndexRoute. Sets Up a new Leg
 */
 App.IndexRoute = Ember.Route.extend({
   redirect: function() {
+    var leg = App.Leg.create({
+      startScore: 501
+    });
+    this.controllerFor('application').set('leg', leg);
+    window.gleg = leg; //global shortcut fer debuggin
     this.transitionTo('match.setup');
   }
 });
@@ -21,14 +26,7 @@ App.IndexRoute = Ember.Route.extend({
 * ApplicationRoute
 */
 App.ApplicationRoute = Ember.Route.extend({
-  setupController: function(controller, model) {
-    var leg = App.Leg.create({
-      startScore: 501
-    });
-    controller.set('leg', leg);
-    window.gleg = leg; //global shortcut fer debuggin
-  },
-  
+
   events: {
     startLeg: function() {
       var leg = this.controllerFor("application").get("leg")
