@@ -122,12 +122,6 @@ body {
         color: #bd362f;
       &.checkout {
         color: darken(@btnSuccessBackground, 20);
-        text-shadow: -1px 1px 18px yellow, 1px -1px 18px yellow;
-        -webkit-transition: 500ms linear 0s;  
-        -moz-transition: 500ms linear 0s;  
-        -o-transition: 500ms linear 0s;  
-        transition: 500ms linear 0s;  
-        outline: 0 none;
       }
     }
   }
@@ -166,6 +160,12 @@ body {
       margin: 0 0 0 140px;
       padding: 0 0 10px;
       text-align: center;
+      &:hover {
+        cursor: pointer;
+        span {
+          
+        }
+      }
     }
   }
   .wrapper {
@@ -197,6 +197,10 @@ body {
     h4 {
       white-space: nowrap;
       border-bottom: 1px solid #fff;
+      &:hover {
+        cursor: pointer;
+        color: yellow;
+      }
     }
     ol {
       overflow-y: scroll;

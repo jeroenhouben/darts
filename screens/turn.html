@@ -2,11 +2,11 @@
 <section id="turn">
 		
 	<div id="calculator">
-		{{#view view.multiplierView id="multipliers" classNames="btn-group"}}
-			<button value="1" type="button" {{bindAttr class=":multiplier :btn :btn-warning isSingle:active"}}>Single</button>
-			<button value="2" type="button" {{bindAttr class=":multiplier :btn :btn-warning isDouble:active"}}>Double</button>
-			<button value="3" type="button" {{bindAttr class=":multiplier :btn :btn-warning isTriple:active"}}>Triple</button>
-		{{/view}}
+		<div id="multipliers" class="btn-group">
+			<button {{action setMultiplier 1}} type="button" {{bindAttr class=":multiplier :btn :btn-warning isSingle:active"}}>Single</button>
+			<button {{action setMultiplier 2}} type="button" {{bindAttr class=":multiplier :btn :btn-warning isDouble:active"}}>Double</button>
+			<button {{action setMultiplier 3}} type="button" {{bindAttr class=":multiplier :btn :btn-warning isTriple:active"}}>Triple</button>
+		</div>
 		{{#view view.numpadView id="numpad"}}
 			<button class="btn btn-large" value="20" type="button">20</button>	
 			<button class="btn btn-large" value="19" type="button">19</button>	
@@ -39,6 +39,7 @@
   <div id="score">
 		<h1>{{player.name}}</h1>
 		<div id="current-throw">
+			<ul>
 			{{#view view.dartScoresView id="dart-scores" class="unstyled" tagName="ol"}}
 				<li {{bindAttr class="isDart1Selected:active"}}>
 					<button type="button" value="1" {{bindAttr class=":btn:btn-large isDart1Processed:btn-success"}}>{{dart1}}</button>

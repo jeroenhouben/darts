@@ -1,8 +1,9 @@
+<script type="text/x-handlebars" data-template-name="match/scoreboard">
 <section id="scoreboard">
 	<div class="wrapper">
 		
 		<div id="current-player">
-			<h1>{{currentPlayer.name}} to throw.</h1>
+			<h1 {{action newTurnForPlayer nextPlayer}}><span>{{nextPlayer.name}}</span> to throw.</h1>
 		</div>
 		
 		<div class="buttons-left">
@@ -13,11 +14,17 @@
 		<ol id="scoreboard-wrapper" class="unstyled">
 			{{#each player in players}}
 			<li class="scores-for-player">
-				<h4>{{player.name}}</h4>
+				<h4 {{action newTurnForPlayer player}}>{{player.name}}</h4>
 				<ol class="unstyled">
 					<li>{{startScore}}</li>
 					{{#each turn in player.turns}}
-						{{view App.TurnOnScoreboardView contextBinding="turn"}}
+						<li {{action editTurn turn}}>
+						{{#if turn.isCompleted}}
+							{{turn.legScore}}
+						{{else}}
+							...
+						{{/if}}
+						</li>
 					{{/each}}
 				</ol>
 			</li>
@@ -26,3 +33,5 @@
 			
 	</div>
 </section>
+</script>
+

@@ -10,32 +10,18 @@
 </head>
 
 <body>
-	<script type="text/x-handlebars" data-template-name="application">
 	<div id="main">
-		{{outlet}}
+		
 	</div>
+	<script type="text/x-handlebars" data-template-name="application">
+		{{outlet}}
 	</script>
 
 	<!--# include file="screens/home.html" -->
 
 	<!--# include file="screens/players.html" -->
 
-
-  <script type="text/x-handlebars" data-template-name="match/scoreboard">
-		<!--# include file="screens/scoreboard.html" -->
-  </script>
-
-	<script type="text/x-handlebars" data-template-name="turn-on-scoreboard">
-		{{#if view.isEditing}}
-			waiting...
-		{{else}}
-			{{#if isCompleted}}
-				{{legScore}}
-			{{else}}
-				...
-			{{/if}}
-		{{/if}}
-	</script>
+	<!--# include file="screens/scoreboard.html" -->
 
 	<!--# include file="screens/turn.html" -->
 

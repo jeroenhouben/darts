@@ -28,35 +28,9 @@ App.MatchSetupView = Ember.View.extend({
 /*
 *
 */
-App.TurnOnScoreboardView = Ember.View.extend({
-  tagName: 'li',
-  templateName: 'turn-on-scoreboard',
-  isEditing: false,
-
-  click: function(e) {
-    this.set('isEditing', (!this.isEditing));
-    if (this.get('isEditing')) {
-      this.get('controller').startCalculator(this.get('context'));
-    }
-  }
-
-});
-
-/*
-*
-*/
 App.TurnView = Ember.View.extend({
   templateName: 'turn',
   childView: ['multiplierView', 'numpadView'],
-
-  multiplierView: Ember.View.extend({
-    click: function(e) {
-      var i = parseInt(e.target.value, 10);
-      if (i>0) {
-        this.get('controller').set('selectedMultiplier', i);
-      }
-    }
-  }),
 
   numpadView: Ember.View.extend({
     click: function(e) {
@@ -84,11 +58,6 @@ App.TurnView = Ember.View.extend({
 /*
 *
 */
-// <button value="1" type="button" {{bindAttr class=":multiplier :btn :btn-success controller.isSingle:active"}}>Single</button>
-// <button value="2" type="button" {{bindAttr class=":multiplier :btn :btn-success isDouble:active"}}>Double</button>
-// <button value="3" type="button" {{bindAttr class=":multiplier :btn :btn-success isTriple:active"}}>Triple</button>
-// 
-
 App.MultiplierButtonView = Ember.View.extend({
   label: null,
   tagName: 'button',

@@ -3519,12 +3519,6 @@ body {
 }
 #score #required span.checkout {
   color: #348c34;
-  text-shadow: -1px 1px 18px #ffff00, 1px -1px 18px #ffff00;
-  -webkit-transition: 500ms linear 0s;
-  -moz-transition: 500ms linear 0s;
-  -o-transition: 500ms linear 0s;
-  transition: 500ms linear 0s;
-  outline: 0 none;
 }
 #score #dart-scores {
   margin-top: 25px;
@@ -3557,6 +3551,9 @@ body {
   padding: 0 0 10px;
   text-align: center;
 }
+#scoreboard #current-player h1:hover {
+  cursor: pointer;
+}
 #scoreboard .wrapper {
   padding-top: 10px;
 }
@@ -3587,6 +3584,10 @@ body {
 #scoreboard-wrapper li.scores-for-player h4 {
   white-space: nowrap;
   border-bottom: 1px solid #fff;
+}
+#scoreboard-wrapper li.scores-for-player h4:hover {
+  cursor: pointer;
+  color: yellow;
 }
 #scoreboard-wrapper li.scores-for-player ol {
   overflow-y: scroll;

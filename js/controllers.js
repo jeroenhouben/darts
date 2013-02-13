@@ -71,9 +71,6 @@ App.TurnController = Ember.ObjectController.extend({
   registerTurn: function() {
     this.set('completed', true);
     this.transitionTo('match.scoreboard');
-
-    var leg = this.controllerFor('application').get('leg');
-    leg.advanceTurn();
   },
 
   setMultiplier: function(i) {
@@ -105,9 +102,49 @@ App.TurnController = Ember.ObjectController.extend({
 *
 */
 App.MatchScoreboardController = Ember.ObjectController.extend({
-  startCalculator: function(turn) {
+
+  /*
+  * this method needs refactoring
+  */
+  nextPlayer: function() {
+    var players = this.get('players'), players, i, minTurns=999, l, nextPlayer, _player;
+
+    for (i = players.length - 1; i >= 0; i--){
+      _player = players[i];
+      l = _player.get('turns.length');
+      if (l <= minTurns) {
+        minTurns = l; 
+        nextPlayer = _player;
+      }
+    };
+    
+    return nextPlayer;
+  }.property('content.players.@each.turns.length'),
+
+  /*
+  * edit an existing turn in the TurnCalculator
+  */
+  editTurn: function(turn) {
     this.transitionTo('turn', turn)
+  },
+  
+  /*
+  * get (or create!) the player's last turn and go to the TurnCalculator
+  */
+  newTurnForPlayer: function(player) {
+    var turn = player.get('turns.getLastObject');
+    if (!turn) {
+      turn = App.Turn.create({player: player});
+      player.set('turns', [turn]);
+    } else {
+      if (turn.get('completed')) {
+        turn = App.Turn.create({player: player});
+        player.get('turns').addObject(turn);
+      }
+    }
+    this.transitionTo('turn', turn);
   }
+  
 });
 
 
