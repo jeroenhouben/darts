@@ -47,7 +47,7 @@ App.MatchScoreboardController = Ember.ArrayController.extend({
     
     for (i = count-1; i >= 0; i--){
       _player = players.objectAt(i);
-      turnCount = _player.get('turns.length');
+      turnCount = _player.get('completedTurns.length');
       if (turnCount <= minTurns) {
         minTurns = turnCount; 
         nextPlayer = _player;
