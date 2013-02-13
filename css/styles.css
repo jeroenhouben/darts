@@ -3598,3 +3598,14 @@ body {
 #scoreboard-wrapper li.scores-for-player ol li {
   padding: 3px 0;
 }
+#scoreboard-wrapper li.scores-for-player ol li:hover {
+  cursor: pointer;
+  color: yellow;
+}
+#scoreboard-wrapper li.scores-for-player ol li.start-score {
+  color: #eee;
+}
+#scoreboard-wrapper li.scores-for-player ol li.start-score:hover {
+  cursor: text;
+  color: #eee;
+}

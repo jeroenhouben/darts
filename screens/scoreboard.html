@@ -7,7 +7,7 @@
 		</div>
 		
 		<div class="buttons-left">
-			<a {{action startLeg}} class="btn btn-primary btn-block" type="button">New Game</a>
+			<a {{action startLeg}} class="btn btn-primary btn-block" type="button">New Leg</a>
 			{{#linkTo "players" class="btn btn-block" }}<i class="icon-wrench"></i> Players {{/linkTo}}
 		</div>
 
@@ -16,7 +16,7 @@
 			<li class="scores-for-player">
 				<h4 {{action newTurnForPlayer player}}>{{player.name}}</h4>
 				<ol class="unstyled">
-					<li>{{startScore}}</li>
+					<li class="start-score">{{startScore}}</li>
 					{{#each turn in player.turns}}
 						<li {{action editTurn turn}}>
 						{{#if turn.isCompleted}}

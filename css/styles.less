@@ -208,6 +208,17 @@ body {
       font-size: 30px;
       width: 218px;
       li {
+        &:hover {
+          cursor: pointer;
+          color: yellow;
+        }
+        &.start-score {
+          color: #eee;
+          &:hover {
+            cursor: text;
+            color: #eee;
+          }
+        }
         padding: 3px 0;
       }
     }
