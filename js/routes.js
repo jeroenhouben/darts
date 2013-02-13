@@ -9,6 +9,15 @@ App.Router.map(function() {
 });
 
 /*
+* IndexRoute. just redirects. can probably go away
+*/
+App.IndexRoute = Ember.Route.extend({
+  redirect: function() {
+    this.transitionTo('match.setup');
+  }
+});
+
+/*
 * ApplicationRoute
 */
 App.ApplicationRoute = Ember.Route.extend({
@@ -35,22 +44,13 @@ App.ApplicationRoute = Ember.Route.extend({
 
 });
 
-/*
-* IndexRoute. just redirects. can probably go away
-*/
-App.IndexRoute = Ember.Route.extend({
-  redirect: function() {
-    this.transitionTo('match.setup');
-  }
-});
 
 /*
 * MatchSetupRoute
 */
 App.MatchSetupRoute = Ember.Route.extend({
   setupController: function(controller, model) {
-    var leg = this.controllerFor('application').get('leg');
-    controller.set('content', leg);
+    controller.set('content', this.controllerFor('application').get('leg'));
   }
 });    
 
@@ -71,7 +71,6 @@ App.PlayersRoute = Ember.Route.extend({
 */
 App.MatchScoreboardRoute = Ember.Route.extend({
   setupController: function(controller, model) {
-    var leg = this.controllerFor('application').get('leg');
-    controller.set('content', leg);
+    controller.set('content', this.controllerFor('application').get('leg'));
   }
 });

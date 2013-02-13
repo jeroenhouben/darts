@@ -1,28 +1,76 @@
+<script type="text/x-handlebars" data-template-name="turn">
 <section id="turn">
-	<div class="row">
-	  <div class="span8" id="numpad">
-			<div class="btn-group">
-			  <button {{action "setMultiplier" 1}} type="button" {{bindAttr class=":btn :btn-success isSingle:active"}}>Single</button>
-			  <button {{action "setMultiplier" 2}} type="button" {{bindAttr class=":btn :btn-success isDouble:active"}}>Double</button>
-			  <button {{action "setMultiplier" 3}} type="button" {{bindAttr class=":btn :btn-success isTriple:active"}}>Triple</button>
-			</div>
-			<!--# include file="components/_calculator.html" -->
+		
+	<div id="calculator">
+		<div id="multipliers" class="btn-group">
+			<button {{action setMultiplier 1}} type="button" {{bindAttr class=":multiplier :btn :btn-warning isSingle:active"}}>Single</button>
+			<button {{action setMultiplier 2}} type="button" {{bindAttr class=":multiplier :btn :btn-warning isDouble:active"}}>Double</button>
+			<button {{action setMultiplier 3}} type="button" {{bindAttr class=":multiplier :btn :btn-warning isTriple:active"}}>Triple</button>
 		</div>
-	  <div class="span4" id="subtotal">
-			<h1>{{player.name}}</h1>
-
-			<ol class="unstyled">
-				<li {{bindAttr class="isDart1Selected:active"}} {{action "selectDart" 1}}>1st Dart: {{dart1}}</li>	
-				<li {{bindAttr class="isDart2Selected:active"}} {{action "selectDart" 2}}>2nd Dart: {{dart2}}</li>	
-				<li {{bindAttr class="isDart3Selected:active"}} {{action "selectDart" 3}}>3rd Dart: {{dart3}}</li>	
-			</ol>
-			<hr />
-			<h2>total: {{score}}</h2>
-			<hr />
-			<button {{action "registerTurn"}} class="btn btn-large btn-block btn-primary" type="button">
-				<i class="icon-save icon-white"></i> Commit Score
-			</button>
-			{{#linkTo "match.scoreboard" class="btn btn-large btn-block"}}Cancel{{/linkTo}}
-			</div>
+		<div id="numpad">
+			<button {{action registerThrow 20}} class="btn btn-large" value="20" type="button">20</button>	
+			<button {{action registerThrow 19}} class="btn btn-large" value="19" type="button">19</button>	
+			<button {{action registerThrow 18}} class="btn btn-large" value="18" type="button">18</button>	
+			<button {{action registerThrow 17}} class="btn btn-large" value="17" type="button">17</button>	
+			<button {{action registerThrow 16}} class="btn btn-large" value="16" type="button">16</button>	
+			<button {{action registerThrow 15}} class="btn btn-large" value="15" type="button">15</button>	
+			<button {{action registerThrow 14}} class="btn btn-large" value="14" type="button">14</button>	
+			<button {{action registerThrow 13}} class="btn btn-large" value="13" type="button">13</button>	
+			<button {{action registerThrow 12}} class="btn btn-large" value="12" type="button">12</button>	
+			<button {{action registerThrow 11}} class="btn btn-large" value="11" type="button">11</button>	
+			<button {{action registerThrow 10}} class="btn btn-large" value="10" type="button">10</button>	
+			<button {{action registerThrow 9}} class="btn btn-large" value="9" type="button">9</button>	
+			<button {{action registerThrow 8}} class="btn btn-large" value="8" type="button">8</button>	
+			<button {{action registerThrow 7}} class="btn btn-large" value="7" type="button">7</button>	
+			<button {{action registerThrow 6}} class="btn btn-large" value="6" type="button">6</button>	
+			<button {{action registerThrow 5}} class="btn btn-large" value="5" type="button">5</button>	
+			<button {{action registerThrow 4}} class="btn btn-large" value="4" type="button">4</button>	
+			<button {{action registerThrow 3}} class="btn btn-large" value="3" type="button">3</button>	
+			<button {{action registerThrow 2}} class="btn btn-large" value="2" type="button">2</button>	
+			<button {{action registerThrow 1}} class="btn btn-large" value="1" type="button">1</button>
+			<button {{action registerThrow 25}} class="bull btn btn-large btn-success" value="25" type="button">single <strong>BULL</strong></button>	
+			<button {{action registerThrow 50}} class="bull btn btn-large btn-danger" value="50" type="button">double <strong>BULL</strong></button>	
+			<button {{action registerThrow 0}}class="bull btn btn-large btn-inverse" value="0" type="button">0 <br /><strong>miss!</strong></button>	
+			<button {{action registerThrow 26}}class="bull btn btn-large btn-homo" value="26" type="button">26 <strong>homo</strong></button>	
+		</div>
 	</div>
+
+  <div id="score">
+		<h1>{{player.name}}</h1>
+		<div id="current-throw">
+			<ol id="dart-scores" class="unstyled">
+				<li {{bindAttr class="isDart1Selected:active"}}>
+					<button {{action selectDart 1}} type="button" {{bindAttr class=":btn:btn-large isDart1Processed:btn-success"}}>{{dart1}}</button>
+				</li>
+				<li class="plus">+</li>
+				<li {{bindAttr class="isDart2Selected:active"}}>
+					<button {{action selectDart 2}} type="button" {{bindAttr class=":btn:btn-large isDart2Processed:btn-success"}}>{{dart2}}</button>
+				</li>
+				<li class="plus">+</li>
+				<li {{bindAttr class="isDart3Selected:active"}}>
+					<button {{action selectDart 3}} type="button" {{bindAttr class=":btn:btn-large isDart3Processed:btn-success"}}>{{dart3}}</button>
+				</li>
+			</ol>
+			<h2>
+			{{#if score}}
+				{{score}}
+			{{else}}
+				...
+			{{/if}}
+			</h2>
+		</div>
+
+		<div id="required">
+			<h3>required:</h3>
+			<span {{bindAttr class="isCheckoutPossible:checkout"}}>{{requiredScore}}</span>
+		</div>
+
+
+		<button {{action "registerTurn"}} class="btn btn-large btn-block btn-primary" type="button">
+			<i class="icon-save icon-white"></i> Commit Score
+		</button>
+		{{#linkTo "match.scoreboard" class="btn btn-large btn-block"}}Cancel{{/linkTo}}
+	</div>
+
 </section>
+</script>

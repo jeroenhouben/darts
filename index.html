@@ -1,64 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
 	<title>Dartfart</title>
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-	<meta name="viewport" content="width=device-width" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	
-	<link rel="stylesheet" href="css/bootstrap.css" type="text/css" media="screen" title="no title" charset="utf-8">
-	<link rel="stylesheet" href="css/styles.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	<link rel="stylesheet" href="css/chalk.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	<link rel="stylesheet" href="css/styles.css" type="text/css" charset="utf-8">
+
 </head>
 
 <body>
-	<script type="text/x-handlebars" data-template-name="application">
 	<div id="main">
-		{{outlet}}
+		
 	</div>
+	<script type="text/x-handlebars" data-template-name="application">
+		{{outlet}}
 	</script>
 
-  <script type="text/x-handlebars" data-template-name="match/setup">
 	<!--# include file="screens/home.html" -->
-	{{outlet}}
-  </script>
 
-  <script type="text/x-handlebars" data-template-name="players">
 	<!--# include file="screens/players.html" -->
-  </script>
 
+	<!--# include file="screens/scoreboard.html" -->
 
-  <script type="text/x-handlebars" data-template-name="match/scoreboard">
-		<!--# include file="screens/scoreboard.html" -->
-  </script>
-
-	<script type="text/x-handlebars" data-template-name="turn-on-scoreboard">
-		{{#if view.isEditing}}
-			waiting...
-		{{else}}
-			{{#if isCompleted}}
-				{{legScore}}
-			{{else}}
-				...
-			{{/if}}
-		{{/if}}
-	</script>
-
-	<script type="text/x-handlebars" data-template-name="turn">
 	<!--# include file="screens/turn.html" -->
-	</script>
 
 	
   <script src="js/libs/jquery-1.9.1.min.js"></script>
-	<script src="js/bootstrap/bootstrap-modal.js" type="text/javascript" charset="utf-8"></script>
   <script src="js/libs/handlebars-1.0.0.rc.2.js"></script>
   <script src="js/libs/ember.js"></script>
 
   <script src="js/dartfart.js"></script>
+  <script src="js/ghostclickbuster.js" type="text/javascript" charset="utf-8"></script>
   <script src="js/controllers.js" type="text/javascript" charset="utf-8"></script>
   <script src="js/models.js" type="text/javascript" charset="utf-8"></script>
   <script src="js/routes.js" type="text/javascript" charset="utf-8"></script>
   <script src="js/views.js" type="text/javascript" charset="utf-8"></script>
 
+	<script src="js/sampledata.js" type="text/javascript" charset="utf-8"></script>
 	
 </body>
 </html>

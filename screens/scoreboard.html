@@ -1,27 +1,37 @@
+<script type="text/x-handlebars" data-template-name="match/scoreboard">
 <section id="scoreboard">
-	<div class="page-header">
-		<h1>{{currentPlayer.name}} to throw.</h1>
-	</div>
-	<div class="row">
-	  <div class="span4">
-			{{#linkTo "players" class="btn btn-large btn-block btn-primary" }}<i class="icon-white icon-wrench"></i> Players &amp; Settings {{/linkTo}}
-			<button  {{action startLeg}} class="btn btn-large btn-block btn-danger" type="button"><i class="icon-white icon-file"></i> New Game</button>
+	<div class="wrapper">
+		
+		<div id="current-player">
+			<h1 {{action newTurnForPlayer nextPlayer}}><span>{{nextPlayer.name}}</span> to throw.</h1>
 		</div>
-	  <div class="span8">
-			<ol class="unstyled">
-				{{#each player in players}}
-				<li class="scores-for-player">
-					<h4>{{player.name}}</h4>
-					<ol class="unstyled">
-						<li>{{startScore}}</li>
-						{{#each turn in player.turns}}
-							{{view App.TurnOnScoreboardView contextBinding="turn"}}
-						{{/each}}
-					</ol>
-				</li>
-				{{/each}}
-			</ol>
+		
+		<div class="buttons-left">
+			<a {{action startLeg}} class="btn btn-primary btn-block" type="button">New Leg</a>
+			{{#linkTo "players" class="btn btn-block" }}<i class="icon-wrench"></i> Players {{/linkTo}}
+		</div>
+
+		<ol id="scoreboard-wrapper" class="unstyled">
+			{{#each player in players}}
+			<li class="scores-for-player">
+				<h4 {{action newTurnForPlayer player}}>{{player.name}}</h4>
+				<ol class="unstyled">
+					<li class="start-score">{{startScore}}</li>
+					{{#each turn in player.turns}}
+						<li {{action editTurn turn}}>
+						{{#if turn.isCompleted}}
+							{{turn.legScore}}
+						{{else}}
+							...
+						{{/if}}
+						</li>
+					{{/each}}
+				</ol>
+			</li>
+			{{/each}}
+		</ol>
 			
-		</div>
 	</div>
 </section>
+</script>
+

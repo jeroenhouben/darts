@@ -1,9 +1,10 @@
+<script type="text/x-handlebars" data-template-name="players">
 <section id="setup">
 	<div class="row centered">
 	  <div class="span6 offset3">
 			<div class="row centered">
 				<div class="page-header">
-					<h1>They be Dartin'</h1>
+					<h1>They be Dartin&#8217;</h1>
 				</div>
 				<ol class="unstyled">
 			    {{#each player in controller}}
@@ -11,10 +12,11 @@
 			    {{/each}}
 				</ol>
 
-				<button {{action "startLeg"}} class="btn btn-large btn-primary btn-block" type="button">
+				<a {{action "startLeg"}} class="btn btn-large btn-primary btn-block"  href="#">
 					<i class="icon-white"></i> Game On!
-				</button>
+				</a>
 			</div>
 		</div>
 	</div>
 </section>
+</script>

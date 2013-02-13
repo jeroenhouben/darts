@@ -23,7 +23,6 @@ App.Leg = Ember.Object.extend({
     this.resetPlayerTurns();
     // create a new turn for the first player
     var p1 = this.get('players.firstObject');
-    p1.get('turns').addObject(App.Turn.create({player: p1}));
     this.set('currentPlayer', p1);
   },
   
@@ -33,21 +32,6 @@ App.Leg = Ember.Object.extend({
     });
   },
   
-  advanceTurn: function() {
-    var currentPlayer = this.get('currentPlayer'),
-        idx = this.players.indexOf(currentPlayer);
-
-    if (idx == this.players.length-1) {
-      this.set('currentPlayer', this.players[0]);
-    } else {
-      this.set('currentPlayer', this.players[idx+1]);
-    }
-
-    newTurn = App.Turn.create({player: this.get('currentPlayer')});
-    this.get('currentPlayer').get('turns').addObject(newTurn);
-  },
-  
-
   is301: function() {
     return (this.get('startScore') == 301)
   }.property('startScore'),
@@ -70,7 +54,15 @@ App.Player = Ember.Object.extend({
   
   completedTurns: function() {
     return this.get('turns').filterProperty('completed', true);
-  }.property("turns.@each.completed")
+  }.property("turns.@each.completed"),
+  
+  requiredScore: function() {
+    var i = this.get('leg.startScore');
+    this.get('turns').forEach(function(turn) {
+      i-=turn.get('score');
+    });
+    return i;
+  }.property('leg.startScore', 'turns.@each.score')
   
 });
 
@@ -98,7 +90,7 @@ App.Turn = Ember.Object.extend({
   */
   legScore: function() {
     var leg = this.get('player.leg'),
-        turns = this.get('player.turns'),
+        turns = this.get('player.turns'), // maybe only use completed scores?
         score = leg.startScore // dont use a getter we're not modifying this (??)
 
     idx = turns.indexOf(this);

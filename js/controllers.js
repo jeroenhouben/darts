@@ -36,12 +36,29 @@ App.TurnController = Ember.ObjectController.extend({
 
   selectDart: function(dartNumber) {
     this.set('selectedDart', dartNumber)
+    this.set('dart'+this.selectedDart, null);
   },
   
+  requiredScore: function() {
+    return this.get('player.requiredScore');
+  }.property('player.requiredScore'),
+  
+  isCheckoutPossible: function() {
+    var i = this.get('requiredScore');
+    if (i<162) {
+      return true;
+    }
+    if (i==170 || i==167 || i==164) {
+      return true;
+    }
+    return false;
+  }.property('requiredScore'),
+  
   registerThrow: function(number) {
-    var score = number*this.selectedMultiplier; 
-    this.set('dart'+this.selectedDart, score);
+    var m = (number<25) ? this.selectedMultiplier : 1; //bulls cannot have multipliers
+    var score = number*m;
 
+    this.set('dart'+this.selectedDart, score);
     this.set('selectedMultiplier', 1); // chances are the next throw will be a single
 
     if (this.selectedDart == 3) {
@@ -54,9 +71,6 @@ App.TurnController = Ember.ObjectController.extend({
   registerTurn: function() {
     this.set('completed', true);
     this.transitionTo('match.scoreboard');
-
-    var leg = this.controllerFor('application').get('leg');
-    leg.advanceTurn();
   },
 
   setMultiplier: function(i) {
@@ -66,6 +80,11 @@ App.TurnController = Ember.ObjectController.extend({
   isDart1Selected: function() {return this.get('selectedDart') === 1}.property('selectedDart'),
   isDart2Selected: function() {return this.get('selectedDart') === 2}.property('selectedDart'),
   isDart3Selected: function() {return this.get('selectedDart') === 3}.property('selectedDart'),
+
+  isDart1Processed: function() {return this.get('dart1') != null}.property('dart1'),
+  isDart2Processed: function() {return this.get('dart2') != null}.property('dart2'),
+  isDart3Processed: function() {return this.get('dart3') != null}.property('dart3'),
+
 
   isSingle: function() {return this.get('selectedMultiplier') === 1}.property('selectedMultiplier'),
   isDouble: function() {return this.get('selectedMultiplier') === 2}.property('selectedMultiplier'),
@@ -83,9 +102,49 @@ App.TurnController = Ember.ObjectController.extend({
 *
 */
 App.MatchScoreboardController = Ember.ObjectController.extend({
-  startCalculator: function(turn) {
+
+  /*
+  * this method needs refactoring
+  */
+  nextPlayer: function() {
+    var players = this.get('players'), players, i, minTurns=999, l, nextPlayer, _player;
+
+    for (i = players.length - 1; i >= 0; i--){
+      _player = players[i];
+      l = _player.get('turns.length');
+      if (l <= minTurns) {
+        minTurns = l; 
+        nextPlayer = _player;
+      }
+    };
+    
+    return nextPlayer;
+  }.property('content.players.@each.turns.length'),
+
+  /*
+  * edit an existing turn in the TurnCalculator
+  */
+  editTurn: function(turn) {
     this.transitionTo('turn', turn)
+  },
+  
+  /*
+  * get (or create!) the player's last turn and go to the TurnCalculator
+  */
+  newTurnForPlayer: function(player) {
+    var turn = player.get('turns.getLastObject');
+    if (!turn) {
+      turn = App.Turn.create({player: player});
+      player.set('turns', [turn]);
+    } else {
+      if (turn.get('completed')) {
+        turn = App.Turn.create({player: player});
+        player.get('turns').addObject(turn);
+      }
+    }
+    this.transitionTo('turn', turn);
   }
+  
 });
 
 
