@@ -127,6 +127,17 @@ App.TurnController = Ember.ObjectController.extend({
     }
   },
   
+  registerHomo: function() {
+    this.set('dart1', 1);
+    this.set('dart2', 20);
+    this.set('dart3', 5);
+    this.set('selectedMultiplier', 1);
+  },
+  
+  bust: function() {
+    
+  },
+  
   registerTurn: function() {
     this.set('completed', true);
     this.transitionTo('match.scoreboard');
@@ -152,6 +163,7 @@ App.TurnController = Ember.ObjectController.extend({
   
   turnChanged: function(sender, key, value) {
     this.set('selectedDart', 1)
+    this.set('selectedMultiplier', 1);
   }.observes('content')
 
 });

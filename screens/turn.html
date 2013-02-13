@@ -8,30 +8,30 @@
 			<button {{action setMultiplier 3}} type="button" {{bindAttr class=":multiplier :btn :btn-warning isTriple:active"}}>Triple</button>
 		</div>
 		<div id="numpad">
-			<button {{action registerThrow 20}} class="btn btn-large" value="20" type="button">20</button>	
-			<button {{action registerThrow 19}} class="btn btn-large" value="19" type="button">19</button>	
-			<button {{action registerThrow 18}} class="btn btn-large" value="18" type="button">18</button>	
-			<button {{action registerThrow 17}} class="btn btn-large" value="17" type="button">17</button>	
-			<button {{action registerThrow 16}} class="btn btn-large" value="16" type="button">16</button>	
-			<button {{action registerThrow 15}} class="btn btn-large" value="15" type="button">15</button>	
-			<button {{action registerThrow 14}} class="btn btn-large" value="14" type="button">14</button>	
-			<button {{action registerThrow 13}} class="btn btn-large" value="13" type="button">13</button>	
-			<button {{action registerThrow 12}} class="btn btn-large" value="12" type="button">12</button>	
-			<button {{action registerThrow 11}} class="btn btn-large" value="11" type="button">11</button>	
-			<button {{action registerThrow 10}} class="btn btn-large" value="10" type="button">10</button>	
-			<button {{action registerThrow 9}} class="btn btn-large" value="9" type="button">9</button>	
-			<button {{action registerThrow 8}} class="btn btn-large" value="8" type="button">8</button>	
-			<button {{action registerThrow 7}} class="btn btn-large" value="7" type="button">7</button>	
-			<button {{action registerThrow 6}} class="btn btn-large" value="6" type="button">6</button>	
-			<button {{action registerThrow 5}} class="btn btn-large" value="5" type="button">5</button>	
-			<button {{action registerThrow 4}} class="btn btn-large" value="4" type="button">4</button>	
-			<button {{action registerThrow 3}} class="btn btn-large" value="3" type="button">3</button>	
-			<button {{action registerThrow 2}} class="btn btn-large" value="2" type="button">2</button>	
-			<button {{action registerThrow 1}} class="btn btn-large" value="1" type="button">1</button>
-			<button {{action registerThrow 25}} class="bull btn btn-large btn-success" value="25" type="button">single <strong>BULL</strong></button>	
-			<button {{action registerThrow 50}} class="bull btn btn-large btn-danger" value="50" type="button">double <strong>BULL</strong></button>	
-			<button {{action registerThrow 0}}class="bull btn btn-large btn-inverse" value="0" type="button">0 <br /><strong>miss!</strong></button>	
-			<button {{action registerThrow 26}}class="bull btn btn-large btn-homo" value="26" type="button">26 <strong>homo</strong></button>	
+			<button {{action registerThrow 20}} class="btn btn-large" type="button">20</button>	
+			<button {{action registerThrow 19}} class="btn btn-large" type="button">19</button>	
+			<button {{action registerThrow 18}} class="btn btn-large" type="button">18</button>	
+			<button {{action registerThrow 17}} class="btn btn-large" type="button">17</button>	
+			<button {{action registerThrow 16}} class="btn btn-large" type="button">16</button>	
+			<button {{action registerThrow 15}} class="btn btn-large" type="button">15</button>	
+			<button {{action registerThrow 14}} class="btn btn-large" type="button">14</button>	
+			<button {{action registerThrow 13}} class="btn btn-large" type="button">13</button>	
+			<button {{action registerThrow 12}} class="btn btn-large" type="button">12</button>	
+			<button {{action registerThrow 11}} class="btn btn-large" type="button">11</button>	
+			<button {{action registerThrow 10}} class="btn btn-large" type="button">10</button>	
+			<button {{action registerThrow 9}} class="btn btn-large"  type="button">9</button>	
+			<button {{action registerThrow 8}} class="btn btn-large"  type="button">8</button>	
+			<button {{action registerThrow 7}} class="btn btn-large"  type="button">7</button>	
+			<button {{action registerThrow 6}} class="btn btn-large"  type="button">6</button>	
+			<button {{action registerThrow 5}} class="btn btn-large"  type="button">5</button>	
+			<button {{action registerThrow 4}} class="btn btn-large"  type="button">4</button>	
+			<button {{action registerThrow 3}} class="btn btn-large"  type="button">3</button>	
+			<button {{action registerThrow 2}} class="btn btn-large"  type="button">2</button>	
+			<button {{action registerThrow 1}} class="btn btn-large"  type="button">1</button>
+			<button {{action registerThrow 25}} class="bull btn btn-large btn-success" type="button">single <strong>BULL</strong></button>	
+			<button {{action registerThrow 50}} class="bull btn btn-large btn-danger" type="button">double <strong>BULL</strong></button>	
+			<button {{action registerThrow 0}}class="bull btn btn-large btn-inverse" type="button">0 <br /><strong>miss!</strong></button>	
+			<button {{action registerHomo}}class="bull btn btn-large btn-homo" value="26" type="button">26 <strong>homo</strong></button>	
 		</div>
 	</div>
 
@@ -61,8 +61,14 @@
 		</div>
 
 		<div id="required">
-			<h3>required:</h3>
 			<span {{bindAttr class="isCheckoutPossible:checkout"}}>{{requiredScore}}</span>
+			<h3>
+			{{#if isCheckoutPossible}}
+				required
+			{{else}}	
+				&nbsp;
+			{{/if}}
+			</h3>
 		</div>
 
 

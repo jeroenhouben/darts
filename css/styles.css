@@ -3511,19 +3511,25 @@ body {
 }
 #score #required {
   text-align: center;
-  height: 155px;
+  height: 154px;
   border: 1px solid #eee;
   border-width: 1px 0;
-  padding-bottom: 30px;
-  margin: 0 0 80px 0;
+  padding: 30px 0;
+  margin: 48px 0 30px 0;
 }
 #score #required span {
   font-size: 112px;
+  line-height: 112px;
   font-weight: bold;
   color: #bd362f;
 }
 #score #required span.checkout {
   color: #348c34;
+}
+#score #required h3 {
+  margin-top: -29px;
+  color: #bbb;
+  padding-left: 13px;
 }
 #score #dart-scores {
   margin-top: 25px;
