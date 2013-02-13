@@ -135,11 +135,11 @@ App.MatchScoreboardController = Ember.ObjectController.extend({
   newTurnForPlayer: function(player) {
     var turn = player.get('turns.getLastObject');
     if (!turn) {
-      turn = App.Turn.create({player: player});
+      turn = App.Turn.createRecord({player: player});
       player.set('turns', [turn]);
     } else {
       if (turn.get('completed')) {
-        turn = App.Turn.create({player: player});
+        turn = App.Turn.createRecord({player: player});
         player.get('turns').addObject(turn);
       }
     }
@@ -154,5 +154,4 @@ App.MatchScoreboardController = Ember.ObjectController.extend({
 *
 */
 App.PlayersController = Ember.ArrayController.extend({
-  leg: null
 });

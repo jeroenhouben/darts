@@ -13,7 +13,7 @@ App.Leg = DS.Model.extend({
   players: [],
   
   registerPlayer: function(name) {
-    var p = App.Player.create({
+    var p = App.Player.createRecord({
       name: name,
       turns: []
     });
@@ -43,7 +43,7 @@ App.Leg = DS.Model.extend({
 * Player
 *
 */
-App.Player = Ember.Object.extend({
+App.Player = DS.Model.extend({
   name: null,
   leg: null,
   turns: null,
@@ -66,7 +66,7 @@ App.Player = Ember.Object.extend({
 * Turn
 *
 */
-App.Turn = Ember.Object.extend({
+App.Turn = DS.Model.extend({
   player: null,
   dart1: null,
   dart2: null,
