@@ -1,0 +1,50 @@
+players
+-------
+player belongsto profile
+name etc moves to profile
+his will be a joinmodel  
+
+profile
+------
+id
+facebook_id
+name
+avatar
+has_many games through players
+stats (gewonnen, topscores)
+
+groups (voor mensen die vaak samen spelen)
+-------
+id
+name
+stats binnen group (meeste gewonnen, ranking, topscores)
+
+group_members
+-------
+profile
+group
+
+matches
+--------
+players [Player, Player, Player]
+setts (double tt set is reserved word, kinda)
+legs
+completed
+winner (Player)
+startscore (501|301|701|1001)
+best (x leg, x setts)
+
+sett
+------
+belongsto match
+has_many legs
+
+leg
+----
+belongsto sett
+belongsto match (in case there are only legs)
+has_many turns
+
+turn
+-----
+is OK
