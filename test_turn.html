@@ -51,40 +51,60 @@
 	</div>
 
   <div id="score">
-		<h1>Marvin</h1>
 		<div id="current-throw">
+			<h2>Lars Vegas</h2>
+			
 			<ol id="dart-scores" class="unstyled">
-				<li class="active" data-bindattr-45="45">
-					<button data-ember-action="46" type="button" class="btn" data-bindattr-47="47"></button>
+				<li class="" data-bindattr-45="45">
+					<button data-ember-action="46" type="button" class="btn btn-success" data-bindattr-47="47">18</button>
 				</li>
 				<li class="plus">+</li>
 				<li class="" data-bindattr-48="48">
-					<button data-ember-action="49" type="button" class="btn" data-bindattr-50="50"></button>
+					<button data-ember-action="49" type="button" class="btn btn-success" data-bindattr-50="50">17</button>
 				</li>
 				<li class="plus">+</li>
-				<li class="" data-bindattr-51="51">
+				<li class="active" data-bindattr-51="51">
 					<button data-ember-action="52" type="button" class="btn" data-bindattr-53="53"></button>
 				</li>
 			</ol>
 			<h2>
 			
-				...
+				35
 			
 			</h2>
+
+			<button data-ember-action="55" class="btn btn-large btn-block btn-primary" type="button">
+				<i class="icon-save icon-white"></i> Commit Score
+			</button>
+			<a id="ember473" class="ember-view btn btn-large btn-block" href="#/match/scoreboard">Cancel</a>
+
 		</div>
 
-		<div id="required">
-			<span class="required checkout" data-bindattr-54="54">101</span>
-			<h3>
-				required
-			</h3>
-		</div>
 
+		<ol id="latest-scores" class="unstyled">
+			<li>
+				<h4>Lars Vegas</h4>
+				<span>344</span>
+			</li>
+			<li>
+				<h4>Jeroen</h4>
+				<span>200</span>
+			</li>
+			<li class="current">
+				<h4>Ferdinand</h4>
+				<span>501</span>
+			</li>
+			<li>
+				<h4>Rutger</h4>
+				<span class="checkout">160</span>
+			</li>
+		</ol>
 
-		<button data-ember-action="55" class="btn btn-large btn-block btn-primary" type="button">
-			<i class="icon-save icon-white"></i> Commit Score
+		<button data-ember-action="55" class="btn btn-large btn-block btn-inverse" type="button">
+			<i class="icon-save icon-white"></i> Scoreboard
 		</button>
-		<a id="ember473" class="ember-view btn btn-large btn-block" href="#/match/scoreboard">Cancel</a>
+
+
 	</div>
 
 </section>
