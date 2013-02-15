@@ -36,8 +36,8 @@
 	</div>
 
   <div id="score">
-		<h1>{{player.name}}</h1>
 		<div id="current-throw">
+		  <h2>{{player.name}}</h2>
 			<ol id="dart-scores" class="unstyled">
 				<li {{bindAttr class="isDart1Selected:active"}}>
 					<button {{action selectDart 1}} type="button" {{bindAttr class=":btn:btn-large isDart1Processed:btn-success"}}>{{dart1}}</button>
@@ -58,25 +58,32 @@
 				...
 			{{/if}}
 			</h2>
+  		<button {{action "registerTurn"}} class="btn btn-large btn-block btn-primary" type="button">
+  			<i class="icon-save icon-white"></i> Commit Score
+  		</button>
+  		{{#linkTo "match.scoreboard" class="btn btn-large btn-block"}}Cancel{{/linkTo}}
 		</div>
-
-		<div id="required">
-			<span {{bindAttr class="isCheckoutPossible:checkout"}}>{{requiredScore}}</span>
-			<h3>
-			{{#if isCheckoutPossible}}
-				required
-			{{else}}	
-				&nbsp;
-			{{/if}}
-			</h3>
-		</div>
-
-
-		<button {{action "registerTurn"}} class="btn btn-large btn-block btn-primary" type="button">
-			<i class="icon-save icon-white"></i> Commit Score
-		</button>
-		{{#linkTo "match.scoreboard" class="btn btn-large btn-block"}}Cancel{{/linkTo}}
 	</div>
 
+  {{render "latestScores" player.leg}}
+
 </section>
+</script>
+
+<script type="text/x-handlebars" data-template-name="latestScores">
+<div id="latest-scores">
+  latest
+	<ol class="unstyled">
+	  {{#each players}}
+		<li>
+			<h4>{{name}}</h4>
+			<span>{{requiredScore}}</span>
+		</li>
+		{{/each}}
+	</ol>
+
+	<div class="buttons">
+	  {{#linkTo "match.scoreboard" class="btn btn-large btn-block"}}Scoreboard{{/linkTo}}
+	</div>
+</div>
 </script>

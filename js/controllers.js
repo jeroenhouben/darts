@@ -102,17 +102,6 @@ App.TurnController = Ember.ObjectController.extend({
     return this.get('player.requiredScore');
   }.property('player.requiredScore'),
   
-  isCheckoutPossible: function() {
-    var i = this.get('requiredScore');
-    if (i<162) {
-      return true;
-    }
-    if (i==170 || i==167 || i==164) {
-      return true;
-    }
-    return false;
-  }.property('requiredScore'),
-  
   registerThrow: function(number) {
     var m = (number<25) ? this.selectedMultiplier : 1; //bulls cannot have multipliers
     var score = number*m;
@@ -166,6 +155,10 @@ App.TurnController = Ember.ObjectController.extend({
     this.set('selectedMultiplier', 1);
   }.observes('content')
 
+});
+
+App.LatestScoresController = Ember.ObjectController.extend({
+  
 });
 
 /*
