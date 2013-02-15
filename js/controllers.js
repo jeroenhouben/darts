@@ -158,7 +158,7 @@ App.TurnController = Ember.ObjectController.extend({
 });
 
 App.LatestScoresController = Ember.ObjectController.extend({
-  
+
 });
 
 /*
@@ -166,4 +166,6 @@ App.LatestScoresController = Ember.ObjectController.extend({
 *
 */
 App.PlayersController = Ember.ArrayController.extend({
+
+
 });
