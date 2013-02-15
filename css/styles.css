@@ -3442,20 +3442,6 @@ body {
   float: left;
   width: 560px;
 }
-#calculator.ext {
-  width: 336px;
-  margin-top: 20px;
-  padding-left: 196px;
-}
-#calculator.ext #numpad button {
-  float: right;
-}
-#calculator.ext #numpad button.ext {
-  display: none;
-}
-#calculator.ext #multipliers {
-  display: none;
-}
 #calculator #multipliers {
   display: block;
   margin: 18px 0;
@@ -3474,6 +3460,9 @@ body {
 }
 #calculator #numpad button.bull {
   font-size: 20px;
+}
+#calculator #numpad button.zero {
+  display: none;
 }
 #calculator #numpad button.btn-homo {
   color: #ffffff;
@@ -3506,6 +3495,28 @@ body {
 #calculator #numpad button.btn-homo:active,
 #calculator #numpad button.btn-homo.active {
   background-color: #9a284b \9;
+}
+/* simple version with only a numpad */
+#turn.simple #calculator {
+  width: 336px;
+  margin-top: 20px;
+  padding-left: 196px;
+}
+#turn.simple #calculator #numpad button {
+  float: right;
+}
+#turn.simple #calculator #numpad button.ext {
+  display: none;
+}
+#turn.simple #calculator #numpad button.zero {
+  width: 310px;
+  display: block;
+}
+#turn.simple #calculator #multipliers {
+  display: none;
+}
+#turn.simple #dart-scores {
+  display: none;
 }
 #score {
   background: #fff;

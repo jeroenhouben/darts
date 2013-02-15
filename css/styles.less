@@ -73,26 +73,9 @@ body {
   background-color: @darkBackground;
   padding-top: 10px !important;
 }
-
 #calculator {
   float: left;
   width: 560px;
-  &.ext {
-    width: 336px;
-    margin-top: 20px;
-    padding-left: 196px;
-    #numpad {
-      button {
-        float: right;
-        &.ext {
-          display: none;
-        }
-      }
-    }
-    #multipliers {
-      display: none;
-    }
-  }
   #multipliers {
     display: block;
     margin: 18px 0;
@@ -110,12 +93,45 @@ body {
       &.bull {
         font-size: 20px
       }
+      &.zero {
+        display: none;
+      }
       &.btn-homo {
         .buttonBackground(lighten(@pink, 10%), @pink);
       }
     }
   }
 }
+
+/* simple version with only a numpad */
+#turn.simple {
+  #calculator {
+    width: 336px;
+    margin-top: 20px;
+    padding-left: 196px;
+    #numpad {
+      button {
+        float: right;
+        &.ext {
+          display: none;
+        }
+        &.zero {
+          width: 310px;
+          display: block;
+        }
+      }
+    }
+    #multipliers {
+      display: none;
+    }
+  }
+  #dart-scores {
+    display: none;
+  }
+}
+
+
+
 #score {
   background: #fff;
   border-radius: 15px;
