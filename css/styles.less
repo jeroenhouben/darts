@@ -77,6 +77,22 @@ body {
 #calculator {
   float: left;
   width: 560px;
+  &.ext {
+    width: 336px;
+    margin-top: 20px;
+    padding-left: 196px;
+    #numpad {
+      button {
+        float: right;
+        &.ext {
+          display: none;
+        }
+      }
+    }
+    #multipliers {
+      display: none;
+    }
+  }
   #multipliers {
     display: block;
     margin: 18px 0;
