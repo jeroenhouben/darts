@@ -17,7 +17,7 @@ App.MatchSetupController = Ember.ObjectController.extend({
         name: DUMMIES[i-1]
       });
     };
-    this.transitionToRoute('players');
+    this.transitionToRouteRoute('players');
   },
   
   setStartScore: function(score) {
@@ -61,7 +61,7 @@ App.MatchScoreboardController = Ember.ArrayController.extend({
   * edit an existing turn in the TurnCalculator
   */
   editTurn: function(turn) {
-    this.transitionTo('turn', turn)
+    this.transitionToRoute('turn', turn)
   },
   
   /*
@@ -72,7 +72,7 @@ App.MatchScoreboardController = Ember.ArrayController.extend({
     if (!turn || turn.get('completed')) {
       turn = player.get('turns').createRecord();
     }
-    this.transitionTo('turn', turn);
+    this.transitionToRoute('turn', turn);
   }
   
 });
@@ -129,7 +129,7 @@ App.TurnController = Ember.ObjectController.extend({
   
   registerTurn: function() {
     this.set('completed', true);
-    this.transitionTo('match.scoreboard');
+    this.transitionToRoute('match.scoreboard');
   },
 
   setMultiplier: function(i) {
@@ -158,7 +158,8 @@ App.TurnController = Ember.ObjectController.extend({
 });
 
 App.LatestScoresController = Ember.ObjectController.extend({
-
+  needs: ["turn"]
+  
 });
 
 /*
