@@ -47,6 +47,17 @@ App.Player = DS.Model.extend({
     var turns = this.get('turns').filterProperty('completed', true);
     return turns.slice(-LIMIT);
   }.property("turns.@each.completed"),
+
+  isCheckoutPossible: function() {
+    var i = this.get('requiredScore');
+    if (i<162) {
+      return true;
+    }
+    if (i==170 || i==167 || i==164) {
+      return true;
+    }
+    return false;
+  }.property('requiredScore'),
   
   requiredScore: function() {
     var i = this.get('leg.startScore');

@@ -10,13 +10,15 @@ App.Leg.FIXTURES = [{
 // }];
 // 
 // App.Player.FIXTURES = [{
+//   leg: 1,
 //   id: 100,
 //   name: "Jeroen",
-//   turns: [1000,1001]
+//   turns: [1000]
 // },{
+//   leg: 1,
 //   id: 200,
 //   name: "Starvin",
-//   turns: []
+//   turns: [1001]
 // }
 // ];
 // 
@@ -28,7 +30,7 @@ App.Leg.FIXTURES = [{
 //   dart3: 1,
 //   completed: true
 // },{
-//   player: 100,
+//   player: 200,
 //   id: 1001,
 //   dart1: 2,
 //   dart2: 2,

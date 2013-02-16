@@ -61,7 +61,7 @@ App.MatchScoreboardController = Ember.ArrayController.extend({
   * edit an existing turn in the TurnCalculator
   */
   editTurn: function(turn) {
-    this.transitionTo('turn', turn)
+    this.transitionToRoute('turn', turn)
   },
   
   /*
@@ -72,7 +72,7 @@ App.MatchScoreboardController = Ember.ArrayController.extend({
     if (!turn || turn.get('completed')) {
       turn = player.get('turns').createRecord();
     }
-    this.transitionTo('turn', turn);
+    this.transitionToRoute('turn', turn);
   }
   
 });
@@ -92,6 +92,21 @@ App.TurnController = Ember.ObjectController.extend({
     this.set('dart'+this.selectedDart, null);
   },
   
+  // returns the player number (1,2,3 or 4) for current turn
+  playerNumber: function() {
+    var players = this.get('player.leg.players'), 
+        currentPlayer = this.get('player'),
+        nr;
+        
+    players.forEach(function(player,idx) {
+      if (player==currentPlayer) {
+        nr = idx+1;
+        return;
+      }  
+    });
+    return "player"+nr;
+  }.property('content'),
+  
   hasScore: function() {
     if (this.get('dart1') != null) return true;
     if (this.get('dart2') != null) return true;
@@ -101,17 +116,6 @@ App.TurnController = Ember.ObjectController.extend({
   requiredScore: function() {
     return this.get('player.requiredScore');
   }.property('player.requiredScore'),
-  
-  isCheckoutPossible: function() {
-    var i = this.get('requiredScore');
-    if (i<162) {
-      return true;
-    }
-    if (i==170 || i==167 || i==164) {
-      return true;
-    }
-    return false;
-  }.property('requiredScore'),
   
   registerThrow: function(number) {
     var m = (number<25) ? this.selectedMultiplier : 1; //bulls cannot have multipliers
@@ -140,7 +144,7 @@ App.TurnController = Ember.ObjectController.extend({
   
   registerTurn: function() {
     this.set('completed', true);
-    this.transitionTo('match.scoreboard');
+    this.transitionToRoute('match.scoreboard');
   },
 
   setMultiplier: function(i) {
@@ -168,9 +172,16 @@ App.TurnController = Ember.ObjectController.extend({
 
 });
 
+App.LatestScoresController = Ember.ObjectController.extend({
+  needs: ["turn"]
+  
+});
+
 /*
 * PlayersController
 *
 */
 App.PlayersController = Ember.ArrayController.extend({
+
+
 });

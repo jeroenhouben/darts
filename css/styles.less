@@ -73,7 +73,6 @@ body {
   background-color: @darkBackground;
   padding-top: 10px !important;
 }
-
 #calculator {
   float: left;
   width: 560px;
@@ -94,51 +93,60 @@ body {
       &.bull {
         font-size: 20px
       }
+      &.zero {
+        display: none;
+      }
       &.btn-homo {
         .buttonBackground(lighten(@pink, 10%), @pink);
       }
     }
   }
 }
+
+/* simple version with only a numpad */
+#turn.simple {
+  #calculator {
+    width: 336px;
+    margin-top: 20px;
+    padding-left: 196px;
+    #numpad {
+      button {
+        float: right;
+        &.ext {
+          display: none;
+        }
+        &.zero {
+          width: 310px;
+          display: block;
+        }
+      }
+    }
+    #multipliers {
+      display: none;
+    }
+  }
+  #dart-scores {
+    display: none;
+  }
+}
+
+
+
 #score {
   background: #fff;
   border-radius: 15px;
-  height: 640px;
   margin-left: 560px;
-  padding: 0 20px 10px;
+  margin-top: 20px;
+  padding: 10px;
   text-align: right;
-  h1 {
+  h2 {
     margin-top: 0;
-    padding-top: 20px;
     text-align: center;
   }
   #current-throw {
     text-align: center;
   }
-  #required {
-    text-align: center;
-    height: 154px;
-    border: 1px solid #eee;
-    border-width: 1px 0;
-    padding: 30px 0;
-    margin: 48px 0 30px 0;
-    span {
-        font-size: 112px;
-        line-height: 112px;
-        font-weight: bold;
-        color: #bd362f;
-      &.checkout {
-        color: darken(@btnSuccessBackground, 20);
-      }
-    }
-    h3 {
-      margin-top: -29px;
-      color: #bbb;
-      padding-left: 13px;
-    }
-  }
   #dart-scores {
-    margin-top: 25px;
     display: table;
     width: 100%;
     li {
@@ -162,7 +170,44 @@ body {
       }
     }
   }
-  
+}
+#latest-scores {
+  margin: 0 0 0 560px;
+  padding: 20px;
+  ol {
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  li {
+    text-align: center;
+    float: left;
+    margin: 0 0 10px 0;
+    padding: 10px 10px 18px 10px;
+    width: 180px;
+    border-radius: 15px;
+    cursor: pointer;
+    h4 {
+      margin: 0;
+      color: #eee;
+    }
+    span {
+      font-size: 42px;
+      font-weight: bold;
+      color: #bd362f;
+      &.checkout {
+        color: darken(@btnSuccessBackground, 20);
+      }
+    }
+  }
+}
+#turn.player1 #latest-scores li:nth-of-type(1),
+#turn.player2 #latest-scores li:nth-of-type(2),
+#turn.player3 #latest-scores li:nth-of-type(3),
+#turn.player4 #latest-scores li:nth-of-type(4) {
+  background-color: #fff;
+  h4 {
+    color: #000;
+  }
 }
 
 /* scoreboard */
