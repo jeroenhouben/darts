@@ -17,7 +17,7 @@ App.MatchSetupController = Ember.ObjectController.extend({
         name: DUMMIES[i-1]
       });
     };
-    this.transitionToRouteRoute('players');
+    this.transitionToRoute('players');
   },
   
   setStartScore: function(score) {
@@ -91,6 +91,21 @@ App.TurnController = Ember.ObjectController.extend({
     this.set('selectedDart', dartNumber)
     this.set('dart'+this.selectedDart, null);
   },
+  
+  // returns the player number (1,2,3 or 4) for current turn
+  playerNumber: function() {
+    var players = this.get('player.leg.players'), 
+        currentPlayer = this.get('player'),
+        nr;
+        
+    players.forEach(function(player,idx) {
+      if (player==currentPlayer) {
+        nr = idx+1;
+        return;
+      }  
+    });
+    return "player"+nr;
+  }.property('content'),
   
   hasScore: function() {
     if (this.get('dart1') != null) return true;

@@ -3574,12 +3574,6 @@ body {
   border-radius: 15px;
   cursor: pointer;
 }
-#latest-scores li.current {
-  background-color: #fff;
-}
-#latest-scores li.current h4 {
-  color: #000;
-}
 #latest-scores li h4 {
   margin: 0;
   color: #eee;
@@ -3591,6 +3585,18 @@ body {
 }
 #latest-scores li span.checkout {
   color: #348c34;
+}
+#turn.player1 #latest-scores li:nth-of-type(1),
+#turn.player2 #latest-scores li:nth-of-type(2),
+#turn.player3 #latest-scores li:nth-of-type(3),
+#turn.player4 #latest-scores li:nth-of-type(4) {
+  background-color: #fff;
+}
+#turn.player1 #latest-scores li:nth-of-type(1) h4,
+#turn.player2 #latest-scores li:nth-of-type(2) h4,
+#turn.player3 #latest-scores li:nth-of-type(3) h4,
+#turn.player4 #latest-scores li:nth-of-type(4) h4 {
+  color: #000;
 }
 /* scoreboard */
 #scoreboard #current-player h1 {

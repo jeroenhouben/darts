@@ -186,12 +186,6 @@ body {
     width: 180px;
     border-radius: 15px;
     cursor: pointer;
-    &.current {
-      background-color: #fff;
-      h4 {
-        color: #000;
-      }
-    }
     h4 {
       margin: 0;
       color: #eee;
@@ -204,6 +198,15 @@ body {
         color: darken(@btnSuccessBackground, 20);
       }
     }
+  }
+}
+#turn.player1 #latest-scores li:nth-of-type(1),
+#turn.player2 #latest-scores li:nth-of-type(2),
+#turn.player3 #latest-scores li:nth-of-type(3),
+#turn.player4 #latest-scores li:nth-of-type(4) {
+  background-color: #fff;
+  h4 {
+    color: #000;
   }
 }
 
