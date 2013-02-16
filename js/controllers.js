@@ -5,19 +5,30 @@
 *
 *
 */
-App.MatchSetupController = Ember.ObjectController.extend({
+App.MatchNewController = Ember.ObjectController.extend({
 
-  initNumberOfPlayers: function(size) {
+  initWithNumberOfPlayers: function(size) {
     var DUMMIES = ["Marvin", "Jeroen", "Lennard", "Lars Vegas"];
-    var leg = this.get('model');
-
-    leg.set('players', []);
+    var match = this.get('model');
+    match.set('players', []);
     for (var i=1; i <= size; i++) {
-      leg.get('players').createRecord({
+      match.get('players').createRecord({
         name: DUMMIES[i-1]
       });
     };
-    this.transitionToRoute('players');
+    // create a first Leg
+    var leg = match.get('legs').createRecord();
+    
+    // create a test Turn
+    leg.get('turns').createRecord({
+      player: match.get('players.firstObject'),
+      dart1: 23,
+      dart2: 1,
+      dart3: 34,
+      completed: true
+    });
+    
+    this.transitionToRoute('leg', leg);
   },
   
   setStartScore: function(score) {
@@ -27,14 +38,9 @@ App.MatchSetupController = Ember.ObjectController.extend({
 });
 
 /*
-* MatchScoreboardController
-* Proxies the players in the leg
+* A leg
 */
-App.MatchScoreboardController = Ember.ArrayController.extend({
-  
-  leg: function() {
-    return App.Leg.find(1);
-  }.property(),
+App.LegController = Ember.ObjectController.extend({
   
   /*
   * this method needs refactoring
@@ -61,7 +67,7 @@ App.MatchScoreboardController = Ember.ArrayController.extend({
   * edit an existing turn in the TurnCalculator
   */
   editTurn: function(turn) {
-    this.transitionToRoute('turn', turn)
+    this.transitionToRoute('turns', turn)
   },
   
   /*

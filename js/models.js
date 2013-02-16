@@ -4,28 +4,33 @@ App.Store = DS.Store.extend({
   adapter: 'DS.FixtureAdapter'
 });
 
+App.Match = DS.Model.extend({
+  startScore: DS.attr('number', {defaultValue: 301}),
+  players: DS.hasMany('App.Player'),
+  legs: DS.hasMany('App.Leg'),
+
+  is301: function() {
+    return (this.get('startScore') == 301)
+  }.property('startScore'),
+ 
+  is501: function() {
+    return (this.get('startScore') == 501)
+  }.property('startScore')
+  
+});
+
+
 /*
 * Leg
 *
 */
 App.Leg = DS.Model.extend({
-  startScore: DS.attr('number'),
-  players: DS.hasMany('App.Player'),
+  match: DS.belongsTo('App.Match'),
+  turns: DS.hasMany('App.Turn'),
   
-  resetTurns: function() {
-    this.get('players').forEach(function(p) {
-      p.set('turns', [])
-    });
-  },
-  
-  is301: function() {
-    return (this.get('startScore') == 301)
-  }.property('startScore'),
-
-  is501: function() {
-    return (this.get('startScore') == 501)
-  }.property('startScore')
-  
+  players: function() {
+    return this.get('match.players');
+  }.property('match.players')
 
 });
 
@@ -36,7 +41,6 @@ App.Leg = DS.Model.extend({
 App.Player = DS.Model.extend({
   name: DS.attr('string'),
   leg: DS.belongsTo('App.Leg'),
-  turns: DS.hasMany('App.Turn'),
   
   completedTurns: function() {
     return this.get('turns').filterProperty('completed', true);
@@ -74,6 +78,7 @@ App.Player = DS.Model.extend({
 *
 */
 App.Turn = DS.Model.extend({
+  leg: DS.belongsTo('App.Leg'),
   player: DS.belongsTo('App.Player'),
   dart1: DS.attr('number'),
   dart2: DS.attr('number'),

@@ -19,8 +19,12 @@
 
 	<script type="text/x-handlebars" data-template-name="index">
 		<div id="intro">
-			{{#linkTo "match.setup" class="btn btn-primary btn-large btn-block"}}You be Dartin??{{/linkTo}}
+			{{#linkTo "match.new" class="btn btn-primary btn-large btn-block"}}You be Dartin??{{/linkTo}}
 		</div>
+	</script>
+
+	<script type="text/x-handlebars" data-template-name="match">
+		{{outlet}}
 	</script>
 
 
@@ -28,7 +32,7 @@
 
 	<!--# include file="screens/players.html" -->
 
-	<!--# include file="screens/scoreboard.html" -->
+	<!--# include file="screens/leg.html" -->
 
 	<!--# include file="screens/turn.html" -->
 
