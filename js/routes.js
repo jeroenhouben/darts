@@ -3,7 +3,7 @@ App.Router.map(function() {
   this.resource('match', function() {
     this.route('new');
     this.resource('leg', { path: '/legs/:leg_id' }, function() {
-      this.resource('turns', { path: '/turns/:turn_id' });
+      this.resource('turn', { path: '/turns/:turn_id' });
     });
   });
 });
@@ -14,6 +14,10 @@ App.Router.map(function() {
 App.ApplicationRoute = Ember.Route.extend({
 });
 
+App.LegRoute = Ember.Route.extend({
+
+  
+});
 
 /*
 * MatchSetupRoute
@@ -29,5 +33,17 @@ App.MatchNewRoute = Ember.Route.extend({
 /*
 * MatchScoreboardRoute
 */
+App.TurnRoute = Ember.Route.extend({
+
+  renderTemplate: function() {
+    this.render("turn", {
+      into: "match",
+      outlet: "main"
+    });
+  }
+  
+});
+
+
 App.TurnsRoute = Ember.Route.extend({
 });

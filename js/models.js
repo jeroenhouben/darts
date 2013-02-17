@@ -19,38 +19,22 @@ App.Match = DS.Model.extend({
   
 });
 
-
 /*
 * Leg
 *
 */
 App.Leg = DS.Model.extend({
   match: DS.belongsTo('App.Match'),
-  turns: DS.hasMany('App.Turn'),
-  
-  players: function() {
-    return this.get('match.players');
-  }.property('match.players')
-
+  players: DS.hasMany('App.LegPlayer')
 });
 
-/*
-* Player
-*
-*/
-App.Player = DS.Model.extend({
-  name: DS.attr('string'),
-  leg: DS.belongsTo('App.Leg'),
-  
-  completedTurns: function() {
-    return this.get('turns').filterProperty('completed', true);
-  }.property("turns.@each.completed"),
+App.LegPlayer = DS.Model.extend({
+  player: DS.belongsTo('App.Player'),
+  turns: DS.hasMany('App.Turn'),
 
-  lastTurns: function() {
-    var LIMIT = 13;
-    var turns = this.get('turns').filterProperty('completed', true);
-    return turns.slice(-LIMIT);
-  }.property("turns.@each.completed"),
+  name: function() {
+    return this.get('player.name')
+  }.property(),
 
   isCheckoutPossible: function() {
     var i = this.get('requiredScore');
@@ -61,16 +45,17 @@ App.Player = DS.Model.extend({
       return true;
     }
     return false;
-  }.property('requiredScore'),
-  
-  requiredScore: function() {
-    var i = this.get('leg.startScore');
-    this.get('turns').forEach(function(turn) {
-      i-=turn.get('score');
-    });
-    return i;
-  }.property('leg.startScore', 'turns.@each.score')
-  
+  }.property('requiredScore')
+
+});
+
+
+/*
+* Player
+*
+*/
+App.Player = DS.Model.extend({
+  name: DS.attr('string')
 });
 
 /*
@@ -78,13 +63,16 @@ App.Player = DS.Model.extend({
 *
 */
 App.Turn = DS.Model.extend({
-  leg: DS.belongsTo('App.Leg'),
-  player: DS.belongsTo('App.Player'),
+  player: DS.belongsTo('App.LegPlayer'),
   dart1: DS.attr('number'),
   dart2: DS.attr('number'),
   dart3: DS.attr('number'),
   completed: DS.attr('boolean'),
   
+  leg: function() {
+    return this.get('player.leg')
+  }.property(),
+
   score: function() {
     var d1 = this.get('dart1'), d2 = this.get('dart2'), d3 = this.get('dart3');
     if (d1 == null && d2 == null && d3 == null) {
@@ -97,9 +85,9 @@ App.Turn = DS.Model.extend({
   * returns the score at this given turn of the leg
   */
   legScore: function() {
-    var leg = this.get('player.leg'),
-        turns = this.get('player.turns'), // maybe only use completed scores?
-        score = leg.get('startScore')
+    var leg = this.get('leg'),
+        turns = this.get('player').turnsForLeg(leg),
+        score = leg.get('match.startScore')
 
     idx = turns.indexOf(this);
 
@@ -111,7 +99,7 @@ App.Turn = DS.Model.extend({
     };
     
     return score;
-  }.property('player.turns.@each.score', 'player.leg.startScore'),
+  }.property('player.turns.@each.score', 'leg.match.startScore'),
   
   isCompleted: function() {
     return this.get('completed');

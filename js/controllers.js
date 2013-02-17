@@ -19,15 +19,18 @@ App.MatchNewController = Ember.ObjectController.extend({
     // create a first Leg
     var leg = match.get('legs').createRecord();
     
-    // create a test Turn
-    leg.get('turns').createRecord({
-      player: match.get('players.firstObject'),
+    match.get('players').forEach(function(player) {
+      leg.get('players').createRecord({player: player})
+    });
+    
+    // create a dummy Turn
+    var p = leg.get('players.firstObject');
+    p.get('turns').createRecord({
       dart1: 23,
       dart2: 1,
       dart3: 34,
       completed: true
     });
-    
     this.transitionToRoute('leg', leg);
   },
   
@@ -41,7 +44,7 @@ App.MatchNewController = Ember.ObjectController.extend({
 * A leg
 */
 App.LegController = Ember.ObjectController.extend({
-  
+  needs: ["match"],
   /*
   * this method needs refactoring
   */
@@ -64,13 +67,6 @@ App.LegController = Ember.ObjectController.extend({
   }.property('@each.completedTurns'),
 
   /*
-  * edit an existing turn in the TurnCalculator
-  */
-  editTurn: function(turn) {
-    this.transitionToRoute('turns', turn)
-  },
-  
-  /*
   * get (or create!) the player's last turn and go to the TurnCalculator
   */
   newTurnForPlayer: function(player) {
@@ -90,6 +86,7 @@ App.LegController = Ember.ObjectController.extend({
 * represents a single Turn 
 */
 App.TurnController = Ember.ObjectController.extend({
+  needs: ["leg"],
   selectedDart: 1,
   selectedMultiplier: 1,
 
@@ -100,7 +97,7 @@ App.TurnController = Ember.ObjectController.extend({
   
   // returns the player number (1,2,3 or 4) for current turn
   playerNumber: function() {
-    var players = this.get('player.leg.players'), 
+    var players = this.get('leg.match.players'), 
         currentPlayer = this.get('player'),
         nr;
         
@@ -178,8 +175,29 @@ App.TurnController = Ember.ObjectController.extend({
 
 });
 
-App.LatestScoresController = Ember.ObjectController.extend({
-  needs: ["turn"]
+App.CurrentLegScoresController = Ember.ObjectController.extend({
+  leg: null, 
+  needs: ["turn"],
+
+  playerScores: function() {
+    var match = this.leg.get('match'), score, turns, startScore = match.get('startScore');
+    
+    var hash = match.get('players').map(function(player, idx) {
+      scores = player.get('turns').filterProperty('leg', this.leg).mapProperty('score')
+      
+      score = scores.reduce(function(prevVal, _score) {
+        return (prevVal || startScore) - _score;
+      });
+
+      return {
+        player: player,
+        score: score
+      }
+    });
+    
+    return hash;
+  }.property('turns.@each.score')
+
   
 });
 
