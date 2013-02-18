@@ -14,11 +14,11 @@
 		
 	</div>
 	<script type="text/x-handlebars" data-template-name="application">
-		{{outlet name="main"}}
+	<span class="appoutlet">{{outlet}}</span>
 	</script>
 
 	<script type="text/x-handlebars" data-template-name="match">
-		{{outlet}}
+		<span class="matchoutlet">{{outlet}}</span>
 	</script>
 
 	<script type="text/x-handlebars" data-template-name="index">
@@ -26,8 +26,6 @@
 			{{#linkTo "match.new" class="btn btn-primary btn-large btn-block"}}You be Dartin??{{/linkTo}}
 		</section>
 	</script>
-
-
 
 	<!--# include file="screens/setup.html" -->
 

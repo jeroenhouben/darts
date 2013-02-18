@@ -86,8 +86,6 @@ App.LegController = Ember.ObjectController.extend({
 
 
 /*
-* MatchSetupController
-*
 * represents a single Turn 
 */
 App.TurnController = Ember.ObjectController.extend({

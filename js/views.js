@@ -11,12 +11,5 @@ App.LegScoresView = Ember.View.extend({
 
 
 App.TurnView = Ember.View.extend({
-  didInsertElement: function() {
-    $('#main').addClass("two");
-  },
-  willDestroyElement: function() {
-    $('#main').removeClass("two");
-  }
-
 });
 
