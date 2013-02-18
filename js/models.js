@@ -87,9 +87,6 @@ App.Turn = DS.Model.extend({
 
   score: function() {
     var d1 = this.get('dart1'), d2 = this.get('dart2'), d3 = this.get('dart3');
-    if (d1 == null && d2 == null && d3 == null) {
-      return null;
-    }
     return (d1 ? d1 : 0) + (d2 ? d2 : 0) + (d3 ? d3 : 0);
   }.property('dart1','dart2','dart3'),
   

@@ -75,7 +75,7 @@ App.LegController = Ember.ObjectController.extend({
   * get (or create!) the player's last turn and go to the TurnCalculator
   */
   nextTurnForPlayer: function(player) {
-    var turn = player.get('turns.getLastObject');
+    var turn = player.get('turns.lastObject');
     if (!turn || turn.get('completed')) {
       turn = player.get('turns').createRecord();
     }
@@ -134,11 +134,14 @@ App.TurnController = Ember.ObjectController.extend({
     this.set('dart1', 1);
     this.set('dart2', 20);
     this.set('dart3', 5);
-    this.set('selectedMultiplier', 1);
+    this.registerTurn();
   },
   
-  bust: function() {
-    
+  registerBust: function() {
+    this.set('dart1', null);
+    this.set('dart2', null);
+    this.set('dart3', null);
+    this.registerTurn();
   },
   
   registerTurn: function() {
@@ -155,6 +158,13 @@ App.TurnController = Ember.ObjectController.extend({
       nextPlayer = players.objectAt(currentPlayerIndex+1);
     }
     this.get('controllers.leg').nextTurnForPlayer(nextPlayer);
+  },
+  
+  reset: function() {
+    this.set('dart1', null);
+    this.set('dart2', null);
+    this.set('dart3', null);
+    this.set('completed', false);
   },
 
   currentPlayerIndex: function() {
