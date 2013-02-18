@@ -65,24 +65,20 @@
 		</div>
 	</div>
 
-  {{render "currentLegScores" leg}}
+	<div id="latest-scores">
+		<ol class="unstyled">
+	  {{#each leg.players}}
+		<li>
+			<h4>{{name}}</h4>
+			<span>{{requiredScore}}</span>
+		</li>
+		{{/each}}
+		</ol>
+
+		<div class="buttons">
+		  {{#linkTo leg.index leg class="btn btn-large btn-block"}}Scoreboard{{/linkTo}}
+		</div>
+	</div>
 
 </section>
-</script>
-
-<script type="text/x-handlebars" data-template-name="latestScores">
-<div id="latest-scores">
-	<ol class="unstyled">
-  {{#each match.players}}
-	<li>
-		<h4>{{name}}</h4>
-		<span>{{requiredScore}}</span>
-	</li>
-	{{/each}}
-	</ol>
-
-	<div class="buttons">
-	  {{#linkTo leg.index this class="btn btn-large btn-block"}}Scoreboard{{/linkTo}}
-	</div>
-</div>
 </script>

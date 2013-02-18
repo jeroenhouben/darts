@@ -13,8 +13,9 @@
 				<ol class="unstyled">
 					<li class="start-score">{{match.startScore}}</li>
 					{{#each player.turns}}
-						<li>{{#linkTo turn this}}{{score}}{{/linkTo}}</li>
+						<li>- {{#linkTo turn this}}{{score}}{{/linkTo}}</li>
 					{{/each}}
+					<li><hr />{{player.requiredScore}}</li>
 				</ol>
 			</li>
 			{{/each}}
@@ -22,7 +23,6 @@
 			
 	</div>
 </section>
+{{outlet}}
 </script>
 
-<script type="text/x-handlebars" data-template-name="legScores">
-</script>

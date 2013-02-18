@@ -16,7 +16,7 @@ App.ApplicationRoute = Ember.Route.extend({
 
 App.LegRoute = Ember.Route.extend({
 
-  
+
 });
 
 /*
@@ -35,12 +35,11 @@ App.MatchNewRoute = Ember.Route.extend({
 */
 App.TurnRoute = Ember.Route.extend({
 
-  renderTemplate: function() {
-    this.render("turn", {
-      into: "match",
-      outlet: "main"
-    });
-  }
+  // renderTemplate: function() {
+  //   this.render("turn", {
+  //     into: "match"
+  //   });
+  // }
   
 });
 

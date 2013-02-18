@@ -28,7 +28,11 @@ App.Leg = DS.Model.extend({
   players: DS.hasMany('App.LegPlayer')
 });
 
+/*
+* LegPlayer represents a player enrolled in a Leg
+*/
 App.LegPlayer = DS.Model.extend({
+  leg: DS.belongsTo('App.Leg'),
   player: DS.belongsTo('App.Player'),
   turns: DS.hasMany('App.Turn'),
 
@@ -45,7 +49,15 @@ App.LegPlayer = DS.Model.extend({
       return true;
     }
     return false;
-  }.property('requiredScore')
+  }.property('requiredScore'),
+
+  requiredScore: function() {
+    var score = this.get('leg.match.startScore');
+    this.get('turns').forEach(function(turn) {
+      score-=turn.get('score');
+    });
+    return score;
+  }.property('leg.match.startScore', 'turns.@each.score')
 
 });
 

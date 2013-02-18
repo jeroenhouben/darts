@@ -16,15 +16,25 @@ body {
   background: #eee;
   padding: 0;
   margin: 0;
+  width: 1024px;
+  overflow: hidden;
+  position: relative;
 }
 #main {
-  margin: 0 auto;
-  width:1024px;
-  height: 660px;
+  position: absolute;
+  left: 0;
   background: #fff;
-  > div > section, > section {
+  width: 3000px;
+  height: 660px;
+  -webkit-transition: all 0.3s;
+  &.two {
+    left: -1044px;
+  }
+  section {
+    width:1024px;
     height: 660px;
     padding: 0 10px;
+    float: left;
   }
 }
 

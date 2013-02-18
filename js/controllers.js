@@ -23,6 +23,12 @@ App.MatchNewController = Ember.ObjectController.extend({
       leg.get('players').createRecord({player: player})
     });
     
+    this.dummyData(leg);
+    
+    this.transitionToRoute('leg', leg);
+  },
+  
+  dummyData: function(leg) {
     // create a dummy Turn
     var p = leg.get('players.firstObject');
     p.get('turns').createRecord({
@@ -31,7 +37,6 @@ App.MatchNewController = Ember.ObjectController.extend({
       dart3: 34,
       completed: true
     });
-    this.transitionToRoute('leg', leg);
   },
   
   setStartScore: function(score) {
@@ -95,9 +100,13 @@ App.TurnController = Ember.ObjectController.extend({
     this.set('dart'+this.selectedDart, null);
   },
   
+  leg: function() {
+    return this.get('controllers.leg.content');
+  }.property('content'),
+  
   // returns the player number (1,2,3 or 4) for current turn
   playerNumber: function() {
-    var players = this.get('leg.match.players'), 
+    var players = this.get('leg.players'), 
         currentPlayer = this.get('player'),
         nr;
         
@@ -173,32 +182,6 @@ App.TurnController = Ember.ObjectController.extend({
     this.set('selectedMultiplier', 1);
   }.observes('content')
 
-});
-
-App.CurrentLegScoresController = Ember.ObjectController.extend({
-  leg: null, 
-  needs: ["turn"],
-
-  playerScores: function() {
-    var match = this.leg.get('match'), score, turns, startScore = match.get('startScore');
-    
-    var hash = match.get('players').map(function(player, idx) {
-      scores = player.get('turns').filterProperty('leg', this.leg).mapProperty('score')
-      
-      score = scores.reduce(function(prevVal, _score) {
-        return (prevVal || startScore) - _score;
-      });
-
-      return {
-        player: player,
-        score: score
-      }
-    });
-    
-    return hash;
-  }.property('turns.@each.score')
-
-  
 });
 
 /*
