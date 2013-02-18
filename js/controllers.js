@@ -23,7 +23,7 @@ App.MatchNewController = Ember.ObjectController.extend({
       leg.get('players').createRecord({player: player})
     });
     
-    this.dummyData(leg);
+    // this.dummyData(leg);
     
     this.transitionToRoute('leg', leg);
   },
@@ -50,8 +50,11 @@ App.MatchNewController = Ember.ObjectController.extend({
 */
 App.LegController = Ember.ObjectController.extend({
   needs: ["match"],
-  currentPlayer: null,
+  currentPlayerIndex: 0,
 
+  currentPlayer: function() {
+    return this.get('players').objectAt(this.get('currentPlayerIndex'));
+  }.property('currentPlayerIndex'),
   /*
   * get (or create!) the player's last turn
   */
@@ -186,6 +189,7 @@ App.TurnController = Ember.ObjectController.extend({
   turnChanged: function(sender, key, value) {
     this.set('selectedDart', 1)
     this.set('selectedMultiplier', 1);
+    this.set('controllers.leg.currentPlayerIndex', this.get('currentPlayerIndex'));
   }.observes('content')
 
 });

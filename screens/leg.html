@@ -3,7 +3,7 @@
 	<div class="wrapper">
 		
 		<div id="current-player">
-			<h1 {{action gotoNextTurnForPlayer nextPlayer}}><span>{{nextPlayer.name}}</span> to throw.</h1>
+			<h1 {{action gotoNextTurnForPlayer currentPlayer}}><span>{{currentPlayer.name}}</span> to throw!</h1>
 		</div>
 		<ol id="scoreboard-wrapper" class="unstyled">
 			{{#each player in players}}
