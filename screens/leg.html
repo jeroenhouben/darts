@@ -1,14 +1,14 @@
 <script type="text/x-handlebars" data-template-name="leg">
-<section id="scoreboard">
+<section class="scoreboard">
 	<div class="wrapper">
 		
 		<div id="current-player">
-			<h1 {{action newTurnForPlayer nextPlayer}}><span>{{nextPlayer.name}}</span> to throw.</h1>
+			<h1 {{action nextTurnForPlayer nextPlayer}}><span>{{nextPlayer.name}}</span> to throw.</h1>
 		</div>
 		<ol id="scoreboard-wrapper" class="unstyled">
 			{{#each player in players}}
 			<li class="scores-for-player">
-				<h4 {{action newTurnForPlayer player}}>{{player.name}}</h4>
+				<h4 {{action nextTurnForPlayer player}}>{{player.name}}</h4>
 				<ol class="unstyled">
 					<li class="start-score">{{match.startScore}}</li>
 					{{#each player.turns}}

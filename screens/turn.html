@@ -1,6 +1,4 @@
 <script type="text/x-handlebars" data-template-name="turn">
-<section id="turn" {{bindAttr class="playerNumber"}}">
-		
 	<div id="calculator">
 		<div id="multipliers" class="btn-group">
 			<button {{action setMultiplier 1}} type="button" {{bindAttr class=":multiplier :btn :btn-warning isSingle:active"}}>Single</button>
@@ -79,6 +77,4 @@
 		  {{#linkTo leg leg class="btn btn-large btn-block"}}Scoreboard{{/linkTo}}
 		</div>
 	</div>
-
-</section>
 </script>

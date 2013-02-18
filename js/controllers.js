@@ -74,7 +74,7 @@ App.LegController = Ember.ObjectController.extend({
   /*
   * get (or create!) the player's last turn and go to the TurnCalculator
   */
-  newTurnForPlayer: function(player) {
+  nextTurnForPlayer: function(player) {
     var turn = player.get('turns.getLastObject');
     if (!turn || turn.get('completed')) {
       turn = player.get('turns').createRecord();
@@ -93,29 +93,18 @@ App.TurnController = Ember.ObjectController.extend({
   selectedDart: 1,
   selectedMultiplier: 1,
 
+  leg: function() {
+    return this.get('controllers.leg.content');
+  }.property('content'),
+
   selectDart: function(dartNumber) {
     this.set('selectedDart', dartNumber)
     this.set('dart'+this.selectedDart, null);
   },
-  
-  leg: function() {
-    return this.get('controllers.leg.content');
-  }.property('content'),
-  
-  // returns the player number (1,2,3 or 4) for current turn
-  playerNumber: function() {
-    var players = this.get('leg.players'), 
-        currentPlayer = this.get('player'),
-        nr;
-        
-    players.forEach(function(player,idx) {
-      if (player==currentPlayer) {
-        nr = idx+1;
-        return;
-      }  
-    });
-    return "player"+nr;
-  }.property('content'),
+
+  setMultiplier: function(i) {
+    this.set('selectedMultiplier', i);
+  },
   
   hasScore: function() {
     if (this.get('dart1') != null) return true;
@@ -153,13 +142,31 @@ App.TurnController = Ember.ObjectController.extend({
   },
   
   registerTurn: function() {
+    var nextPlayer,
+        players = this.get('leg.players'),
+        currentPlayerIndex = this.get('currentPlayerIndex');
+        
     this.set('completed', true);
-    this.transitionToRoute('match.scoreboard');
+
+    // get next player
+    if (currentPlayerIndex == players.get('length')-1) {
+      nextPlayer = players.get('firstObject');
+    } else {
+      nextPlayer = players.objectAt(currentPlayerIndex+1);
+    }
+    this.get('controllers.leg').nextTurnForPlayer(nextPlayer);
   },
 
-  setMultiplier: function(i) {
-    this.set('selectedMultiplier', i);
-  },
+  currentPlayerIndex: function() {
+    var players = this.get('leg.players'), 
+        currentPlayer = this.get('player'),
+        idx;
+        
+    players.forEach(function(player,i) {
+      if (player==currentPlayer) idx = i; return;
+    });
+    return idx;
+  }.property('content'),
   
   isDart1Selected: function() {return this.get('selectedDart') === 1}.property('selectedDart'),
   isDart2Selected: function() {return this.get('selectedDart') === 2}.property('selectedDart'),
@@ -168,7 +175,6 @@ App.TurnController = Ember.ObjectController.extend({
   isDart1Processed: function() {return this.get('dart1') != null}.property('dart1'),
   isDart2Processed: function() {return this.get('dart2') != null}.property('dart2'),
   isDart3Processed: function() {return this.get('dart3') != null}.property('dart3'),
-
 
   isSingle: function() {return this.get('selectedMultiplier') === 1}.property('selectedMultiplier'),
   isDouble: function() {return this.get('selectedMultiplier') === 2}.property('selectedMultiplier'),
