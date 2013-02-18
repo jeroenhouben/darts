@@ -3,12 +3,12 @@
 	<div class="wrapper">
 		
 		<div id="current-player">
-			<h1 {{action nextTurnForPlayer nextPlayer}}><span>{{nextPlayer.name}}</span> to throw.</h1>
+			<h1 {{action gotoNextTurnForPlayer nextPlayer}}><span>{{nextPlayer.name}}</span> to throw.</h1>
 		</div>
 		<ol id="scoreboard-wrapper" class="unstyled">
 			{{#each player in players}}
 			<li class="scores-for-player">
-				<h4 {{action nextTurnForPlayer player}}>{{player.name}}</h4>
+				<h4 {{action gotoNextTurnForPlayer player}}>{{player.name}}</h4>
 				<ol class="unstyled">
 					<li class="start-score">{{match.startScore}}</li>
 					{{#each player.turns}}

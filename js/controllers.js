@@ -50,35 +50,24 @@ App.MatchNewController = Ember.ObjectController.extend({
 */
 App.LegController = Ember.ObjectController.extend({
   needs: ["match"],
-  /*
-  * this method needs refactoring
-  */
-  nextPlayer: function() {
-    var players  = this.get('model'),
-        count    = this.get('length'),
-        minTurns = 999,
-        i, turnCount, nextPlayer, _player;
-    
-    for (i = count-1; i >= 0; i--){
-      _player = players.objectAt(i);
-      turnCount = _player.get('completedTurns.length');
-      if (turnCount <= minTurns) {
-        minTurns = turnCount; 
-        nextPlayer = _player;
-      }
-    };
-    
-    return nextPlayer;
-  }.property('@each.completedTurns'),
+  currentPlayer: null,
 
   /*
-  * get (or create!) the player's last turn and go to the TurnCalculator
+  * get (or create!) the player's last turn
   */
   nextTurnForPlayer: function(player) {
     var turn = player.get('turns.lastObject');
     if (!turn || turn.get('completed')) {
       turn = player.get('turns').createRecord();
     }
+    return turn;
+  },
+  
+  gotoNextTurnForPlayer: function(player) {
+    this.gotoTurn(this.nextTurnForPlayer(player));
+  },
+  
+  gotoTurn: function(turn) {
     this.transitionToRoute('turn', turn);
   }
   
@@ -145,19 +134,22 @@ App.TurnController = Ember.ObjectController.extend({
   },
   
   registerTurn: function() {
+    this.set('completed', true);
+    this.advanceTurn();
+  },
+  
+  advanceTurn: function() {
     var nextPlayer,
         players = this.get('leg.players'),
         currentPlayerIndex = this.get('currentPlayerIndex');
         
-    this.set('completed', true);
-
     // get next player
     if (currentPlayerIndex == players.get('length')-1) {
       nextPlayer = players.get('firstObject');
     } else {
       nextPlayer = players.objectAt(currentPlayerIndex+1);
     }
-    this.get('controllers.leg').nextTurnForPlayer(nextPlayer);
+    this.transitionToRoute('turn', this.get('controllers.leg').nextTurnForPlayer(nextPlayer));
   },
   
   reset: function() {
