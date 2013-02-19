@@ -1,12 +1,11 @@
-- prettier scores on scoreboards
 - uitgooien is terug naar scoreboard/ met modal window (x heeft gewonnen! ----> Verder/new leg | Undo)
-
 - setup number of legs
 - tussenstand legs
-- navigatie new leg
 
 
 DONE
+- prettier scores on scoreboards
+- navigatie new leg
 - alt. numpad
 	- simpleScore property
 	- numpadType property bind aan ClassName
