@@ -223,44 +223,44 @@ section.turn.player4 #latest-scores li:nth-of-type(4) {
 
 /* scoreboard */
 section.scoreboard {
-  #current-player {
-    h1 {
-      margin: 0 0 0 140px;
-      padding: 0 0 10px;
-      text-align: center;
-      &:hover {
-        cursor: pointer;
-        span {
-          
-        }
+  .top {
+    height: 30px;
+    clear: both;
+  }
+  .nav {
+    float: left;
+  }
+  .legs-nav {
+    float: right;
+    li {
+      float: left;
+      width: 20px;
+      height: 20px;
+      border: 1px solid #fff;
+      &.closed {
+        background: #fff;
       }
     }
   }
-  .wrapper {
-    padding-top: 10px;
-  }
-  .buttons-left {
-    float: left;
-    width: 140px;
-  }
 }
 #scoreboard-wrapper {
-  margin: 0 0 0 150px;
-  padding:0;
-  overflow: hidden;
   background: @darkBackground;
+  padding:0;
   color: #fff;
   font-family: 'pwchalkmedium';
   text-transform:uppercase;
+  ol {
+    overflow: hidden;
+  }
   li.scores-for-player {
     &.active {
       color: yellow;
     }
     float: left;
     width: 200px;
-    height: 570px;
+    height: 590px;
     text-align: center;
-    margin-left: 10px;
+    margin: 0 40px 0 10px;
     h4 {
       white-space: nowrap;
       border-bottom: 1px solid #fff;

@@ -3602,36 +3602,41 @@ section.turn.player4 #latest-scores li:nth-of-type(4) h4 {
   color: #000;
 }
 /* scoreboard */
-section.scoreboard #current-player h1 {
-  margin: 0 0 0 140px;
-  padding: 0 0 10px;
-  text-align: center;
+section.scoreboard .top {
+  height: 30px;
+  clear: both;
 }
-section.scoreboard #current-player h1:hover {
-  cursor: pointer;
-}
-section.scoreboard .wrapper {
-  padding-top: 10px;
-}
-section.scoreboard .buttons-left {
+section.scoreboard .nav {
   float: left;
-  width: 140px;
+}
+section.scoreboard .legs-nav {
+  float: right;
+}
+section.scoreboard .legs-nav li {
+  float: left;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #fff;
+}
+section.scoreboard .legs-nav li.closed {
+  background: #fff;
 }
 #scoreboard-wrapper {
-  margin: 0 0 0 150px;
-  padding: 0;
-  overflow: hidden;
   background: #353535;
+  padding: 0;
   color: #fff;
   font-family: 'pwchalkmedium';
   text-transform: uppercase;
 }
+#scoreboard-wrapper ol {
+  overflow: hidden;
+}
 #scoreboard-wrapper li.scores-for-player {
   float: left;
   width: 200px;
-  height: 570px;
+  height: 590px;
   text-align: center;
-  margin-left: 10px;
+  margin: 0 40px 0 10px;
 }
 #scoreboard-wrapper li.scores-for-player.active {
   color: yellow;
