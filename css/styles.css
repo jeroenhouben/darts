@@ -3603,23 +3603,57 @@ section.turn.player4 #latest-scores li:nth-of-type(4) h4 {
 }
 /* scoreboard */
 section.scoreboard .top {
-  height: 30px;
-  clear: both;
+  height: 46px;
+  position: relative;
+  padding-top: 6px;
+}
+section.scoreboard .current-player {
+  left: 50%;
+  margin-left: -250px;
+  position: absolute;
+  width: 500px;
+  bottom: 4px;
+}
+section.scoreboard .current-player h3 {
+  cursor: pointer;
+  font-size: 53.75px;
+  text-align: center;
+  padding-bottom: 0px;
+  line-height: 16px;
+  font-style: italic;
 }
 section.scoreboard .nav {
-  float: left;
+  position: absolute;
+  left: 0;
 }
 section.scoreboard .legs-nav {
+  margin-top: 6px;
+  position: absolute;
+  right: -5px;
+  bottom: 3px;
+}
+section.scoreboard .legs-nav h5 {
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+section.scoreboard .legs-nav ol {
   float: right;
+  margin: 5px 0 0 0;
 }
 section.scoreboard .legs-nav li {
   float: left;
+  font-size: 16px;
+  text-align: center;
   width: 20px;
   height: 20px;
-  border: 1px solid #fff;
+  margin: 0 5px;
+  border: 1px solid #353535;
+  line-height: 20px;
 }
 section.scoreboard .legs-nav li.closed {
-  background: #fff;
+  background: #46a546;
+  color: #fff;
 }
 #scoreboard-wrapper {
   background: #353535;
@@ -3639,11 +3673,16 @@ section.scoreboard .legs-nav li.closed {
   margin: 0 40px 0 10px;
 }
 #scoreboard-wrapper li.scores-for-player.active {
-  color: yellow;
+  background: #fff;
+}
+#scoreboard-wrapper li.scores-for-player.active a,
+#scoreboard-wrapper li.scores-for-player.active li,
+#scoreboard-wrapper li.scores-for-player.active h4 {
+  color: #000;
 }
 #scoreboard-wrapper li.scores-for-player h4 {
+  margin-bottom: 5px;
   white-space: nowrap;
-  border-bottom: 1px solid #fff;
 }
 #scoreboard-wrapper li.scores-for-player h4:hover {
   cursor: pointer;
@@ -3655,14 +3694,20 @@ section.scoreboard .legs-nav li.closed {
 #scoreboard-wrapper li.scores-for-player ol li {
   padding: 3px 0;
 }
-#scoreboard-wrapper li.scores-for-player ol li:hover {
-  cursor: pointer;
+#scoreboard-wrapper li.scores-for-player ol li a {
+  color: #fff;
+}
+#scoreboard-wrapper li.scores-for-player ol li a span {
+  padding-right: 10px;
+}
+#scoreboard-wrapper li.scores-for-player ol li a:hover {
   color: yellow;
+  text-decoration: none;
 }
-#scoreboard-wrapper li.scores-for-player ol li.start-score {
-  color: #eee;
-}
-#scoreboard-wrapper li.scores-for-player ol li.start-score:hover {
-  cursor: text;
-  color: #eee;
+#scoreboard-wrapper li.scores-for-player ol li strong {
+  display: block;
+  border-top: 1px solid #fff;
+  padding: 10px 20px 0 34px;
+  width: 48px;
+  margin: 0 auto;
 }

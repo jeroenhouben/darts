@@ -41,14 +41,7 @@ App.MatchNewController = Ember.ObjectController.extend({
   start: function() {
     // create a first Leg
     var match = this.get('model');
-    var leg = match.get('legs').createRecord();
-    
-    // enroll players in leg
-    match.get('players').forEach(function(player) {
-      leg.get('players').createRecord({player: player})
-    });
-    
-    this.transitionToRoute('leg', leg);
+    this.transitionToRoute('leg', match.createNewLeg());
   },
   
   setStartScore: function(score) {
