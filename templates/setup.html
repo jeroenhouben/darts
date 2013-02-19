@@ -6,34 +6,61 @@
 				<div class="page-header">
 				  <h1>Lets play darts!</h1>
 				</div>
-			</div>
-
-			<div class="btn-group start-score-select">
-			  <button {{action setStartScore 301}} type="button" {{bindAttr class=":btn :btn-large :btn-primary :btn301 is301:active"}}> 301 </button>
-			  <button {{action setStartScore 501}} type="button" {{bindAttr class=":btn :btn-large :btn-primary :btn501 is501:active"}}> 501 </button>
-			</div>
-
-			<hr />
-
-			<h2>Start a {{startScore}} with:</h2>
-			<div class="player-select">
-				<button {{action initWithNumberOfPlayers 2}} class="btn btn-large btn-block btn-primary" type="button">
-					<i class="icon-user icon-white"></i>
-					<i class="icon-user icon-white"></i>
-				</button>
-				<button {{action initWithNumberOfPlayers 3}} class="btn btn-large btn-block btn-primary" type="button">
-					<i class="icon-user icon-white"></i>
-					<i class="icon-user icon-white"></i>
-					<i class="icon-user icon-white"></i>
-				</button>
-				<button  {{action initWithNumberOfPlayers 4}} class="btn btn-large btn-block btn-primary" type="button">
-					<i class="icon-user icon-white"></i>
-					<i class="icon-user icon-white"></i>
-					<i class="icon-user icon-white"></i>
-					<i class="icon-user icon-white"></i>
-				</button>
+				<div class="btn-group start-score-select">
+				  <button {{action setStartScore 301}} type="button" {{bindAttr class=":btn :btn-large :btn-primary :btn301 is301:active"}}> 301 </button>
+				  <button {{action setStartScore 501}} type="button" {{bindAttr class=":btn :btn-large :btn-primary :btn501 is501:active"}}> 501 </button>
+				</div>
+				<hr />
 			</div>
 		</div>
-	</div>			
+	</div>
+
+	<div class="row">
+		<!-- left -->
+	  <div class="span6 player-select">
+			<ol class="unstyled">
+				<li>
+				<button {{action setNumberOfPlayers 2}} class="btn btn-large btn-primary" type="button">
+					<i class="icon-user icon-white"></i>
+					<i class="icon-user icon-white"></i>
+				</button>
+				</li>
+				<li>
+					<button {{action setNumberOfPlayers 3}} class="btn btn-large btn-primary" type="button">
+						<i class="icon-user icon-white"></i>
+						<i class="icon-user icon-white"></i>
+						<i class="icon-user icon-white"></i>
+					</button>
+				</li>
+				<li>
+					<button  {{action setNumberOfPlayers 4}} class="btn btn-large btn-primary" type="button">
+						<i class="icon-user icon-white"></i>
+						<i class="icon-user icon-white"></i>
+						<i class="icon-user icon-white"></i>
+						<i class="icon-user icon-white"></i>
+					</button>
+				</li>
+			</ol>
+		</div>
+
+		<!-- right -->
+	  <div class="span6 player-inputs">
+			<ol class="unstyled">
+				{{#each players}}
+					<li>{{view Ember.TextField valueBinding="name"}}</li>
+				{{/each}}
+			</ol>
+		</div>
+	</div>		
+	
+	<div class="row centered">
+	  <div class="span6 offset3">
+			<hr />
+			{{#if hasPlayers}}
+			<button {{action start}} class="btn btn-large btn-primary btn-block" type="button">Start {{startScore}} !</button>
+			{{/if}}
+		</div>	
+	</div>	
+
 </section>
 </script>

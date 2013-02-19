@@ -7,6 +7,12 @@ App.Router.map(function() {
   });
 });
 
+App.IndexRoute = Ember.Route.extend({
+  redirect: function() {
+    this.transitionTo('match.new');
+  }
+});
+
 App.MatchNewRoute = Ember.Route.extend({
 
   setupController: function(controller) {

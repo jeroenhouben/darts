@@ -3429,8 +3429,12 @@ body {
   margin: 0 auto;
 }
 /* home */
-#home .player-select button {
-  margin-top: 20px;
+#home .player-select ol li {
+  text-align: center;
+  margin: 20px 0;
+}
+#home .player-inputs ol li {
+  margin: 20px 0;
 }
 /* Turn (calc) */
 section.turn {
