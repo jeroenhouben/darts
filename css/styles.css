@@ -3460,9 +3460,6 @@ section.turn {
 #calculator #numpad button.bull {
   font-size: 20px;
 }
-#calculator #numpad button.zero {
-  display: none;
-}
 #calculator #numpad button.btn-homo {
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
@@ -3514,8 +3511,11 @@ section.turn.simple #calculator #numpad button.zero {
 section.turn.simple #calculator #multipliers {
   display: none;
 }
-section.turn.simple #dart-scores {
+section.turn.simple #score #dart-scores {
   display: none;
+}
+section.turn.simple #score h2 button {
+  margin: 0 0 10px 10px;
 }
 #score {
   background: #fff;

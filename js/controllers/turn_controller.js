@@ -2,6 +2,7 @@ App.TurnController = Ember.ObjectController.extend({
   needs: ["leg"],
   selectedDart: 1,
   selectedMultiplier: 1,
+  numpadType: 'extended',
 
   leg: function() {
     return this.get('controllers.leg.content');
@@ -91,6 +92,11 @@ App.TurnController = Ember.ObjectController.extend({
     return idx;
   }.property('content'),
   
+  toggleNumpadType: function() {
+    var t = this.get('numpadType');
+    this.set('numpadType', (t==='simple') ? 'extended' : 'simple');
+  },
+  
   isDart1Selected: function() {return this.get('selectedDart') === 1}.property('selectedDart'),
   isDart2Selected: function() {return this.get('selectedDart') === 2}.property('selectedDart'),
   isDart3Selected: function() {return this.get('selectedDart') === 3}.property('selectedDart'),
@@ -103,6 +109,8 @@ App.TurnController = Ember.ObjectController.extend({
   isDouble: function() {return this.get('selectedMultiplier') === 2}.property('selectedMultiplier'),
   isTriple: function() {return this.get('selectedMultiplier') === 3}.property('selectedMultiplier'),
 
+  isNumpadSimple: function() {return this.get('numpadType') === 'simple'}.property('numpadType'),
+  isNumpadExtended: function() {return this.get('numpadType') === 'extended'}.property('numpadType'),
   
   turnChanged: function(sender, key, value) {
     this.set('selectedDart', 1)
