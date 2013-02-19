@@ -18,6 +18,18 @@ App.LegController = Ember.ObjectController.extend({
     }
     return turn;
   },
+
+  newMatch: function() {
+    this.get('match').deleteRecord(); // FIXME: should prolly persist somewhere, or at least prompt for saving..
+    this.transitionToRoute('match.new');
+  },
+
+  
+  newLeg: function() {
+    // FIXME: remove current leg??
+    var leg = this.get('match').createNewLeg();
+    this.transitionToRoute('leg', leg);
+  },
   
   gotoNextTurnForPlayer: function(player) {
     this.gotoTurn(this.nextTurnForPlayer(player));

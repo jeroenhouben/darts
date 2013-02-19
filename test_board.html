@@ -10,72 +10,255 @@
 <style type="text/css"></style></head>
 
 <body>
-	<script src="js/libs/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
 	<div id="main" class="ember-application">
 		
-	<div id="ember292" class="ember-view">
-		
-<section id="scoreboard">
-	<div class="wrapper">
-		
-		<div id="current-player">
-			<h1 data-ember-action="104"><span>Jeroen</span> to throw.</h1>
+	<div id="ember250" class="ember-view">
+	<span class="appoutlet">
+		<span class="matchoutlet">
+<section class="scoreboard">
+
+	<div class="top">
+	  <div class="nav">
+	  	<button data-ember-action="849" type="button" class="btn btn-primary" }}="">New Game</button>
 		</div>
-		
-		<div class="buttons-left">
-			<a data-ember-action="105" class="btn btn-primary btn-block" type="button">New Leg</a>
-			<a id="ember656" class="ember-view btn btn-block btn-primary" href="#/"> New Game </a>
-			<a id="ember657" class="ember-view btn btn-block" href="#/match/players"><i class="icon-wrench"></i> Names </a>
+		<div class="current-player">
+			<h3>Marvin to throw!</h3>
 		</div>
-
-		<ol id="scoreboard-wrapper" class="unstyled">
-			
-			<li class="scores-for-player">
-				<h4 data-ember-action="106">Marvin</h4>
-						<ol class="unstyled">
-							<li class="start-score">501</li>
-
-								<li>yes</li><li>yes</li><li>yes</li><li>yes</li><li>yes</li><li>yes</li><li>yes</li><li>yes</li>
-								<li data-ember-action="107">
-
-									462
-
-								</li>
-
-								<li>yes</li><li>yes</li><li>yes</li><li>yes</li><li>yes</li><li>yes</li><li>yes</li><li>yes</li>
-								<li data-ember-action="108">
-
-									429
-
-								</li>
-
-						</ol>
-			</li>
-			
-			<li class="scores-for-player">
-				<h4 data-ember-action="109">Jeroen</h4>
-					<ol class="unstyled">
-						<li class="start-score">501</li>
-
-					</ol>
-			</li>
-			
-			<li class="scores-for-player">
-				<h4 data-ember-action="110">Lennard</h4>
-				<ol class="unstyled">
-					<li class="start-score">501</li>
-					
-				</ol>
-			</li>
-			
-		</ol>
-			
+	  <div class="legs-nav">
+			<h5>Legs:</h5>
+			<ol class="unstyled">
+				<li class="closed">1</li>
+				<li class="closed">2</li>
+				<li>3</li>
+			</ol>
+		</div>
 	</div>
-</section>
 
+	<div id="scoreboard-wrapper">
+			<ol class="unstyled">
+				
+				<li class="scores-for-player">
+					<h4 data-ember-action="850">Jeroen</h4>
+					<ol class="unstyled">
+						
+							<li>
+								<a id="ember1451" class="ember-view" href="#/match/turn/ember467">
+								
+									<span>-</span>80
+								
+								</a>
+							</li>
+						
+							<li>
+								<a id="ember1453" class="ember-view" href="#/match/turn/ember630">
+								
+									<span>-</span>120
+								
+								</a>
+							</li>
+						
+							<li>
+								<a id="ember1455" class="ember-view" href="#/match/turn/ember795">
+								
+									<span>-</span>5
+								
+								</a>
+							</li>
+						
+							<li>
+								<a id="ember1457" class="ember-view" href="#/match/turn/ember935">
+								
+									<span>-</span>78
+								
+								</a>
+							</li>
+						
+							<li>
+								<a id="ember1459" class="ember-view" href="#/match/turn/ember1089">
+								
+									<span>-</span>0
+								
+								</a>
+							</li>
+						
+							<li>
+								<a id="ember1461" class="ember-view" href="#/match/turn/ember1235">
+								
+									<span>-</span>0
+								
+								</a>
+							</li>
+						
+							<li>
+								<a id="ember1463" class="ember-view" href="#/match/turn/ember1388">
+								
+									...
+								
+								</a>
+							</li>
+						
+						<li><strong>8</strong></li>
+					</ol>
+				</li>
+				
+				<li class="scores-for-player">
+					<h4 data-ember-action="851">Marvin</h4>
+					<ol class="unstyled">
+						
+							<li>
+								<a id="ember1476" class="ember-view" href="#/match/turn/ember526">
+								
+									<span>-</span>8
+								
+								</a>
+							</li>
+						
+							<li>
+								<a id="ember1478" class="ember-view" href="#/match/turn/ember689">
+								
+									<span>-</span>45
+								
+								</a>
+							</li>
+						
+							<li>
+								<a id="ember1480" class="ember-view" href="#/match/turn/ember841">
+								
+									<span>-</span>5
+								
+								</a>
+							</li>
+						
+							<li>
+								<a id="ember1482" class="ember-view" href="#/match/turn/ember989">
+								
+									<span>-</span>1
+								
+								</a>
+							</li>
+						
+							<li>
+								<a id="ember1484" class="ember-view" href="#/match/turn/ember1135">
+								
+									<span>-</span>59
+								
+								</a>
+							</li>
+						
+							<li>
+								<a id="ember1486" class="ember-view" href="#/match/turn/ember1277">
+								
+									<span>-</span>88
+								
+								</a>
+							</li>
+						
+						<li><strong>195</strong></li>
+					</ol>
+				</li>
+				
+				<li class="scores-for-player">
+					<h4 data-ember-action="852">Piest</h4>
+					<ol class="unstyled">
+						
+							<li>
+								<a id="ember1499" class="ember-view" href="#/match/turn/ember574">
+								
+									<span>-</span>46
+								
+								</a>
+							</li>
+						
+							<li>
+								<a id="ember1501" class="ember-view" href="#/match/turn/ember742">
+								
+									<span>-</span>77
+								
+								</a>
+							</li>
+						
+							<li>
+								<a id="ember1503" class="ember-view" href="#/match/turn/ember888">
+								
+									<span>-</span>5
+								
+								</a>
+							</li>
+						
+							<li>
+								<a id="ember1505" class="ember-view" href="#/match/turn/ember1035">
+								
+									<span>-</span>20
+								
+								</a>
+							</li>
+						
+							<li>
+								<a id="ember1507" class="ember-view" href="#/match/turn/ember1189">
+								
+									<span>-</span>0
+								
+								</a>
+							</li>
+						
+							<li>
+								<a id="ember1509" class="ember-view" href="#/match/turn/ember1329">
+								
+									<span>-</span>103
+								
+								</a>
+							</li>
+						
+						<li><strong>50</strong></li>
+					</ol>
+				</li>
+				
+			</ol>
+	</div>
+			
+</section>
+</span>
+	</span>
 	</div></div>
 	
 
+	
+
+	
+
+
+	
+
+
+
+	
+
+
+	
+  
+  
+  
+	
+  
+
+  
+	<!-- Ember Routes -->
+	
+	<!-- Ember Models -->
+	
+	
+	
+	
+	
+	<!-- Ember Controllers -->
+	
+	
+	
+	<!-- Ember Views -->
+	
+	
+
+	
 	
 
 </body></html>

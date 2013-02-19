@@ -223,47 +223,84 @@ section.turn.player4 #latest-scores li:nth-of-type(4) {
 
 /* scoreboard */
 section.scoreboard {
-  #current-player {
-    h1 {
-      margin: 0 0 0 140px;
-      padding: 0 0 10px;
+  .top {
+    height: 46px;
+    position: relative;
+    padding-top: 6px;
+  }
+  .current-player {
+      left: 50%;
+      margin-left: -250px;
+      position: absolute;
+      width: 500px;
+      bottom: 4px;
+    h3 {
+      cursor: pointer;
+      font-size: 53.75px;
       text-align: center;
-      &:hover {
-        cursor: pointer;
-        span {
-          
-        }
+      padding-bottom: 0px;
+      line-height: 16px;
+      font-style: italic;
+    }
+  }
+  .nav {
+    position: absolute;
+    left: 0;
+  }
+  .legs-nav {
+    margin-top: 6px;
+    position: absolute;
+    right: -5px;
+    bottom: 3px;
+    h5 {
+      float: left;
+      margin: 0;
+      padding: 0;
+    }
+    ol {
+      float: right;
+      margin: 5px 0 0 0;
+    }
+    li {
+      float: left;
+      font-size: 16px;
+      text-align: center;
+      width: 20px;
+      height: 20px;
+      margin: 0 5px;
+      border: 1px solid @darkBackground;
+      line-height: 20px;
+      &.closed {
+        background: @green;
+        color: #fff;
       }
     }
   }
-  .wrapper {
-    padding-top: 10px;
-  }
-  .buttons-left {
-    float: left;
-    width: 140px;
-  }
 }
 #scoreboard-wrapper {
-  margin: 0 0 0 150px;
-  padding:0;
-  overflow: hidden;
   background: @darkBackground;
+  padding:0;
   color: #fff;
   font-family: 'pwchalkmedium';
   text-transform:uppercase;
+  ol {
+    overflow: hidden;
+  }
   li.scores-for-player {
-    &.active {
-      color: yellow;
-    }
     float: left;
     width: 200px;
-    height: 570px;
+    height: 590px;
     text-align: center;
-    margin-left: 10px;
+    margin: 0 40px 0 10px;
+    &.active {
+      background: #fff;
+      a,li,h4 {
+        color: #000;
+      }
+    }
     h4 {
+      margin-bottom: 5px;
       white-space: nowrap;
-      border-bottom: 1px solid #fff;
       &:hover {
         cursor: pointer;
         color: yellow;
@@ -273,16 +310,22 @@ section.scoreboard {
       font-size: 30px;
       li {
         padding: 3px 0;
-        &:hover {
-          cursor: pointer;
-          color: yellow;
-        }
-        &.start-score {
-          color: #eee;
-          &:hover {
-            cursor: text;
-            color: #eee;
+        a {
+          color: #fff;
+          span {
+            padding-right: 10px;
           }
+          &:hover {
+            color: yellow;
+            text-decoration: none;
+          }
+        }
+        strong {
+          display: block;
+          border-top: 1px solid #fff;
+          padding: 10px 20px 0 34px;
+          width: 48px;
+          margin: 0 auto;
         }
       }
     }

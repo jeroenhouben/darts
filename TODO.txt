@@ -1,4 +1,3 @@
-- setup player names
 - prettier scores on scoreboards
 - uitgooien is terug naar scoreboard/ met modal window (x heeft gewonnen! ----> Verder/new leg | Undo)
 
