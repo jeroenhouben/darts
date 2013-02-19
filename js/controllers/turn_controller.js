@@ -18,16 +18,25 @@ App.TurnController = Ember.ObjectController.extend({
   },
   
   hasScore: function() {
+    if (this.get('simpleScore') != null) return true;
     if (this.get('dart1') != null) return true;
     if (this.get('dart2') != null) return true;
     return (this.get('dart3') != null);
-  }.property('dart1','dart2','dart3'),
+  }.property('dart1','dart2','dart3', 'simpleScore'),
   
   requiredScore: function() {
     return this.get('player.requiredScore');
   }.property('player.requiredScore'),
   
   registerThrow: function(number) {
+    if (this.get('isNumpadSimple')) {
+      this.addSimpleScore(number);
+    } else {
+      this.registerExtendedScore(number);
+    }
+  },
+  
+  registerExtendedScore: function(number) {
     var m = (number<25) ? this.selectedMultiplier : 1; //bulls cannot have multipliers
     var score = number*m;
 
@@ -39,6 +48,15 @@ App.TurnController = Ember.ObjectController.extend({
     } else {
       this.set('selectedDart', this.selectedDart+1);
     }
+  },
+  
+  addSimpleScore: function(number) {
+    var s = this.get('simpleScore') || "";
+    s = s.toString() + number.toString();
+    if (parseInt(s, 10) > 180) {
+      return false;
+    }
+    this.set('simpleScore',  s);
   },
   
   registerHomo: function() {
@@ -78,6 +96,7 @@ App.TurnController = Ember.ObjectController.extend({
     this.set('dart1', null);
     this.set('dart2', null);
     this.set('dart3', null);
+    this.set('simpleScore', null);
     this.set('completed', false);
   },
 
@@ -93,8 +112,11 @@ App.TurnController = Ember.ObjectController.extend({
   }.property('content'),
   
   toggleNumpadType: function() {
-    var t = this.get('numpadType');
-    this.set('numpadType', (t==='simple') ? 'extended' : 'simple');
+    var t = this.get('numpadType'),
+        newType = (t==='simple') ? 'extended' : 'simple';
+    
+    if (newType === 'extended') this.set('simpleScore', null);
+    this.set('numpadType', newType);
   },
   
   isDart1Selected: function() {return this.get('selectedDart') === 1}.property('selectedDart'),

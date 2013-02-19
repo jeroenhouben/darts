@@ -3514,9 +3514,6 @@ section.turn.simple #calculator #multipliers {
 section.turn.simple #score #dart-scores {
   display: none;
 }
-section.turn.simple #score h2 button {
-  margin: 0 0 10px 10px;
-}
 #score {
   background: #fff;
   border-radius: 15px;
@@ -3528,6 +3525,9 @@ section.turn.simple #score h2 button {
 #score h2 {
   margin-top: 0;
   text-align: center;
+}
+#score h2 button {
+  margin: 0 0 10px 10px;
 }
 #score #current-throw {
   text-align: center;

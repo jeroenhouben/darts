@@ -13,29 +13,49 @@ App.TurnView = Ember.View.extend({
   
   didInsertElement: function() {
     $(document).on('keydown', $.proxy(function(e) {
-      switch(e.keyCode) {
+      var kc = e.keyCode, nr;
+      
+      // check if a number was pressed
+      if ((kc > 47 && kc < 58) || (kc > 95 && kc < 106)) { // 0-9
+        e.preventDefault();
+        
+        // 
+        nr = (kc > 58) ? kc-96 : kc-48;
+        
+        this.controller.set('numpadType', 'simple');
+        this.controller.addSimpleScore(nr);
+        return;
+      }
+
+      // other special keys
+      switch(kc) {
+      case 8: // backspace
+        e.preventDefault();
+        this.controller.reset();
+        return;
       case 13: // enter or return key
         e.preventDefault();
         this.controller.registerTurn();
-        break;
+        return;
       case 32: // spacebar
         e.preventDefault();
         this.controller.toggleNumpadType();
-        break;
+        return;
       case 83: // S
         e.preventDefault();
         this.controller.setMultiplier(1);
-        break;
+        return;
       case 68: // D
         e.preventDefault();
         this.controller.setMultiplier(2);
-        break;
+        return;
       case 84: // T
         e.preventDefault();
         this.controller.setMultiplier(3);
-        break;
+        return;
       }
-    }, this));
+    }, 
+    this));
   },
   
   willDestroyElement: function() {

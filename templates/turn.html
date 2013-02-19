@@ -52,9 +52,9 @@
 			</ol>
 			<h2>
 			{{#if hasScore}}
-				{{score}}
+				<span>{{score}}</span>
 			{{else}}
-				...
+				<span>...</span>
 			{{/if}}
 			<button type="button" {{action "toggleNumpadType"}} {{bindAttr class=":multiplier :btn :btn-warning isNumpadSimple:active"}}>#</button>
 			</h2>
