@@ -14,36 +14,48 @@
 		
 	</div>
 	<script type="text/x-handlebars" data-template-name="application">
-		{{outlet}}
+	<span class="appoutlet">{{outlet}}</span>
+	</script>
+
+	<script type="text/x-handlebars" data-template-name="match">
+		<span class="matchoutlet">{{outlet}}</span>
 	</script>
 
 	<script type="text/x-handlebars" data-template-name="index">
-		<div id="intro">
-			{{#linkTo "match.setup" class="btn btn-primary btn-large btn-block"}}You be Dartin??{{/linkTo}}
-		</div>
+		<section id="intro">
+			{{#linkTo "match.new" class="btn btn-primary btn-large btn-block"}}You be Dartin??{{/linkTo}}
+		</section>
 	</script>
 
+	<!--# include file="templates/setup.html" -->
 
-	<!--# include file="screens/setup.html" -->
+	<!--# include file="templates/leg.html" -->
 
-	<!--# include file="screens/players.html" -->
-
-	<!--# include file="screens/scoreboard.html" -->
-
-	<!--# include file="screens/turn.html" -->
+	<!--# include file="templates/turn.html" -->
 
 	
   <script src="js/libs/jquery-1.9.1.min.js"></script>
   <script src="js/libs/handlebars-1.0.0.rc.3.js"></script>
   <script src="js/libs/ember-1.0.0-rc.1.js"></script>
 	<script src="js/libs/ember-data.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/libs/ghostclickbuster.js" type="text/javascript" charset="utf-8"></script>
 
-  <script src="js/dartfart.js"></script>
-  <script src="js/ghostclickbuster.js" type="text/javascript" charset="utf-8"></script>
-  <script src="js/controllers.js" type="text/javascript" charset="utf-8"></script>
-  <script src="js/models.js" type="text/javascript" charset="utf-8"></script>
-  <script src="js/routes.js" type="text/javascript" charset="utf-8"></script>
-  <script src="js/views.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/app.js"></script>
+	<!-- Ember Routes -->
+	<script src="js/routes.js" type="text/javascript" charset="utf-8"></script>
+	<!-- Ember Models -->
+	<script src="js/models/match.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/models/leg.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/models/leg_player.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/models/player.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/models/turn.js" type="text/javascript" charset="utf-8"></script>
+	<!-- Ember Controllers -->
+	<script src="js/controllers/leg_controller.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/controllers/match_new_controller.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/controllers/turn_controller.js" type="text/javascript" charset="utf-8"></script>
+	<!-- Ember Views -->
+	<script src="js/views/turn_view.js" type="text/javascript" charset="utf-8"></script>
+	
 
 	<script src="js/sampledata.js" type="text/javascript" charset="utf-8"></script>
 	

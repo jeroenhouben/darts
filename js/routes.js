@@ -1,63 +1,16 @@
 // Routes
 App.Router.map(function() {
   this.resource('match', function() {
-    this.route('setup');
-    this.resource('players');
-    this.route('scoreboard');
-    this.resource('turn', { path: '/turns/:turn_id' });
+    this.route('new');
+    this.resource('leg', { path: '/leg/:leg_id' });
+    this.resource('turn', { path: '/turn/:turn_id' });
   });
 });
 
-/*
-* ApplicationRoute
-*/
-App.ApplicationRoute = Ember.Route.extend({
+App.MatchNewRoute = Ember.Route.extend({
 
-  events: {
-    startLeg: function() {
-      var leg = App.Leg.find(1);
-          
-      if (leg.get('players.length') > 0) {
-        leg.resetTurns();
-        this.transitionTo('match.scoreboard');
-      } else {
-        // no players ... 
-        this.transitionTo('match.setup');
-      }
-    }
+  setupController: function(controller) {
+    controller.set("content", App.Match.createRecord());
   }
 
-});
-
-
-/*
-* MatchSetupRoute
-*/
-App.MatchSetupRoute = Ember.Route.extend({
-  model: function() {
-    return App.Leg.find(1); // always get the same Leg for now.. (its defined in sampledata (FIXTURES))
-  }
 });    
-
-/*
-* PlayersRoute
-*/
-App.PlayersRoute = Ember.Route.extend({
-
-  model: function() {
-    return App.Leg.find(1).get('players'); // always get the same Leg for now.. (its defined in sampledata (FIXTURES))
-  }
-
-
-});
-
-/*
-* MatchScoreboardRoute
-*/
-App.MatchScoreboardRoute = Ember.Route.extend({
-
-  model: function() {
-    return App.Leg.find(1).get('players');
-  }
-
-});

@@ -3,7 +3,6 @@
 * vars & colors
 */
 @darkBackground: #353535;
-
 /*
 * layout
 *
@@ -22,12 +21,11 @@ body {
   width:1024px;
   height: 660px;
   background: #fff;
-  > div > section, > section {
+  section {
     height: 660px;
     padding: 0 10px;
   }
 }
-
 /*
 * generic stuff
 */
@@ -69,7 +67,7 @@ body {
 }
 
 /* Turn (calc) */
-#main section#turn {
+section.turn {
   background-color: @darkBackground;
   padding-top: 10px !important;
 }
@@ -104,7 +102,7 @@ body {
 }
 
 /* simple version with only a numpad */
-#turn.simple {
+section.turn.simple {
   #calculator {
     width: 336px;
     margin-top: 20px;
@@ -129,8 +127,6 @@ body {
     display: none;
   }
 }
-
-
 
 #score {
   background: #fff;
@@ -200,10 +196,10 @@ body {
     }
   }
 }
-#turn.player1 #latest-scores li:nth-of-type(1),
-#turn.player2 #latest-scores li:nth-of-type(2),
-#turn.player3 #latest-scores li:nth-of-type(3),
-#turn.player4 #latest-scores li:nth-of-type(4) {
+section.turn.player1 #latest-scores li:nth-of-type(1),
+section.turn.player2 #latest-scores li:nth-of-type(2),
+section.turn.player3 #latest-scores li:nth-of-type(3),
+section.turn.player4 #latest-scores li:nth-of-type(4) {
   background-color: #fff;
   h4 {
     color: #000;
@@ -211,7 +207,7 @@ body {
 }
 
 /* scoreboard */
-#scoreboard {
+section.scoreboard {
   #current-player {
     h1 {
       margin: 0 0 0 140px;

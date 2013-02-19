@@ -3391,8 +3391,7 @@ body {
   height: 660px;
   background: #fff;
 }
-#main > div > section,
-#main > section {
+#main section {
   height: 660px;
   padding: 0 10px;
 }
@@ -3434,7 +3433,7 @@ body {
   margin-top: 20px;
 }
 /* Turn (calc) */
-#main section#turn {
+section.turn {
   background-color: #353535;
   padding-top: 10px !important;
 }
@@ -3497,25 +3496,25 @@ body {
   background-color: #9a284b \9;
 }
 /* simple version with only a numpad */
-#turn.simple #calculator {
+section.turn.simple #calculator {
   width: 336px;
   margin-top: 20px;
   padding-left: 196px;
 }
-#turn.simple #calculator #numpad button {
+section.turn.simple #calculator #numpad button {
   float: right;
 }
-#turn.simple #calculator #numpad button.ext {
+section.turn.simple #calculator #numpad button.ext {
   display: none;
 }
-#turn.simple #calculator #numpad button.zero {
+section.turn.simple #calculator #numpad button.zero {
   width: 310px;
   display: block;
 }
-#turn.simple #calculator #multipliers {
+section.turn.simple #calculator #multipliers {
   display: none;
 }
-#turn.simple #dart-scores {
+section.turn.simple #dart-scores {
   display: none;
 }
 #score {
@@ -3586,31 +3585,31 @@ body {
 #latest-scores li span.checkout {
   color: #348c34;
 }
-#turn.player1 #latest-scores li:nth-of-type(1),
-#turn.player2 #latest-scores li:nth-of-type(2),
-#turn.player3 #latest-scores li:nth-of-type(3),
-#turn.player4 #latest-scores li:nth-of-type(4) {
+section.turn.player1 #latest-scores li:nth-of-type(1),
+section.turn.player2 #latest-scores li:nth-of-type(2),
+section.turn.player3 #latest-scores li:nth-of-type(3),
+section.turn.player4 #latest-scores li:nth-of-type(4) {
   background-color: #fff;
 }
-#turn.player1 #latest-scores li:nth-of-type(1) h4,
-#turn.player2 #latest-scores li:nth-of-type(2) h4,
-#turn.player3 #latest-scores li:nth-of-type(3) h4,
-#turn.player4 #latest-scores li:nth-of-type(4) h4 {
+section.turn.player1 #latest-scores li:nth-of-type(1) h4,
+section.turn.player2 #latest-scores li:nth-of-type(2) h4,
+section.turn.player3 #latest-scores li:nth-of-type(3) h4,
+section.turn.player4 #latest-scores li:nth-of-type(4) h4 {
   color: #000;
 }
 /* scoreboard */
-#scoreboard #current-player h1 {
+section.scoreboard #current-player h1 {
   margin: 0 0 0 140px;
   padding: 0 0 10px;
   text-align: center;
 }
-#scoreboard #current-player h1:hover {
+section.scoreboard #current-player h1:hover {
   cursor: pointer;
 }
-#scoreboard .wrapper {
+section.scoreboard .wrapper {
   padding-top: 10px;
 }
-#scoreboard .buttons-left {
+section.scoreboard .buttons-left {
   float: left;
   width: 140px;
 }

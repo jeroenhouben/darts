@@ -1,0 +1,34 @@
+<script type="text/x-handlebars" data-template-name="leg">
+<section class="scoreboard">
+	<div class="wrapper">
+		
+		<div id="current-player">
+			<h1 {{action gotoNextTurnForPlayer currentPlayer}}><span>{{currentPlayer.name}}</span> to throw!</h1>
+		</div>
+		<ol id="scoreboard-wrapper" class="unstyled">
+			{{#each player in players}}
+			<li class="scores-for-player">
+				<h4 {{action gotoNextTurnForPlayer player}}>{{player.name}}</h4>
+				<ol class="unstyled">
+					<li class="start-score">{{match.startScore}}</li>
+					{{#each player.turns}}
+						<li>
+							- {{#linkTo turn this}}
+							{{#if completed}}
+								{{score}}
+							{{else}}
+								...
+							{{/if}}
+							{{/linkTo}}
+						</li>
+					{{/each}}
+					<li><hr />{{player.requiredScore}}</li>
+				</ol>
+			</li>
+			{{/each}}
+		</ol>
+			
+	</div>
+</section>
+</script>
+
