@@ -1,9 +1,13 @@
 - setup player names
-- setup number of legs
 - prettier scores on scoreboards
+- uitgooien is terug naar scoreboard/ met modal window (x heeft gewonnen! ----> Verder/new leg | Undo)
+
+- setup number of legs
 - tussenstand legs
 - navigatie new leg
-- uitgooien is terug naar tussenstand leg met modal window (x heeft gewonnen! ----> Verder | Undo)
+
+
+DONE
 - alt. numpad
 	- simpleScore property
 	- numpadType property bind aan ClassName
