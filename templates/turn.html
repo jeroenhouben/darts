@@ -28,7 +28,7 @@
 			<button {{action registerThrow 1}} class="btn btn-large"  type="button">1</button>
 			<button {{action registerThrow 25}} class="ext bull btn btn-large btn-success" type="button">single <strong>BULL</strong></button>	
 			<button {{action registerThrow 50}} class="ext bull btn btn-large btn-danger" type="button">double <strong>BULL</strong></button>	
-			<button {{action registerThrow 0}} class="bull btn btn-large btn-inverse" type="button">0 <br /><strong>miss!</strong></button>	
+			<button {{action registerThrow 0}} class="zero btn btn-large" type="button">0</button>	
 			<button {{action registerBust}} class="ext bull btn btn-large btn-inverse" type="button">X <br /><strong>bust!</strong></button>	
 			<button {{action registerHomo}} class="ext bull btn btn-large btn-homo" value="26" type="button">26 <strong>homo</strong></button>	
 		</div>
@@ -52,10 +52,11 @@
 			</ol>
 			<h2>
 			{{#if hasScore}}
-				{{score}}
+				<span>{{score}}</span>
 			{{else}}
-				...
+				<span>...</span>
 			{{/if}}
+			<button type="button" {{action "toggleNumpadType"}} {{bindAttr class=":multiplier :btn :btn-warning isNumpadSimple:active"}}>#</button>
 			</h2>
   		<button {{action "registerTurn"}} class="btn btn-large btn-block btn-primary" type="button">Commit Score</button>
   		<button {{action "reset"}} class="btn btn-large btn-block" type="button">Reset</button>

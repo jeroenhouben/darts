@@ -91,16 +91,12 @@ section.turn {
       &.bull {
         font-size: 20px
       }
-      &.zero {
-        display: none;
-      }
       &.btn-homo {
         .buttonBackground(lighten(@pink, 10%), @pink);
       }
     }
   }
 }
-
 /* simple version with only a numpad */
 section.turn.simple {
   #calculator {
@@ -123,8 +119,10 @@ section.turn.simple {
       display: none;
     }
   }
-  #dart-scores {
-    display: none;
+  #score {
+    #dart-scores {
+      display: none;
+    }
   }
 }
 
@@ -138,6 +136,9 @@ section.turn.simple {
   h2 {
     margin-top: 0;
     text-align: center;
+    button {
+      margin: 0 0 10px 10px;
+    }
   }
   #current-throw {
     text-align: center;
