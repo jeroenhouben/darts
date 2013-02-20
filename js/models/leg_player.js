@@ -1,5 +1,7 @@
 /*
 * LegPlayer represents a player enrolled in a Leg
+* basically a Join models netween a unique Player profile and a leg
+* a Leg always belongs to a Match 
 */
 App.LegPlayer = DS.Model.extend({
   leg: DS.belongsTo('App.Leg'),
