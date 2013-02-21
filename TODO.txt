@@ -1,7 +1,11 @@
+FEATURES
 - uitgooien is terug naar scoreboard/ met modal window (x heeft gewonnen! ----> Verder/new leg | Undo)
 - setup number of legs
 - tussenstand legs
 
+BUGS
+- new leg kiezen. klik naar eerste turn laat nog vorige scores etc zien.
+- een speler kan meer dan 1 beurt (turn) voorlopen op andere spelers, dan moet in principe niet kunnen
 
 DONE
 - prettier scores on scoreboards
