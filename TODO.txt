@@ -1,5 +1,4 @@
 FEATURES
-- uitgooien is terug naar scoreboard/ met modal window (x heeft gewonnen! ----> Verder/new leg | Undo)
 - setup number of legs
 - tussenstand legs
 
