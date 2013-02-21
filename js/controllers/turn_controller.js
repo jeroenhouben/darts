@@ -134,6 +134,8 @@ App.TurnController = Ember.ObjectController.extend({
   isNumpadSimple: function() {return this.get('numpadType') === 'simple'}.property('numpadType'),
   isNumpadExtended: function() {return this.get('numpadType') === 'extended'}.property('numpadType'),
   
+  isCheckoutPossible: function() {return this.get('player.isCheckoutPossible')}.property('player.isCheckoutPossible'),
+  
   turnChanged: function(sender, key, value) {
     this.set('selectedDart', 1)
     this.set('selectedMultiplier', 1);

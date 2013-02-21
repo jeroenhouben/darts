@@ -11,22 +11,22 @@ App.LegPlayer = DS.Model.extend({
   }.property(),
 
   isCheckoutPossible: function() {
-    var i = this.get('requiredScore');
-    if (i<162) {
+    var rs = this.get('requiredScore');
+    if (rs<162) {
       return true;
     }
-    if (i==170 || i==167 || i==164) {
+    if (rs==170 || rs==167 || rs==164) {
       return true;
     }
     return false;
   }.property('requiredScore'),
 
   requiredScore: function() {
-    var score = this.get('leg.match.startScore');
+    var rs = this.get('leg.match.startScore');
     this.get('turns').forEach(function(turn) {
-      score-=turn.get('score');
+      rs-=turn.get('score');
     });
-    return score;
+    return rs;
   }.property('leg.match.startScore', 'turns.@each.score')
 
 });
