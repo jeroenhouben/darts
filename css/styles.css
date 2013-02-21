@@ -3564,7 +3564,7 @@ section.turn.simple #score #dart-scores {
   width: 82px;
 }
 #latest-scores {
-  margin: 0 0 0 560px;
+  margin-left: 560px;
   padding: 20px;
 }
 #latest-scores ol {
@@ -3589,7 +3589,7 @@ section.turn.simple #score #dart-scores {
   font-weight: bold;
   color: #bd362f;
 }
-#latest-scores li span.checkout {
+#latest-scores li.checkout span {
   color: #348c34;
 }
 section.turn.player1 #latest-scores li:nth-of-type(1),
