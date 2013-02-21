@@ -70,12 +70,26 @@ App.TurnController = Ember.ObjectController.extend({
     this.set('dart1', null);
     this.set('dart2', null);
     this.set('dart3', null);
+    this.set('simpleScore', null);
     this.registerTurn();
   },
   
   registerTurn: function() {
-    this.set('completed', true);
-    this.advanceTurn();
+    var s = this.get('score'),
+        rs = this.get('requiredScore');
+    
+    // could do better here.. how do we know he thre a double in simple view ??? FIXME????
+    if (rs === 0) {
+      this.set('completed', true);
+      this.get('leg').set('winner', this.get('player.player')); // cannot store a Legplayer instance here :-S FIXME!!
+      this.get('controllers.leg').set('currentPlayerIndex', null);
+      this.transitionToRoute('leg.finished', this.get('leg'));
+    } else if (rs < 0) {
+      this.registerBust();
+    } else {
+      this.set('completed', true);
+      this.advanceTurn();
+    }
   },
   
   advanceTurn: function() {
@@ -134,10 +148,10 @@ App.TurnController = Ember.ObjectController.extend({
   isNumpadSimple: function() {return this.get('numpadType') === 'simple'}.property('numpadType'),
   isNumpadExtended: function() {return this.get('numpadType') === 'extended'}.property('numpadType'),
   
-  turnChanged: function(sender, key, value) {
+  turnChanged: function() {
     this.set('selectedDart', 1)
     this.set('selectedMultiplier', 1);
     this.set('controllers.leg.currentPlayerIndex', this.get('currentPlayerIndex'));
-  }.observes('content')
-
+  }.observes('content'),
+  
 });

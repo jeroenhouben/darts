@@ -284,6 +284,7 @@ section.scoreboard {
   background: @darkBackground;
   padding:0;
   color: #fff;
+  position: relative;
   font-family: 'pwchalkmedium';
   text-transform:uppercase;
   ol {
@@ -332,5 +333,21 @@ section.scoreboard {
         }
       }
     }
+  }
+}
+
+.modal {
+  color: @darkBackground;
+  display: absolute;
+  font-family: @sansFontFamily;
+  padding: 20px;
+  border-width: 5px;
+  h1 {
+    text-align: center;
+    text-transform: none;
+    margin-bottom: 48px;
+  }
+  button {
+    margin: 14px 0;
   }
 }
