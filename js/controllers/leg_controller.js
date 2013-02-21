@@ -20,7 +20,7 @@ App.LegController = Ember.ObjectController.extend({
   },
 
   newMatch: function() {
-    this.get('match').deleteRecord(); // FIXME: should prolly persist somewhere, or at least prompt for saving..
+    this.get('match').deleteRecord(); // FIXME: should prolly persist somewhere, or at least prompt for saving..  
     this.transitionToRoute('match.new');
   },
 
@@ -37,6 +37,12 @@ App.LegController = Ember.ObjectController.extend({
   
   gotoTurn: function(turn) {
     this.transitionToRoute('turn', turn);
-  }
+  },
+
+  legChanged: function(sender, key, value) {
+    alert('keyval' + key + '  ' + value);
+    this.set('currentPlayerIndex', 0);
+  }.observes('content')
+
   
 });
