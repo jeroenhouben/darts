@@ -24,16 +24,6 @@ App.LegController = Ember.ObjectController.extend({
     this.transitionToRoute('match.new');
   },
 
-  newLeg: function() {
-    // FIXME: remove current leg??
-    var leg = this.get('match').createNewLeg();
-    this.transitionToRoute('leg', leg);
-  },
-  
-  undowWinner: function() {
-    alert('todo...');
-  },
-  
   gotoNextTurnForPlayer: function(player) {
     this.gotoTurn(this.nextTurnForPlayer(player));
   },
