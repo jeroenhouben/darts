@@ -3,13 +3,14 @@
 *
 */
 App.Turn = DS.Model.extend({
-  player: DS.belongsTo('App.LegPlayer'),
+  player: DS.belongsTo('App.LegPlayer'), // !! is really a LegPlayer, the join model
   dart1: DS.attr('number'),
   dart2: DS.attr('number'),
   dart3: DS.attr('number'),
   completed: DS.attr('boolean'),
-  simpleScore: DS.attr('number'),
+  simpleScore: DS.attr('number'), // if they chose to register the summed score at once, not using the individual dart scores.
   
+  // returns the leg
   leg: function() {
     return this.get('player.leg')
   }.property(),
@@ -26,7 +27,8 @@ App.Turn = DS.Model.extend({
   }.property('dart1','dart2','dart3', 'simpleScore'),
   
   /*
-  * returns the score at this given turn of the leg
+  * returns player's score at this particular turn of the leg
+  * TODO: only use completed Turns??
   */
   legScore: function() {
     var leg = this.get('leg'),
