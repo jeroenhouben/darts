@@ -1,10 +1,12 @@
 FEATURES
-- setup number of legs
-- tussenstand legs
+- setup number of legs (select option disabled )
+- tussenstand legs (button, rendered in leg outlet)
+- als 2 spelers, dan legs % 2 === 1
+- als meer dan 2 spelers, ruimte voor extra leg met 2 spelers
+	- als 3 spelers qualify: bull 2 qualify -> kiezen
 
 BUGS
-- new leg kiezen. klik naar eerste turn laat nog vorige scores etc zien.
-- een speler kan meer dan 1 beurt (turn) voorlopen op andere spelers, dan moet in principe niet kunnen
+- een speler kan meer dan 1 beurt (turn) voorlopen op andere spelers, dat moet in principe niet kunnen
 
 DONE
 - prettier scores on scoreboards

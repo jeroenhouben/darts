@@ -5,8 +5,8 @@ App.TurnController = Ember.ObjectController.extend({
   numpadType: 'extended',
 
   leg: function() {
-    return this.get('controllers.leg.content');
-  }.property('content'),
+    return this.get('player.leg');
+  }.property('player.leg'),
 
   selectDart: function(dartNumber) {
     this.set('selectedDart', dartNumber)
