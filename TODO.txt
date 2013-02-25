@@ -1,6 +1,7 @@
 FEATURES
 - setup number of legs
 - tussenstand legs
+- checkout possibilities
 
 BUGS
 - new leg kiezen. klik naar eerste turn laat nog vorige scores etc zien.
