@@ -21,4 +21,13 @@ App.LegFinishedRoute = Ember.Route.extend({
     controller.set("content", controller.get('controllers.leg.content'));
   }
 
-});
+});    
+
+
+App.MatchNewRoute = Ember.Route.extend({
+
+  setupController: function(controller) {
+    controller.set("content", App.Match.createRecord());
+  }
+
+});    
