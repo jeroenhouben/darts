@@ -1,6 +1,11 @@
 /*
 */
 App.MatchNewController = Ember.ObjectController.extend({
+
+  init: function() {
+    this._super();
+    this.set("content", App.Match.createRecord());
+  }
   
   hasPlayers: function() {
     return this.get('model.players.length') > 0;
@@ -48,15 +53,4 @@ App.MatchNewController = Ember.ObjectController.extend({
     this.get('model').set('startScore', score);
   },
 
-  dummyData: function(leg) {
-    // create a dummy Turn
-    var p = leg.get('players.firstObject');
-    p.get('turns').createRecord({
-      dart1: 23,
-      dart2: 1,
-      dart3: 34,
-      completed: true
-    });
-  }
-  
 });
