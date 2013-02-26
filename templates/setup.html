@@ -17,38 +17,23 @@
 
 	<div class="row">
 		<!-- left -->
-	  <div class="span6 player-select">
+	  <div class="offset2 span4 available-players">
 			<ol class="unstyled">
+				{{#each availablePlayers}}
 				<li>
-				<button {{action setNumberOfPlayers 2}} class="btn btn-large btn-primary" type="button">
-					<i class="icon-user icon-white"></i>
-					<i class="icon-user icon-white"></i>
-				</button>
+					{{name}}
 				</li>
-				<li>
-					<button {{action setNumberOfPlayers 3}} class="btn btn-large btn-primary" type="button">
-						<i class="icon-user icon-white"></i>
-						<i class="icon-user icon-white"></i>
-						<i class="icon-user icon-white"></i>
-					</button>
-				</li>
-				<li>
-					<button  {{action setNumberOfPlayers 4}} class="btn btn-large btn-primary" type="button">
-						<i class="icon-user icon-white"></i>
-						<i class="icon-user icon-white"></i>
-						<i class="icon-user icon-white"></i>
-						<i class="icon-user icon-white"></i>
-					</button>
-				</li>
+				{{/each}}
 			</ol>
 		</div>
 
 		<!-- right -->
-	  <div class="span6 player-inputs">
-			<ol class="unstyled">
-				{{#each players}}
-					<li>{{view Ember.TextField valueBinding="name"}}</li>
-				{{/each}}
+	  <div class="span4 match-players">
+			<ol>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
 			</ol>
 		</div>
 	</div>		

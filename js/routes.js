@@ -28,6 +28,7 @@ App.MatchNewRoute = Ember.Route.extend({
 
   setupController: function(controller) {
     controller.set("content", App.Match.createRecord());
+    controller.set('availablePlayers', App.Player.find());
   }
 
 });    

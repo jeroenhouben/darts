@@ -8,8 +8,7 @@ App.MatchNewController = Ember.ObjectController.extend({
 
   setNumberOfPlayers: function(size) {
     var match = this.get('model'),
-        players = match.get('players'),
-        PREFILLEDS = ["Jeroen", "Marvin", "Piest", "Lenny"]
+        players = match.get('players');
     
     if (players.get('length') === 0) {
       // no players ...
@@ -17,7 +16,7 @@ App.MatchNewController = Ember.ObjectController.extend({
 
       for (var i=1; i <= size; i++) {
         match.get('players').createRecord({
-          name: PREFILLEDS[i-1]
+          name: this.get('availablePlayers').objectAt(i-1).get('name')
         });
       };
 
@@ -26,14 +25,14 @@ App.MatchNewController = Ember.ObjectController.extend({
       var needed = size-players.get('length');
       do  {
         match.get('players').createRecord({
-          name: PREFILLEDS[3-needed]
+          name: this.get('availablePlayers').objectAt(3-needed).get('name')
         });
         needed--;
       } while(needed > 0)
       
     } else if (players.get('length') > size) {
       // there are currenty more players than needed
-      players.set('content', players.slice(0,size));
+      players.set('content', this.get('availablePlayers').slice(0,size));
     }
     
   },
