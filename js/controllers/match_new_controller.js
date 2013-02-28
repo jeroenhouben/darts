@@ -2,11 +2,6 @@
 */
 App.MatchNewController = Ember.ObjectController.extend({
 
-  init: function() {
-    this._super();
-    this.set("content", App.Match.createRecord());
-  }
-  
   hasPlayers: function() {
     return this.get('model.players.length') > 0;
   }.property('model.players.length'),
