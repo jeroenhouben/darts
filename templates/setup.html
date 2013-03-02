@@ -1,18 +1,20 @@
 <script type="text/x-handlebars" data-template-name="match/new">
 <section id="home">
 	<div class="row centered">
-	  <div class="span6 offset3">
-			<div class="row centered">
-				<div class="page-header">
-				  <h2>Let us play darts!</h2>
-				</div>
-				<div class="btn-group start-score-select">
-				  <button {{action setStartScore 301}} type="button" {{bindAttr class=":btn :btn-large :btn-primary :btn301 is301:active"}}> 301 </button>
-				  <button {{action setStartScore 501}} type="button" {{bindAttr class=":btn :btn-large :btn-primary :btn501 is501:active"}}> 501 </button>
-				</div>
-			</div>
-		</div>
+  	<h2>Let us play darts!</h2>
 	</div>
+	<div class="row">
+		<div class="offset1 span3 btn-group start-score-select">
+		  <button {{action setStartScore 301}} type="button" {{bindAttr class=":btn :btn-large :btn-danger :btn301 is301:active"}}> 301 </button>
+		  <button {{action setStartScore 501}} type="button" {{bindAttr class=":btn :btn-large :btn-danger :btn501 is501:active"}}> 501 </button>
+		</div>
+		<div class="offset2 span6 btn-group leg-count-select">
+		  <button {{action setBestOf 1}} type="button" {{bindAttr class=":btn :btn-large :btn-inverse isBestOf1:active"}}> 1 Leg </button>
+		  <button {{action setBestOf 3}} type="button" {{bindAttr class=":btn :btn-large :btn-inverse isBestOf3:active"}}> Best of 3 </button>
+		  <button {{action setBestOf 5}} type="button" {{bindAttr class=":btn :btn-large :btn-inverse isBestOf5:active"}}> Best of 5 </button>
+		  <button {{action setBestOf 7}} type="button" {{bindAttr class=":btn :btn-large :btn-inverse isBestOf7:active"}}> Best of 7 </button>
+		</div>
+	</div>		
 
 	<div class="row">
 		<!-- left -->
@@ -31,7 +33,7 @@
 	  <div class="span5 match-players">
 			<ol>
 			</ol>
-			<button {{action start}} {{bindAttr disabled=isNotReady}} {{bindAttr class=":btn :btn-large :btn-primary :btn-block isReady::disabled"}} type="button">Start {{startScore}} !</button>
+			<button {{action start}} {{bindAttr disabled=isNotReady}} {{bindAttr class=":btn :btn-large :btn-primary :btn-block isReady::disabled"}} type="button">Start {{startScore}} -  best of {{bestOf}}</button>
 		</div>
 		
 	</div>		

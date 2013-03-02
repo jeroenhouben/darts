@@ -2,14 +2,20 @@
 */
 App.MatchNewController = Ember.ObjectController.extend({
   isReady: false,
+  bestOf: 1,
+
+  isBestOf1: function() { return this.get('bestOf') === 1 }.property('bestOf'),
+  isBestOf3: function() { return this.get('bestOf') === 3 }.property('bestOf'),
+  isBestOf5: function() { return this.get('bestOf') === 5 }.property('bestOf'),
+  isBestOf7: function() { return this.get('bestOf') === 7 }.property('bestOf'),
   
   isNotReady: function() {
     return !this.get('isReady')
   }.property('isReady'),
 
-  hasPlayers: function() {
-    return this.get('model.players.length') > 0;
-  }.property('model.players.length'),
+  setBestOf: function(nr) {
+    this.set('bestOf', nr)
+  },
 
   /*
   * set selectedPlayers using player IDs

@@ -9,11 +9,7 @@ App.Turn = DS.Model.extend({
   dart3: DS.attr('number'),
   completed: DS.attr('boolean'),
   simpleScore: DS.attr('number'), // if they chose to register the summed score at once, not using the individual dart scores.
-  
-  // returns the leg
-  leg: function() {
-    return this.get('player.leg')
-  }.property(),
+  leg: Em.computed.alias('player.leg'),
 
   score: function() {
     var score;

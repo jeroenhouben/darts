@@ -3432,6 +3432,12 @@ body {
   margin: 0 auto;
 }
 /* home */
+#home h2 {
+  font-style: italic;
+}
+#home .leg-count-select {
+  text-align: right;
+}
 #home .choose-players {
   background: url('../img/white-curved-arrow-md.png') no-repeat;
   background-position: 321 -5;
@@ -3445,9 +3451,9 @@ body {
 #home .choose-players .available-players ol li {
   margin: 20px 0;
   border-radius: 5px;
-  border: 2px solid #353535;
-  background: #46a546;
-  color: #fff;
+  border: 2px solid #ffc40d;
+  background: #ffe9a6;
+  color: #353535;
   cursor: move;
   padding: 0 7px;
 }
@@ -3459,19 +3465,16 @@ body {
 }
 #home .choose-players .match-players ol {
   padding-left: 54px;
-  background-color: #0064cd;
-  border: 3px solid #333;
+  background-color: #353535;
+  border: 2px solid #000;
   color: #fff;
   font-weight: bold;
   border-radius: 5px;
-  min-height: 8em;
+  height: 230px;
   margin: 3em 0 1em;
 }
 #home .choose-players .match-players ol li {
   cursor: move;
-  margin: 20px 0;
-}
-#home .player-inputs ol li {
   margin: 20px 0;
 }
 /* Turn (calc) */
