@@ -53,6 +53,10 @@ App.TurnView = Ember.View.extend({
         e.preventDefault();
         this.controller.setMultiplier(3);
         return;
+      case 88: // X
+        e.preventDefault();
+        this.controller.registerBust();
+        return;
       }
     }, 
     this));

@@ -3432,8 +3432,43 @@ body {
   margin: 0 auto;
 }
 /* home */
-#home .player-select ol li {
-  text-align: center;
+#home .choose-players {
+  background: url('../img/white-curved-arrow-md.png') no-repeat;
+  background-position: 321 -5;
+  margin-top: 20px;
+  overflow: hidden;
+}
+#home .choose-players .available-players ol {
+  padding-right: 40px;
+  margin-top: 3em;
+}
+#home .choose-players .available-players ol li {
+  margin: 20px 0;
+  border-radius: 5px;
+  border: 2px solid #353535;
+  background: #46a546;
+  color: #fff;
+  cursor: move;
+  padding: 0 7px;
+}
+#home .choose-players .match-players {
+  padding-left: 40px;
+}
+#home .choose-players .match-players h4 {
+  margin-left: 40px;
+}
+#home .choose-players .match-players ol {
+  padding-left: 54px;
+  background-color: #0064cd;
+  border: 3px solid #333;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 5px;
+  min-height: 8em;
+  margin: 3em 0 1em;
+}
+#home .choose-players .match-players ol li {
+  cursor: move;
   margin: 20px 0;
 }
 #home .player-inputs ol li {

@@ -4,63 +4,39 @@
 	  <div class="span6 offset3">
 			<div class="row centered">
 				<div class="page-header">
-				  <h1>Lets play darts!</h1>
+				  <h2>Let us play darts!</h2>
 				</div>
 				<div class="btn-group start-score-select">
 				  <button {{action setStartScore 301}} type="button" {{bindAttr class=":btn :btn-large :btn-primary :btn301 is301:active"}}> 301 </button>
 				  <button {{action setStartScore 501}} type="button" {{bindAttr class=":btn :btn-large :btn-primary :btn501 is501:active"}}> 501 </button>
 				</div>
-				<hr />
 			</div>
 		</div>
 	</div>
 
 	<div class="row">
 		<!-- left -->
-	  <div class="span6 player-select">
+		{{#view App.ChoosePlayersView}}
+	  <div class="offset1 span5 available-players">
 			<ol class="unstyled">
-				<li>
-				<button {{action setNumberOfPlayers 2}} class="btn btn-large btn-primary" type="button">
-					<i class="icon-user icon-white"></i>
-					<i class="icon-user icon-white"></i>
-				</button>
+				{{#each availablePlayers}}
+				<li {{bindAttr data-player-id="id"}}>
+					{{name}}
 				</li>
-				<li>
-					<button {{action setNumberOfPlayers 3}} class="btn btn-large btn-primary" type="button">
-						<i class="icon-user icon-white"></i>
-						<i class="icon-user icon-white"></i>
-						<i class="icon-user icon-white"></i>
-					</button>
-				</li>
-				<li>
-					<button  {{action setNumberOfPlayers 4}} class="btn btn-large btn-primary" type="button">
-						<i class="icon-user icon-white"></i>
-						<i class="icon-user icon-white"></i>
-						<i class="icon-user icon-white"></i>
-						<i class="icon-user icon-white"></i>
-					</button>
-				</li>
+				{{/each}}
 			</ol>
 		</div>
 
 		<!-- right -->
-	  <div class="span6 player-inputs">
-			<ol class="unstyled">
-				{{#each players}}
-					<li>{{view Ember.TextField valueBinding="name"}}</li>
-				{{/each}}
+	  <div class="span5 match-players">
+			<ol>
 			</ol>
+			<button {{action start}} {{bindAttr disabled=isNotReady}} {{bindAttr class=":btn :btn-large :btn-primary :btn-block isReady::disabled"}} type="button">Start {{startScore}} !</button>
 		</div>
+		
 	</div>		
+	{{/view}}
 	
-	<div class="row centered">
-	  <div class="span6 offset3">
-			<hr />
-			{{#if hasPlayers}}
-			<button {{action start}} class="btn btn-large btn-primary btn-block" type="button">Start {{startScore}} !</button>
-			{{/if}}
-		</div>	
-	</div>	
 
 </section>
 </script>

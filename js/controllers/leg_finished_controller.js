@@ -12,8 +12,8 @@ App.LegFinishedController = Ember.ObjectController.extend({
   },
   
   newLeg: function() {
-    // FIXME: remove current leg??
     var leg = this.get('match').createNewLeg();
+    
     this.transitionToRoute('leg', leg);
   },
 
