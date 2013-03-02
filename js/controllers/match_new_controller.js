@@ -23,8 +23,6 @@ App.MatchNewController = Ember.ObjectController.extend({
     var match = this.get('model'),
         leg = match.createNewLeg();
     
-    console.log('legy', leg.get('id'))
-    
     this.transitionToRoute('leg', leg);
   },
   

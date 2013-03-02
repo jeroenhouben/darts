@@ -4,7 +4,7 @@
 	  <div class="span6 offset3">
 			<div class="row centered">
 				<div class="page-header">
-				  <h1>Lets play darts!</h1>
+				  <h2>Let us play darts!</h2>
 				</div>
 				<div class="btn-group start-score-select">
 				  <button {{action setStartScore 301}} type="button" {{bindAttr class=":btn :btn-large :btn-primary :btn301 is301:active"}}> 301 </button>
@@ -29,7 +29,6 @@
 
 		<!-- right -->
 	  <div class="span5 match-players">
-			<h4>Selected Players:</h4>
 			<ol>
 			</ol>
 			<button {{action start}} {{bindAttr disabled=isNotReady}} {{bindAttr class=":btn :btn-large :btn-primary :btn-block isReady::disabled"}} type="button">Start {{startScore}} !</button>
