@@ -10,17 +10,17 @@
 				  <button {{action setStartScore 301}} type="button" {{bindAttr class=":btn :btn-large :btn-primary :btn301 is301:active"}}> 301 </button>
 				  <button {{action setStartScore 501}} type="button" {{bindAttr class=":btn :btn-large :btn-primary :btn501 is501:active"}}> 501 </button>
 				</div>
-				<hr />
 			</div>
 		</div>
 	</div>
 
 	<div class="row">
 		<!-- left -->
-	  <div class="offset2 span4 available-players">
+		{{#view App.ChoosePlayersView}}
+	  <div class="offset1 span5 available-players">
 			<ol class="unstyled">
 				{{#each availablePlayers}}
-				<li>
+				<li {{bindAttr data-player-id="id"}}>
 					{{name}}
 				</li>
 				{{/each}}
@@ -28,24 +28,16 @@
 		</div>
 
 		<!-- right -->
-	  <div class="span4 match-players">
+	  <div class="span5 match-players">
+			<h4>Selected Players:</h4>
 			<ol>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
 			</ol>
+			<button {{action start}} {{bindAttr disabled=isNotReady}} {{bindAttr class=":btn :btn-large :btn-primary :btn-block isReady::disabled"}} type="button">Start {{startScore}} !</button>
 		</div>
+		
 	</div>		
+	{{/view}}
 	
-	<div class="row centered">
-	  <div class="span6 offset3">
-			<hr />
-			{{#if hasPlayers}}
-			<button {{action start}} class="btn btn-large btn-primary btn-block" type="button">Start {{startScore}} !</button>
-			{{/if}}
-		</div>	
-	</div>	
 
 </section>
 </script>

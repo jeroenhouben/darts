@@ -1,46 +1,31 @@
 /*
 */
 App.MatchNewController = Ember.ObjectController.extend({
+  isReady: false,
+  
+  isNotReady: function() {
+    return !this.get('isReady')
+  }.property('isReady'),
 
   hasPlayers: function() {
     return this.get('model.players.length') > 0;
   }.property('model.players.length'),
 
-  setNumberOfPlayers: function(size) {
-    var match = this.get('model'),
-        players = match.get('players');
-    
-    if (players.get('length') === 0) {
-      // no players ...
-      match.set('players', []);
-
-      for (var i=1; i <= size; i++) {
-        match.get('players').createRecord({
-          name: this.get('availablePlayers').objectAt(i-1).get('name')
-        });
-      };
-
-    } else if (players.get('length') < size) {
-      // there are currenty less players than needed
-      var needed = size-players.get('length');
-      do  {
-        match.get('players').createRecord({
-          name: this.get('availablePlayers').objectAt(3-needed).get('name')
-        });
-        needed--;
-      } while(needed > 0)
-      
-    } else if (players.get('length') > size) {
-      // there are currenty more players than needed
-      players.set('content', this.get('availablePlayers').slice(0,size));
-    }
-    
+  /*
+  * set selectedPlayers using player IDs
+  */
+  setPlayersById: function(ids) {
+    this.get('model.players').set('content', ids.map(function(id) { return App.Player.find(id) }));
   },
-  
+
   start: function() {
     // create a first Leg
-    var match = this.get('model');
-    this.transitionToRoute('leg', match.createNewLeg());
+    var match = this.get('model'),
+        leg = match.createNewLeg();
+    
+    console.log('legy', leg.get('id'))
+    
+    this.transitionToRoute('leg', leg);
   },
   
   setStartScore: function(score) {
