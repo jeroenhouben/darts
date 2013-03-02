@@ -6,7 +6,6 @@
   if (('ontouchend' in document) === false) {
     return;
   }
-  alert('a')
 
   var touch = {
     start: false,
