@@ -80,10 +80,11 @@ App.TurnController = Ember.ObjectController.extend({
     
     // could do better here.. how do we know he thre a double in simple view ??? FIXME????
     if (rs === 0) {
-      this.set('completed', true);
-      this.get('leg').set('winner', this.get('player.player')); // cannot store a Legplayer instance here :-S FIXME!!
+      var leg = this.get('leg');
+      leg.set('completed', true);
+      leg.set('winner', this.get('player.player'));
       this.get('controllers.leg').set('currentPlayerIndex', null);
-      this.transitionToRoute('leg.finished', this.get('leg'));
+      this.transitionToRoute('leg.finished', leg);
     } else if (rs < 0) {
       this.registerBust();
     } else {

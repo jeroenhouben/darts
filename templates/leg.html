@@ -1,27 +1,27 @@
 <script type="text/x-handlebars" data-template-name="leg">
-	{{oulet}}
+<h2>{{currentPlayerIndex}}</h2>
+<section class="scoreboard">
 
-	<section class="scoreboard">
-		<div class="top">
-		  <div class="nav">
-		  	<button {{action newMatch}} type="button" class="btn btn-primary"}}>Home</button>
-			</div>
-			<div class="current-player">
-				{{#if currentPlayer}}
-				<h3 {{action gotoNextTurnForPlayer currentPlayer}}><span>{{currentPlayer.name}}</span></h3>
-				{{/if}}
-			</div>
-		  <div class="legs-nav">
-				<h5>Legs:</h5>
-				<ol class="unstyled">
-					<li class="closed">1</li>
-					<li class="closed">2</li>
-					<li>3</li>
-				</ol>
-			</div>
+	<div class="top">
+	  <div class="nav">
+	  	<button {{action newMatch}} type="button" class="btn btn-primary"}}>Home</button>
 		</div>
+		<div class="current-player">
+			{{#if currentPlayer}}
+			<h3 {{action gotoNextTurnForPlayer currentPlayer}}><span>{{currentPlayer.name}}</span></h3>
+			{{/if}}
+		</div>
+	  <div class="legs-nav">
+			<h5>Legs:</h5>
+			<ol class="unstyled">
+				<li class="closed">1</li>
+				<li class="closed">2</li>
+				<li>3</li>
+			</ol>
+		</div>
+	</div>
 
-		<div id="scoreboard-wrapper">
+	<div id="scoreboard-wrapper">
 			<ol class="unstyled">
 				{{#each player in players}}
 				<li class="scores-for-player">
@@ -43,8 +43,9 @@
 				</li>
 				{{/each}}
 			</ol>
-		</div>
-	</section>
+			{{outlet}}		
+	</div>
+</section>
 </script>
 
 

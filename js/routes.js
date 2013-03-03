@@ -12,6 +12,7 @@ App.Router.map(function() {
 });
 
 App.LegFinishedRoute = Ember.Route.extend({
+
   // set the leg to the leg of the parent (LegController)
   setupController: function(controller) {
     controller.set("content", controller.get('controllers.leg.content'));

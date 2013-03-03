@@ -2,18 +2,15 @@
 * A finished leg
 */
 App.LegFinishedController = Ember.ObjectController.extend({
-  needs: ["leg", "turn"],
+  needs: ["leg"],
   
   undoWinner: function() {
     this.set('winner', null);
-    this.set('controllers.turn.model.finished', false);
-    this.set('controllers.turn.model', null);
     this.transitionToRoute('leg', this.get('model'))
   },
   
   newLeg: function() {
     var leg = this.get('match').createNewLeg();
-    
     this.transitionToRoute('leg', leg);
   },
 
