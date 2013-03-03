@@ -1,18 +1,14 @@
 // Routes
 App.Router.map(function() {
-  this.resource('match', function() {
-    this.route('new');
+  this.resource('matches');
+  this.resource('match', { path: '/match/:match_id' }, function() {  
+    this.route('setup');
+    this.resource('legs');
     this.resource('leg', { path: '/leg/:leg_id' }, function() {
       this.route('finished');
     });
     this.resource('turn', { path: '/turn/:turn_id' });
   });
-});
-
-App.IndexRoute = Ember.Route.extend({
-  redirect: function() {
-    this.transitionTo('match.new');
-  }
 });
 
 App.LegFinishedRoute = Ember.Route.extend({
@@ -24,11 +20,23 @@ App.LegFinishedRoute = Ember.Route.extend({
 });    
 
 
-App.MatchNewRoute = Ember.Route.extend({
+App.MatchSetupRoute = Ember.Route.extend({
 
   setupController: function(controller) {
-    controller.set("content", App.Match.createRecord());
+    controller.set("content", controller.get('controllers.match.content'));
     controller.set('availablePlayers', App.Player.find());
   }
 
 });    
+
+App.LegIndexRoute = Ember.Route.extend({
+  renderTemplate: function() {
+    this.render({ into: 'match' });
+  }
+})
+
+App.TurnRoute = Ember.Route.extend({
+  renderTemplate: function() {
+    this.render({ into: 'match' });
+  }
+})

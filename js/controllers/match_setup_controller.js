@@ -1,6 +1,7 @@
 /*
 */
-App.MatchNewController = Ember.ObjectController.extend({
+App.MatchSetupController = Ember.ObjectController.extend({
+  needs: "match",
   isReady: false,
   bestOf: 1,
 
@@ -29,7 +30,7 @@ App.MatchNewController = Ember.ObjectController.extend({
     var match = this.get('model'),
         leg  = match.createNewLeg(),
         turn = leg.get('players.firstObject.turns').createRecord();
-        this.transitionToRoute('turn', turn);
+        this.transitionToRoute('turn', match, turn);
   },
   
   setStartScore: function(score) {

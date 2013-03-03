@@ -13,12 +13,14 @@
 		
 	</div>
 	<script type="text/x-handlebars" data-template-name="application">
-	<span class="appoutlet">{{outlet}}</span>
+		{{outlet}}
 	</script>
 
 	<script type="text/x-handlebars" data-template-name="match">
-		<span class="matchoutlet">{{outlet}}</span>
+		<span class="mmmmats">{{outlet}}</span>
 	</script>
+
+	<!--# include file="templates/index.html" -->
 
 	<!--# include file="templates/setup.html" -->
 
@@ -44,8 +46,9 @@
 	<script src="js/models/player.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/models/turn.js" type="text/javascript" charset="utf-8"></script>
 	<!-- Ember Controllers -->
+	<script src="js/controllers/index_controller.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/controllers/leg_controller.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/controllers/match_new_controller.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/controllers/match_setup_controller.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/controllers/turn_controller.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/controllers/leg_finished_controller.js" type="text/javascript" charset="utf-8"></script>
 	<!-- Ember Views -->
