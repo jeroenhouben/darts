@@ -3446,11 +3446,14 @@ body {
   width: 216px;
   height: 121px;
   left: 216px;
-  top: 0;
-  -webkit-transform: rotate(-3deg);
-  transform: rotate(-3deg);
+  top: -12px;
+  -webkit-transform: rotate(5deg);
+  transform: rotate(-6deg);
+  z-index: 0;
 }
 #match-setup .choose-players .available-players ol {
+  position: relative;
+  z-index: 1;
   padding-right: 40px;
   margin-top: 3em;
 }
