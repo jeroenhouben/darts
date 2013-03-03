@@ -22,7 +22,6 @@ App.ChoosePlayersView = Ember.View.extend({
       })
       .on("sortupdate", function(e, ui) {
         var ids = gamePlayers.sortable( "toArray", {attribute: "data-player-id"});
-        controller.set('isReady', ids.length>1);
         controller.setPlayersById(ids);
       })
   },

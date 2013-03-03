@@ -7,7 +7,7 @@
 		</div>
 		<div class="current-player">
 			{{#if currentPlayer}}
-			<h3 {{action gotoNextTurnForPlayer currentPlayer}}><span>{{currentPlayer.name}}</span></h3>
+			<h3 {{action gotoNextTurnForPlayer currentPlayer}}><span>{{currentPlayer.name}}</span> to throw</h3>
 			{{/if}}
 		</div>
 	  <div class="legs-nav">
@@ -48,9 +48,9 @@
 </script>
 
 
-<script type="text/x-handlebars" data-template-name="leg/finished">
+<script type="text/x-handlebars" data-template-name="leg/finish">
 	<h1 class="center">{{winner.name}} is victorious!</h1>
- 	<button {{action newLeg}} type="button" class="btn btn-success btn-block "}}>Game On!</button>
+ 	<button {{action gameOn}} type="button" class="btn btn-success btn-block "}}>Game On!</button>
  	<button {{action newMatch}} type="button" class="btn btn-primary btn-block"}}>Start new match</button>
  	<button {{action undoWinner}} type="button" class="btn btn-block btn-danger"}}>Undo</button>
 </script>

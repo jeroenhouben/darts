@@ -1,13 +1,17 @@
 /*
 */
-App.MatchNewController = Ember.ObjectController.extend({
-  isReady: false,
+App.MatchSetupController = Ember.ObjectController.extend({
+  needs: "match",
   bestOf: 1,
 
   isBestOf1: function() { return this.get('bestOf') === 1 }.property('bestOf'),
   isBestOf3: function() { return this.get('bestOf') === 3 }.property('bestOf'),
   isBestOf5: function() { return this.get('bestOf') === 5 }.property('bestOf'),
   isBestOf7: function() { return this.get('bestOf') === 7 }.property('bestOf'),
+
+  isReady: function() {
+    return this.get('players.length') > 1;
+  }.property('players.length'),
   
   isNotReady: function() {
     return !this.get('isReady')
@@ -27,9 +31,9 @@ App.MatchNewController = Ember.ObjectController.extend({
   start: function() {
     // create a first Leg
     var match = this.get('model'),
-        leg  = match.createNewLeg(),
-        turn = leg.get('players.firstObject.turns').createRecord();
-        this.transitionToRoute('turn', turn);
+        leg  = match.createNewLeg()
+        // turn = leg.get('players.firstObject.turns').createRecord();
+        this.transitionToRoute('leg', match, leg);
   },
   
   setStartScore: function(score) {
