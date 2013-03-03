@@ -6,7 +6,8 @@ App.ChoosePlayersView = Ember.View.extend({
     var $container       = $(this.get('element')),
         availablePlayers = $container.find('.available-players ol').sortable(),
         gamePlayers      = $container.find('.match-players ol').sortable(),
-        controller       = this.get('controller')
+        controller       = this.get('controller'),
+        arrow            = $container.find('.arrow')
     
 
     // connect them to eachother
@@ -22,8 +23,12 @@ App.ChoosePlayersView = Ember.View.extend({
       })
       .on("sortupdate", function(e, ui) {
         var ids = gamePlayers.sortable( "toArray", {attribute: "data-player-id"});
+        arrow.toggleClass("in", ids.length < 4)
         controller.setPlayersById(ids);
       })
+      
+    // at last, some fancyness!!
+    setTimeout(function() { arrow.addClass("in")}, 200);
   },
   
   didDestroyElement: function() {

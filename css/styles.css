@@ -3434,10 +3434,21 @@ body {
   text-align: right;
 }
 #match-setup .choose-players {
-  background: url('../img/white-curved-arrow-md.png') no-repeat;
-  background-position: 321 -5;
   margin-top: 20px;
   overflow: hidden;
+}
+#match-setup .choose-players .available-players {
+  position: relative;
+}
+#match-setup .choose-players .available-players .arrow {
+  position: absolute;
+  background: url('../img/white-curved-arrow-md.png') no-repeat;
+  width: 216px;
+  height: 121px;
+  left: 216px;
+  top: 0;
+  -webkit-transform: rotate(-3deg);
+  transform: rotate(-3deg);
 }
 #match-setup .choose-players .available-players ol {
   padding-right: 40px;

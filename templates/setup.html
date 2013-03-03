@@ -15,11 +15,12 @@
 		  <button {{action setBestOf 7}} type="button" {{bindAttr class=":btn :btn-large :btn-inverse isBestOf7:active"}}> Best of 7 </button>
 		</div>
 	</div>		
-
+	
 	<div class="row">
 		<!-- left -->
 		{{#view App.ChoosePlayersView}}
 	  <div class="offset1 span5 available-players">
+			<div class="arrow fade"></div>
 			<ol class="unstyled">
 				{{#each availablePlayers}}
 				<li {{bindAttr data-player-id="id"}}>
