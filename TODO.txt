@@ -1,11 +1,10 @@
 FEATURES
-- setup number of legs (select option disabled )
+- setup number of legs
 - tussenstand legs (button, rendered in leg outlet)
 - checkout possibilities
 - round the clock. subclass Leg, Turn, (matchtype)
 
 BUGS
-- nulls in URLs
 - een speler kan meer dan 1 beurt (turn) voorlopen op andere spelers, dat moet in principe niet kunnen
 
 DONE

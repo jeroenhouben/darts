@@ -3611,7 +3611,6 @@ section.turn.simple #score #dart-scores {
   padding: 10px 10px 18px 10px;
   width: 180px;
   border-radius: 15px;
-  cursor: pointer;
 }
 #latest-scores li h4 {
   margin: 0;
