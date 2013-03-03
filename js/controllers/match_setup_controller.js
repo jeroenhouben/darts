@@ -2,13 +2,16 @@
 */
 App.MatchSetupController = Ember.ObjectController.extend({
   needs: "match",
-  isReady: false,
   bestOf: 1,
 
   isBestOf1: function() { return this.get('bestOf') === 1 }.property('bestOf'),
   isBestOf3: function() { return this.get('bestOf') === 3 }.property('bestOf'),
   isBestOf5: function() { return this.get('bestOf') === 5 }.property('bestOf'),
   isBestOf7: function() { return this.get('bestOf') === 7 }.property('bestOf'),
+
+  isReady: function() {
+    return this.get('players.length') > 1;
+  }.property('players.length'),
   
   isNotReady: function() {
     return !this.get('isReady')

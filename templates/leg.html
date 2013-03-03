@@ -1,48 +1,50 @@
 <script type="text/x-handlebars" data-template-name="leg">
-<section class="scoreboard">
-	<div class="top">
-	  <div class="nav">
-	  	<button {{action newMatch}} type="button" class="btn btn-primary"}}>Home</button>
+	{{oulet}}
+
+	<section class="scoreboard">
+		<div class="top">
+		  <div class="nav">
+		  	<button {{action newMatch}} type="button" class="btn btn-primary"}}>Home</button>
+			</div>
+			<div class="current-player">
+				{{#if currentPlayer}}
+				<h3 {{action gotoNextTurnForPlayer currentPlayer}}><span>{{currentPlayer.name}}</span></h3>
+				{{/if}}
+			</div>
+		  <div class="legs-nav">
+				<h5>Legs:</h5>
+				<ol class="unstyled">
+					<li class="closed">1</li>
+					<li class="closed">2</li>
+					<li>3</li>
+				</ol>
+			</div>
 		</div>
-		<div class="current-player">
-			{{#if currentPlayer}}
-			<h3 {{action gotoNextTurnForPlayer currentPlayer}}><span>{{currentPlayer.name}}</span></h3>
-			{{/if}}
-		</div>
-	  <div class="legs-nav">
-			<h5>Legs:</h5>
+
+		<div id="scoreboard-wrapper">
 			<ol class="unstyled">
-				<li class="closed">1</li>
-				<li class="closed">2</li>
-				<li>3</li>
+				{{#each player in players}}
+				<li class="scores-for-player">
+					<h4 {{action gotoNextTurnForPlayer player}}>{{player.name}}</h4>
+					<ol class="unstyled">
+						{{#each player.turns}}
+							<li>
+								{{#linkTo turn this}}
+								{{#if completed}}
+									<span>-</span>{{score}}
+								{{else}}
+									...
+								{{/if}}
+								{{/linkTo}}
+							</li>
+						{{/each}}
+						<li><strong>{{player.requiredScore}}</strong></li>
+					</ol>
+				</li>
+				{{/each}}
 			</ol>
 		</div>
-	</div>
-
-	<div id="scoreboard-wrapper">
-		<ol class="unstyled">
-			{{#each player in players}}
-			<li class="scores-for-player">
-				<h4 {{action gotoNextTurnForPlayer player}}>{{player.name}}</h4>
-				<ol class="unstyled">
-					{{#each player.turns}}
-						<li>
-							{{#linkTo turn this}}
-							{{#if completed}}
-								<span>-</span>{{score}}
-							{{else}}
-								...
-							{{/if}}
-							{{/linkTo}}
-						</li>
-					{{/each}}
-					<li><strong>{{player.requiredScore}}</strong></li>
-				</ol>
-			</li>
-			{{/each}}
-		</ol>
-	</div>
-</section>
+	</section>
 </script>
 
 

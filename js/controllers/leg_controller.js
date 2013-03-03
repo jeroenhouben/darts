@@ -20,8 +20,7 @@ App.LegController = Ember.ObjectController.extend({
   },
 
   newMatch: function() {
-    this.get('match').deleteRecord(); // FIXME: should prolly persist somewhere, or at least prompt for saving..  
-    this.transitionToRoute('match.new');
+    this.transitionToRoute('index');
   },
 
   gotoNextTurnForPlayer: function(player) {

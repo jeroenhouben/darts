@@ -28,15 +28,3 @@ App.MatchSetupRoute = Ember.Route.extend({
   }
 
 });    
-
-App.LegIndexRoute = Ember.Route.extend({
-  renderTemplate: function() {
-    this.render({ into: 'match' });
-  }
-})
-
-App.TurnRoute = Ember.Route.extend({
-  renderTemplate: function() {
-    this.render({ into: 'match' });
-  }
-})

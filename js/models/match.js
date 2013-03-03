@@ -1,5 +1,5 @@
 App.Match = DS.Model.extend({
-  startScore: DS.attr('number', {defaultValue: 301}),
+  startScore: DS.attr('number', {defaultValue: 5}),
   players: DS.hasMany('App.Player'),
   legs: DS.hasMany('App.Leg'),
 
