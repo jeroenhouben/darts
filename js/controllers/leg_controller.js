@@ -3,7 +3,7 @@
 */
 App.LegController = Ember.ObjectController.extend({
   needs: ["match"],
-  currentPlayerIndex: 0,
+  currentPlayerIndex: null,
 
   currentPlayer: function() {
     return this.get('players').objectAt(this.get('currentPlayerIndex'));

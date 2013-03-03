@@ -1,4 +1,4 @@
-App.LegFinishedView = Ember.View.extend({
+App.LegFinishView = Ember.View.extend({
   tagName: "div",
   classNames: ['modal']
 });  

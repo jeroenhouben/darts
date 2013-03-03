@@ -5,17 +5,20 @@ App.Router.map(function() {
     this.route('setup');
     this.resource('legs');
     this.resource('leg', { path: '/leg/:leg_id' }, function() {
-      this.route('finished');
+      this.route('finish');
     });
     this.resource('turn', { path: '/turn/:turn_id' });
   });
 });
 
-App.LegFinishedRoute = Ember.Route.extend({
+App.LegFinishRoute = Ember.Route.extend({
 
-  // set the leg to the leg of the parent (LegController)
-  setupController: function(controller) {
-    controller.set("content", controller.get('controllers.leg.content'));
+  setupController: function(controller, model) {
+    var legController = controller.get('controllers.leg');
+    legController.set('currentPlayerIndex', null);
+    
+    controller.set("content", legController.get('content'));
+    controller.set('completed', true);
   }
 
 });    

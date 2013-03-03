@@ -78,13 +78,11 @@ App.TurnController = Ember.ObjectController.extend({
     var s = this.get('score'),
         rs = this.get('requiredScore');
     
-    // could do better here.. how do we know he thre a double in simple view ??? FIXME????
+    // could do better here.. how do we know he threw a double in simple view ??? FIXME????
     if (rs === 0) {
       var leg = this.get('leg');
-      leg.set('completed', true);
       leg.set('winner', this.get('player.player'));
-      this.get('controllers.leg').set('currentPlayerIndex', null);
-      this.transitionToRoute('leg.finished', leg);
+      this.transitionToRoute('leg.finish', leg);
     } else if (rs < 0) {
       this.registerBust();
     } else {

@@ -3652,7 +3652,7 @@ section.scoreboard .current-player {
 }
 section.scoreboard .current-player h3 {
   cursor: pointer;
-  font-size: 53.75px;
+  font-size: 32px;
   text-align: center;
   padding-bottom: 0px;
   line-height: 16px;

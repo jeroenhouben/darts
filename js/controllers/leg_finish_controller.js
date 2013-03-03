@@ -1,7 +1,7 @@
 /*
 * A finished leg
 */
-App.LegFinishedController = Ember.ObjectController.extend({
+App.LegFinishController = Ember.ObjectController.extend({
   needs: ["leg"],
   
   undoWinner: function() {
@@ -9,7 +9,7 @@ App.LegFinishedController = Ember.ObjectController.extend({
     this.transitionToRoute('leg', this.get('model'))
   },
   
-  newLeg: function() {
+  gameOn: function() {
     var leg = this.get('match').createNewLeg();
     this.transitionToRoute('leg', leg);
   },
