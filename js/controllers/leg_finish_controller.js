@@ -13,13 +13,11 @@ App.LegFinishController = Ember.ObjectController.extend({
     var leg     = this.get('match').createNewLeg(),
         players = leg.get('players'),
         count   = this.get('match.legs.length'),
-        i = 1,
-        p;
+        i = 1;
 
     // rotate player turns with each new leg
     for (i;i<count; i++) {
-      p = players.popObject(); players.unshiftObject(p);
-      console.log('i popped: ', i, " this mang", p.get('name'))
+      players.pushObject(players.shiftObject());
     };
     
     this.transitionToRoute('leg', leg);
