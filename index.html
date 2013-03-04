@@ -3,10 +3,9 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	
+	<link rel="stylesheet" href="css/jquery-ui-1.10.1.custom.css" type="text/css" media="screen" title="no title" charset="utf-8">
 	<link rel="stylesheet" href="css/chalk.css" type="text/css" media="screen" title="no title" charset="utf-8">
 	<link rel="stylesheet" href="css/styles.css" type="text/css" charset="utf-8">
-
 </head>
 
 <body>
@@ -14,12 +13,14 @@
 		
 	</div>
 	<script type="text/x-handlebars" data-template-name="application">
-	<span class="appoutlet">{{outlet}}</span>
+		{{outlet}}
 	</script>
 
 	<script type="text/x-handlebars" data-template-name="match">
-		<span class="matchoutlet">{{outlet}}</span>
+		<span class="mmmmats">{{outlet}}</span>
 	</script>
+
+	<!--# include file="templates/index.html" -->
 
 	<!--# include file="templates/setup.html" -->
 
@@ -28,6 +29,8 @@
 	<!--# include file="templates/turn.html" -->
 	
   <script src="js/libs/jquery-1.9.1.min.js"></script>
+  <script src="js/libs/jquery-ui-1.10.1.custom.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/libs/jquery.ui.touch-punch.js" type="text/javascript" charset="utf-8"></script>
   <script src="js/libs/handlebars-1.0.0.rc.3.js"></script>
   <script src="js/libs/ember-1.0.0-rc.1.js"></script>
 	<script src="js/libs/ember-data.js" type="text/javascript" charset="utf-8"></script>
@@ -43,13 +46,15 @@
 	<script src="js/models/player.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/models/turn.js" type="text/javascript" charset="utf-8"></script>
 	<!-- Ember Controllers -->
+	<script src="js/controllers/index_controller.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/controllers/leg_controller.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/controllers/match_new_controller.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/controllers/match_setup_controller.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/controllers/turn_controller.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/controllers/leg_finished_controller.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/controllers/leg_finish_controller.js" type="text/javascript" charset="utf-8"></script>
 	<!-- Ember Views -->
+	<script src="js/views/choose_players_view.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/views/turn_view.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/views/leg_finished_view.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/views/leg_finish_view.js" type="text/javascript" charset="utf-8"></script>
 	
 
 	<script src="js/sampledata.js" type="text/javascript" charset="utf-8"></script>

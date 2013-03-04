@@ -1,13 +1,12 @@
 App.Match = DS.Model.extend({
-  startScore: DS.attr('number', {defaultValue: 301}),
+  startScore: DS.attr('number', {defaultValue: 501}),
   players: DS.hasMany('App.Player'),
   legs: DS.hasMany('App.Leg'),
 
   // create a new Leg and enroll all players known in this match
   createNewLeg: function() {
     var leg = this.get('legs').createRecord();
-    
-    // enroll players in leg
+    // enroll players in leg by creating the join model
     this.get('players').forEach(function(player) {
       leg.get('players').createRecord({player: player})
     });

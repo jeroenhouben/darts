@@ -1,16 +1,19 @@
-- setup number of legs (select option disabled )
+FEATURES
+- setup number of legs
 - tussenstand legs (button, rendered in leg outlet)
-- als 2 spelers, dan legs % 2 === 1
-- als meer dan 2 spelers, ruimte voor extra leg met 2 spelers
-	- als 3 spelers qualify: bull 2 qualify -> kiezen
+- checkout possibilities
+- round the clock. subclass Leg, Turn, (matchtype)
 
 BUGS
 - een speler kan meer dan 1 beurt (turn) voorlopen op andere spelers, dat moet in principe niet kunnen
 
 DONE
+- spelers uit lijst van server (JSON)
 - prettier scores on scoreboards
 - navigatie new leg
 - alt. numpad
 	- simpleScore property
 	- numpadType property bind aan ClassName
 	- nummers 0-9 --> action numberEntered: numpadType == simple ? simpleScore : registerDart
+	
+	
